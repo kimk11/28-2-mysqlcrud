@@ -6,14 +6,15 @@ grant select,insert,update,delete,create,drop,alter on mysqlcrud_2.* to 'mysqlcr
 
 mysqlcrud_2id °èÁ¤ Äõ¸®
 
-CREATE TABLE `teacher` (
-	`teacher_no` INT(10) NOT NULL AUTO_INCREMENT,
-	`teacher_name` VARCHAR(50) NOT NULL,
-	`teacher_age` INT(10) NOT NULL,
-	PRIMARY KEY (`teacher_no`)
+CREATE TABLE `member` (
+	`member_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`member_name` VARCHAR(50) NOT NULL,
+	`member_age` INT(10) NOT NULL,
+	PRIMARY KEY (`member_no`)
 )
 COLLATE='euckr_korean_ci'
 ENGINE=InnoDB;
+
 
 CREATE TABLE `member_addr` (
 	`member_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
