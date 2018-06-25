@@ -1,6 +1,7 @@
 commit 하기전에
 
-team >> Remote >> Fetch From..
+1. team >> Remote >> Fetch From..
+2. team >> merge
 
 무조건 하고 commit and push 하기
 
