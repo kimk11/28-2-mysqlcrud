@@ -1,14 +1,14 @@
 package service;
 
 public class Teacher {
-	public int teacherName;
+	public String teacherName;
 	public int teacherAge;
 	
 	
-	public int getTeacherName() {
+	public String getTeacherName() {
 		return teacherName;
 	}
-	public void setTeacherName(int teacherName) {
+	public void setTeacherName(String teacherName) {
 		this.teacherName = teacherName;
 	}
 	public int getTeacherAge() {
@@ -17,4 +17,8 @@ public class Teacher {
 	public void setTeacherAge(int teacherAge) {
 		this.teacherAge = teacherAge;
 	}
+	
+	
+	
+	
 }
