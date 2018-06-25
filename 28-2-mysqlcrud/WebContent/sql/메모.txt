@@ -1,0 +1,7 @@
+commit 하기전에
+
+team >> Remote >> Fetch From..
+
+무조건 하고 commit and push 하기
+
+commit and push 할 때 메세지에 본인이름 적기
