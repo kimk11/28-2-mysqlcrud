@@ -1,19 +1,21 @@
 package service;
 
 public class Student {
-	private int teacherNo;
-	private int teacherAddrContent;
+	private String studentName;
+	private int studentAge;
 	
-	public int getTeacherNo() {
-		return teacherNo;
+	public String getStudentName() {
+		return studentName;
 	}
-	public void setTeacherNo(int teacherNo) {
-		this.teacherNo = teacherNo;
+	public void setStudentName(String studentName) {
+		this.studentName = studentName;
 	}
-	public int getTeacherAddrContent() {
-		return teacherAddrContent;
+	public int getStudentAge() {
+		return studentAge;
 	}
-	public void setTeacherAddrContent(int teacherAddrContent) {
-		this.teacherAddrContent = teacherAddrContent;
+	public void setStudentAge(int studentAge) {
+		this.studentAge = studentAge;
 	}
+	
+	
 }
