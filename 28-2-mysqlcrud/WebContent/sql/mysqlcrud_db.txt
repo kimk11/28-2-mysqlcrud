@@ -1,0 +1,70 @@
+root °èÁ¤ Äõ¸®
+
+create database mysqlcrud_2;
+
+grant select,insert,update,delete,create,drop,alter on mysqlcrud_2.* to 'mysqlcrud_2id'@'localhost' identified by 'mysqlcrud_2pw';
+
+mysqlcrud_2id °èÁ¤ Äõ¸®
+
+CREATE TABLE `teacher` (
+	`teacher_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`teacher_name` VARCHAR(50) NOT NULL,
+	`teacher_age` INT(10) NOT NULL,
+	PRIMARY KEY (`teacher_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `member_addr` (
+	`member_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`member_no` INT(10) NOT NULL,
+	`member_addr_content` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`member_addr_no`),
+	INDEX `FK__member` (`member_no`),
+	CONSTRAINT `FK__member` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `student` (
+	`student_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`student_name` VARCHAR(50) NOT NULL,
+	`student_age` INT(10) NOT NULL,
+	PRIMARY KEY (`student_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `student_addr` (
+	`student_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`student_no` INT(11) NOT NULL,
+	`student_addr_content` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`student_addr_no`),
+	INDEX `FK__student` (`student_no`),
+	CONSTRAINT `FK__student` FOREIGN KEY (`student_no`) REFERENCES `student` (`student_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `teacher` (
+	`teacher_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`teacher_name` VARCHAR(50) NOT NULL,
+	`teacher_age` INT(10) NOT NULL,
+	PRIMARY KEY (`teacher_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `teacher_addr` (
+	`teacher_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`teacher_no` INT(10) NOT NULL,
+	`teacher_addr_content` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`teacher_addr_no`),
+	INDEX `FK__teacher` (`teacher_no`),
+	CONSTRAINT `FK__teacher` FOREIGN KEY (`teacher_no`) REFERENCES `teacher` (`teacher_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+
+
