@@ -30,7 +30,7 @@
 		</form>
 	</div>
 	
-	<script type="text/javascript" src="script/insertstudent.js" charset="utf-8"></script>
+	<script type="text/javascript" src="script/insertstudentOrAddr.js" charset="utf-8"></script>
 	
 </body>
 </html>

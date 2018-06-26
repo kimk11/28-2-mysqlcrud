@@ -19,12 +19,12 @@
 			<div>
 				<label>이름 : </label>
 				<input type="text" id="studentName" name="studentName">
-				<span id="studentNameValid"></span>
+				<span id="studentNameValid" class="studentBlank"></span>
 			</div>
 			<div>
 				<label>나이 : </label>
 				<input type="text" id="studentAge" name="studentAge">
-				<span id="studentAgeValid"></span>
+				<span id="studentAgeValid" class="studentBlank"></span>
 			</div>
 			<div>
 				<button type="button" id="signStudent">입력</button>
@@ -32,7 +32,7 @@
 		</form>
 	</div>
 	
-	<script type="text/javascript" src="script/insertstudent.js" charset="utf-8"></script>
+	<script type="text/javascript" src="script/insertstudentOrAddr.js" charset="utf-8"></script>
 		
 </body>
 </html>
