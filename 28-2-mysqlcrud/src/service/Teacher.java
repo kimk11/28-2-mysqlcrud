@@ -1,8 +1,9 @@
+/*2018.06.26 º€¿Ø∫Û Teacher DTO*/ 
 package service;
 
 public class Teacher {
-	public String teacherName;
-	public int teacherAge;
+	private String teacherName;
+	private int teacherAge;
 	
 	
 	public String getTeacherName() {
@@ -17,8 +18,6 @@ public class Teacher {
 	public void setTeacherAge(int teacherAge) {
 		this.teacherAge = teacherAge;
 	}
-	
-	
 	
 	
 }

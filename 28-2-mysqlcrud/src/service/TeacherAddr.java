@@ -2,8 +2,8 @@ package service;
 
 public class TeacherAddr {
 
-	public int teacherNo;
-	public String teacherAddrContent;
+	private int teacherNo;
+	private String teacherAddrContent;
 	
 	
 	public int getTeacherNo() {
