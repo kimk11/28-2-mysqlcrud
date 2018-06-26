@@ -3,6 +3,7 @@
 <!-- employee 입력 처리 작성 -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@page import="service.EmployeeAddrDAO"%>
+<%@page import="service.EmployeeAddr"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +14,12 @@
 <body>
 <%
 	request.setCharacterEncoding("euckr");
-%>
-	<jsp:useBean id="employeeAddr" class="service.EmployeeAddr"/>
-	<jsp:setProperty property="*" name="employeeAddr"/>
-<%
+
+	EmployeeAddr employeeAddr = new EmployeeAddr();
+	
+	employeeAddr.setEmployeeNo(Integer.parseInt(request.getParameter("employeeNo")));
+	employeeAddr.setEmployeeAddrContent(request.getParameter("employeeAddrContent"));
+
 	EmployeeAddrDAO employeeAddrDao = new EmployeeAddrDAO();
 	employeeAddrDao.employeeAddrInsert(employeeAddr);
 %>

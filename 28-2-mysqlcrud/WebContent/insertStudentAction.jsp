@@ -1,8 +1,9 @@
 <!-- 28기 김진우 -->
 <!-- 2018-06-26 -->
 <!-- student 입력 처리 작성 -->
-<%@page import="service.StudentDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@page import="service.StudentDAO"%>
+<%@page import="service.Student"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -13,10 +14,12 @@
 <body>
 <%
 	request.setCharacterEncoding("euckr");
-%>
-	<jsp:useBean id="student" class="service.Student"/>
-	<jsp:setProperty property="*" name="student"/>
-<%
+
+	Student student = new Student();
+	
+	student.setStudentName(request.getParameter("StudentName"));
+	student.setStudentAge(Integer.parseInt(request.getParameter("StudentAge")));
+
 	StudentDAO studentDao = new StudentDAO();
 	studentDao.studentInsert(student);
 %>
