@@ -1,4 +1,4 @@
-// 2018.06.26 ¼ÛÀ¯ºó 
+// 2018.06.26 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ 
 // TeacherDAO.java 
 
 package service;
@@ -12,32 +12,44 @@ public class TeacherDAO {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 	
-	// service ÆĞÅ°Áö¿¡ Teacher Å¬·¡½ºÀÇ °´Ã¼ÂüÁ¶º¯¼ö teacher
-	public void insertTeacher(Teacher teacher) throws ClassNotFoundException, SQLException {
+	
+		/*CREATE TABLE `teacher` (
+			`teacher_no` INT(10) NOT NULL AUTO_INCREMENT,
+			`teacher_name` VARCHAR(50) NOT NULL,
+			`teacher_age` INT(10) NOT NULL,
+			PRIMARY KEY (`teacher_no`)
+		)
+		COLLATE='euckr_korean_ci'
+		ENGINE=InnoDB
+		AUTO_INCREMENT=3;
+		 */
+	
+	
+	// insertTeacher ë©”ì„œë“œì— 
+	public void insertTeacher(Teacher teacher) {
 		System.out.println("insertTeacher TeacherDAO.java");
 		try {
-			// µå¶óÀÌ¹ö ·Îµù
+			// ë“œë¼ì´ë²„ ë¡œë”©
 			Class.forName("com.mysql.jdbc.Driver");
 			String Driveraddr = "jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 			String dbUser = "mysqlcrud_2id";
 			String dbPass = "mysqlcrud_2pw";
 
 			
-			// ÁÖ¼Ò ¾ÆÀÌµğ ºñ¹Ğ¹øÈ£¸¦ Ä¿³Ø¼Ç °´Ã¼ÀÇ ÁÖ¼Ò¿¡ ³Ö¾îÁØ´Ù.
+			// 
 			Connection conn = DriverManager.getConnection(Driveraddr, dbUser, dbPass);
 
 			
-			// ÇÑ ¸íÀÇ insert Äõ¸®¿¡ ÀÌ¸§°ú ³ªÀÌ ÀÔ·ÂÀÚ·á¸¦ ?¿¡ ¼øÂ÷ÀûÀ¸·Î ´ëÀÔ
+			//  í•œ ëª…ì˜insert ì¿¼ë¦¬ì— teacher ê°ì²´ì°¸ì¡°ë³€ìˆ˜ ì£¼ì†Œê°’ì— ìˆëŠ”  TeacherName, TeacherAgeì˜ ì…ë ¥ìë£Œë¥¼ ?ì— ìˆœì°¨ì ìœ¼ë¡œ ëŒ€ì…
 			pstmt = conn.prepareStatement("INSERT INTO teacher(teacher_name,teacher_age) VALUES(?,?)");
-			// teacher °´Ã¼ÂüÁ¶º¯¼ö ÁÖ¼Ò¿¡ ÀÖ´Â teacherNameÀ» ¸®ÅÏ ¹Ş¾Æ °¡Á®¿Â´Ù.
 			pstmt.setString(1, teacher.getTeacherName());
 			pstmt.setInt(2, teacher.getTeacherAge());
 			pstmt.executeUpdate();
 
 			
-			// try ... catch ¿¹¿ÜÃ³¸® ÈÄ PreparedStatement¿Í Connection Á¾·á
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+			// try ... catch ì˜ˆì™¸ì²˜ë¦¬ í›„ PreparedStatementì™€ Connection ì¢…ë£Œ
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null)
 				try {

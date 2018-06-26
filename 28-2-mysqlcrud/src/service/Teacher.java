@@ -1,11 +1,19 @@
-/*2018.06.26 ¼ÛÀ¯ºó Teacher DTO*/ 
+/*2018.06.26 ï¿½ï¿½ï¿½ï¿½ï¿½ï¿½ Teacher DTO*/ 
+
 package service;
 
 public class Teacher {
+	private int teacherNo;
 	private String teacherName;
 	private int teacherAge;
 	
 	
+	public int getTeacherNo() {
+		return teacherNo;
+	}
+	public void setTeacherNo(int teacherNo) {
+		this.teacherNo = teacherNo;
+	}
 	public String getTeacherName() {
 		return teacherName;
 	}
@@ -19,5 +27,7 @@ public class Teacher {
 		this.teacherAge = teacherAge;
 	}
 	
+	
+
 	
 }

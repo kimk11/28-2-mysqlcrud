@@ -1,4 +1,4 @@
-// 2018.06.26 ¼ÛÀ¯ºó 
+// 2018.06.26 ì†¡ìœ ë¹ˆ
 // TeacherAddrDAO.java 
 
 package service;
@@ -12,30 +12,30 @@ public class TeacherAddrDAO {
 	private Connection conn = null;
 	private PreparedStatement pstmt = null;
 
-	public void insertTeacherAddr(TeacherAddr teacherAddr) throws ClassNotFoundException, SQLException {
+	public void insertTeacherAddr(TeacherAddr teacherAddr) {
 		System.out.println("insertTeacherAddr TeacherAddrDAO.java");
 
 		try {
-			// µå¶óÀÌ¹ö ·Îµù
+			//ë“œë¼ì´ë²„ ë¡œë”©
 			Class.forName("com.mysql.jdbc.Driver");
 			String Driveraddr = "jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 			String dbUser = "mysqlcrud_2id";
 			String dbPass = "mysqlcrud_2pw";
 
-			// ÁÖ¼Ò ¾ÆÀÌµğ ºñ¹Ğ¹øÈ£¸¦ Ä¿³Ø¼Ç °´Ã¼ÀÇ ÁÖ¼Ò¿¡ ³Ö¾îÁØ´Ù.
+			// ì£¼ì†Œì™€ ì•„ì´ë””, ë¹„ë°€ë²ˆí˜¸ë¥¼ conn ê°ì²´ì°¸ì¡°ë³€ìˆ˜ì— ë„£ì–´ì¤€ë‹¤.
 			Connection conn = DriverManager.getConnection(Driveraddr, dbUser, dbPass);
 			System.out.println(conn + "<= conn");
 
-			// ÇÑ ¸íÀÇ insert Äõ¸®¿¡ ¹øÈ£¿Í ÁÖ¼Ò ÀÔ·ÂÀÚ·á¸¦ ?¿¡ ¼øÂ÷ÀûÀ¸·Î ´ëÀÔ
+			// 
 			pstmt = conn.prepareStatement("INSERT INTO teacher(teacher_no,teacher_addr_content) VALUES(?,?)");
-			// teacherAddr °´Ã¼ÂüÁ¶º¯¼ö ÁÖ¼Ò¿¡ ÀÖ´Â TeacherNo, TeacherAddrContent¸¦ ¸®ÅÏ ¹Ş¾Æ °¡Á®¿Â´Ù.
+			// teacherAddr ê°ì²´ì˜ ì£¼ì†Œì— ìˆëŠ” TeacherNo, TeacherAddrContentë¥¼ ê°€ì ¸ì˜¨ë‹¤.
 			pstmt.setInt(1, teacherAddr.getTeacherNo());
 			pstmt.setString(2, teacherAddr.getTeacherAddrContent());
 			pstmt.executeUpdate();
 
-			// try ... catch ¿¹¿ÜÃ³¸® ÈÄ PreparedStatement¿Í Connection Á¾·á
-		} catch (SQLException ex) {
-			ex.printStackTrace();
+			// try ... catch ì˜ˆì™¸ì²˜ë¦¬ í›„ PreparedStatementì™€ Connection ì¢…ë£Œ
+		} catch (Exception e) {
+			e.printStackTrace();
 		} finally {
 			if (pstmt != null)
 				try {

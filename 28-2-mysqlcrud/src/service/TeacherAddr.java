@@ -1,13 +1,21 @@
-/*2018.06.26 ¼ÛÀ¯ºó TeacherAddr DTO*/ 
+/*2018.06.26 ì†¡ìœ ë¹ˆ TeacherAddr DTO*/ 
 
 package service;
 
 public class TeacherAddr {
 
+	private int teacherAddrNo;
 	private int teacherNo;
 	private String teacherAddrContent;
 	
 	
+	
+	public int getTeacherAddrNo() {
+		return teacherAddrNo;
+	}
+	public void setTeacherAddrNo(int teacherAddrNo) {
+		this.teacherAddrNo = teacherAddrNo;
+	}
 	public int getTeacherNo() {
 		return teacherNo;
 	}
