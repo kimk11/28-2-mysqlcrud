@@ -10,10 +10,11 @@ import java.sql.SQLException;
 
 public class StudentDAO {
 	
-	//student insert메서드
-	public void studentInsert(Student student){
+	//student insert메서드, 리턴값 0 = 쿼리 실행 실패, 1 = 쿼리실행 성공
+	public int studentInsert(Student student){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		int result = 0;
 		
 		String Driver="com.mysql.jdbc.Driver";
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
@@ -22,14 +23,14 @@ public class StudentDAO {
 		String sql="insert into student(student_name,student_age) values(?,?);";
 		
 		try {	
-			Class.forName(Driver);		//드라이버 연결
+			Class.forName(Driver);
 				
 			connection= DriverManager.getConnection(url, user, password);
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setString(1, student.getStudentName());
 			preparedStatement.setInt(2, student.getStudentAge());
 			
-			preparedStatement.executeUpdate();
+			result = preparedStatement.executeUpdate();
 			
 			preparedStatement.close();
 			connection.close();
@@ -50,5 +51,6 @@ public class StudentDAO {
 				}
 			}
 		}
+		return result;
 	}
 }

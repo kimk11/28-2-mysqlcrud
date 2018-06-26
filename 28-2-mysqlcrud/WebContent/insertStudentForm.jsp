@@ -8,7 +8,16 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insertStudent.css">
+<style type="text/css">
+	input {
+		border: 1px solid #bcbcbc;
+		border-radius: 5px;
+	}
+	button {
+		border: 1px solid #bcbcbc;
+		border-radius: 5px;
+	}
+</style>
 
 </head>
 
