@@ -1,0 +1,9 @@
+@charset "EUC-KR";
+input {
+		border: 1px solid #bcbcbc;
+		border-radius: 5px;
+	}
+	button {
+		border: 1px solid #bcbcbc;
+		border-radius: 5px;
+}

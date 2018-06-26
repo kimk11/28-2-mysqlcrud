@@ -8,22 +8,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 
-<style type="text/css">
-	input {
-		border: 1px solid #bcbcbc;
-		border-radius: 5px;
-	}
-	button {
-		border: 1px solid #bcbcbc;
-		border-radius: 5px;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insert.css">
 
 </head>
 
 <body>
 	<div>
 		<form action="<%= request.getContextPath() %>/insertStudentAction.jsp" method="post" name="formAction">
+			<p>employeeAddr 입력</p>
 			<div>
 				<label>이름 : </label>
 				<input type="text" id="employeeName" name="employeeName">
@@ -40,26 +32,7 @@
 		</form>
 	</div>
 	
-	<script type="text/javascript">
-		//이름
-		var employeeName = document.getElementById('employeeName');
-		var employeeNameValid = document.getElementById('employeeNameValid');
-		//나이
-		var employeeAge = document.getElementById('employeeAge');
-		var employeeAgeValid = document.getElementById('employeeAgeValid');
-		//버튼
-		var signEmployee = document.getElementById('signEmployee');
-		
-		//유효성 검사
-		signEmployee.addEventListener('click', function() {
-			if(employeeName.value.length==''){
-				employeeNameValid.innerHTML = '이름을 입력해주세요';
-			}else if(employeeAge.value.length==''){
-				employeeAgeValid.innerHTML = '나이를 입력해주세요';
-			}else{
-				document.formAction.submit();
-			}
-		});
-	</script>
+	<script type="text/javascript" src="script/insertemployeeOrAddr.js" charset="utf-8"></script>
+	
 </body>
 </html>

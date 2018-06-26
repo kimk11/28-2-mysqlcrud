@@ -8,22 +8,14 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 
-<style type="text/css">
-	input {
-		border: 1px solid #bcbcbc;
-		border-radius: 5px;
-	}
-	button {
-		border: 1px solid #bcbcbc;
-		border-radius: 5px;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insertAddr.css">
 
 </head>
 
 <body>
 	<div>
 		<form action="<%= request.getContextPath() %>/insertStudentAddrAction.jsp" method="post" name="formAction">
+			<p>StudentAddr 입력</p>
 			<div>
 				<input type="hidden" id="studentNo" name="studentNo" value="<%= request.getParameter("studentNo") %>" readonly="readonly">
 			</div>
@@ -38,21 +30,7 @@
 		</form>
 	</div>
 	
-	<script type="text/javascript">
-		//주소
-		var studentAddrContent = document.getElementById('studentAddrContent');
-		var studentAddrContentValid = document.getElementById('studentAddrContentValid');
-		//버튼
-		var signStudent = document.getElementById('signStudentAddr');
-		
-		//유효성 검사
-		signStudent.addEventListener('click', function() {
-			if(studentAddrContent.value.length==''){
-				studentAddrContentValid.innerHTML = '주소를 입력해주세요';
-			}else{
-				document.formAction.submit();
-			}
-		});
-	</script>
+	<script type="text/javascript" src="script/insertstudent.js" charset="utf-8"></script>
+	
 </body>
 </html>

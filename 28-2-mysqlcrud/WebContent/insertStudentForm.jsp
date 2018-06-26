@@ -8,16 +8,7 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 
-<style type="text/css">
-	input {
-		border: 1px solid #bcbcbc;
-		border-radius: 5px;
-	}
-	button {
-		border: 1px solid #bcbcbc;
-		border-radius: 5px;
-	}
-</style>
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insert.css">
 
 </head>
 
@@ -41,26 +32,7 @@
 		</form>
 	</div>
 	
-	<script type="text/javascript">
-		//이름
-		var studentName = document.getElementById('studentName');
-		var studentNameValid = document.getElementById('studentNameValid');
-		//나이
-		var studentAge = document.getElementById('studentAge');
-		var studentAgeValid = document.getElementById('studentAgeValid');
-		//버튼
-		var signStudent = document.getElementById('signStudent');
+	<script type="text/javascript" src="script/insertstudent.js" charset="utf-8"></script>
 		
-		//유효성 검사
-		signStudent.addEventListener('click', function() {
-			if(studentName.value.length==''){
-				studentNameValid.innerHTML = '이름을 입력해주세요';
-			}else if(studentAge.value.length==''){
-				studentAgeValid.innerHTML = '나이를 입력해주세요';
-			}else{
-				document.formAction.submit();
-			}
-		});
-	</script>
 </body>
 </html>
