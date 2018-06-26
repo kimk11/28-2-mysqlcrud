@@ -1,12 +1,19 @@
-//28±â ±èÁø¿ì
+//28ê¸° ê¹€ì§„ìš°
 //2018-06-26
-//student DTO(Bean) ÀÛ¼º
+//student DTO(Bean) ì‘ì„±
 package service;
 
 public class Student {
+	private int studentNo;
 	private String studentName;
 	private int studentAge;
 	
+	public int getStudentNo() {
+		return studentNo;
+	}
+	public void setStudentNo(int studentNo) {
+		this.studentNo = studentNo;
+	}
 	public String getStudentName() {
 		return studentName;
 	}

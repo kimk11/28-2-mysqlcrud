@@ -1,6 +1,6 @@
-//28±â ±èÁø¿ì
+//28ê¸° ê¹€ì§„ìš°
 //2018-06-26
-//student DAO ÀÛ¼º
+//student DAO ì‘ì„±
 package service;
 
 import java.sql.Connection;
@@ -10,7 +10,7 @@ import java.sql.SQLException;
 
 public class StudentDAO {
 	
-	//student insert¸Ş¼­µå, ¸®ÅÏ°ª 0 = Äõ¸® ½ÇÇà ½ÇÆĞ, 1 = Äõ¸®½ÇÇà ¼º°ø
+	//student insertì‘ì„±, ë¦¬í„´ê°’ 0 = ì¿¼ë¦¬ì‹¤í–‰ ì‹¤íŒ¨, 1 = ì¿¼ë¦¬ ì‹¤í–‰ ì„±ê³µ
 	public int studentInsert(Student student){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -19,7 +19,7 @@ public class StudentDAO {
 		String Driver="com.mysql.jdbc.Driver";
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 		String user = "mysqlcrud_2id";
-		String password = "mysqlcrud_2pw";		//¿¬°á Á¤º¸ 
+		String password = "mysqlcrud_2pw";		//ì—°ê²° ì •ë³´
 		String sql="insert into student(student_name,student_age) values(?,?);";
 		
 		try {	
@@ -34,9 +34,9 @@ public class StudentDAO {
 			
 			preparedStatement.close();
 			connection.close();
-		} catch (Exception e) { //try¹® ¾È¿¡¼­ ¿¹¿Ü°¡ ¹ß»ıÇßÀ»½Ã ½ÇÇàµÇ´Â ¹®Àå
+		} catch (Exception e) { //tryë¬¸ì—ì„œ ì˜ˆì™¸ê°€ ë°œìƒí•  ë•Œ ì‹¤í•´
 			e.printStackTrace();
-		} finally { //¿¹¿Ü¿Í °ü°è¾øÀÌ Ç×»ó ½ÇÇàµÇ´Â ¹®Àå
+		} finally { //ì˜ˆì™¸ ë°©ìƒ ì—¬ë¶€ ì—†ì´ ë¬´ì¡°ê±´ ì‹¤í–‰
 			if(preparedStatement != null) {
 				try {
 					preparedStatement.close();

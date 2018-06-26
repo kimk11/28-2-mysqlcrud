@@ -1,12 +1,19 @@
-//28±â ±èÁø¿ì
+//28ê¸° ê¹€ì§„ìš°
 //2018-06-26
-//employeeaddr DTO(Bean) ÀÛ¼º
+//employeeaddr DTO(Bean) ìž‘ì„±
 package service;
 
 public class EmployeeAddr {
+	private int employeeAddrNo;
 	private	int employeeNo;
 	private String employeeAddrContent;
 	
+	public int getEmployeeAddrNo() {
+		return employeeAddrNo;
+	}
+	public void setEmployeeAddrNo(int employeeAddrNo) {
+		this.employeeAddrNo = employeeAddrNo;
+	}
 	public int getEmployeeNo() {
 		return employeeNo;
 	}

@@ -1,12 +1,19 @@
-//28±â ±èÁø¿ì
+//28ê¸° ê¹€ì§„ìš°
 //2018-06-26
-//studentaddr DTO ÀÛ¼º
+//studentaddr DTO ì‘ì„±
 package service;
 
 public class StudentAddr {
+	private int studentAddrNo;
 	private int studentNo;
 	private String studentAddrContent;
 	
+	public int getStudentAddrNo() {
+		return studentAddrNo;
+	}
+	public void setStudentAddrNo(int studentAddrNo) {
+		this.studentAddrNo = studentAddrNo;
+	}
 	public int getStudentNo() {
 		return studentNo;
 	}
