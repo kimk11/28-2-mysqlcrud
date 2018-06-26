@@ -11,68 +11,41 @@
 
 <body>
 	<div>
-		<form action="/insertStudentAction.jsp" method="post" id="formAction">
+		<form action="<%= request.getContextPath() %>/insertStudentAction.jsp" method="post" name="formAction">
 			<div>
 				<label>이름 : </label>
-				<input type="text" id="studentName" name="studentName" class="studentCheck">
+				<input type="text" id="studentName" name="studentName">
 				<span id="studentNameValid"></span>
 			</div>
 			<div>
 				<label>나이 : </label>
-				<input type="text" id="studentAge" name="studentAge" class="studentCheck">
+				<input type="text" id="studentAge" name="studentAge">
 				<span id="studentAgeValid"></span>
 			</div>
 			<div>
 				<button type="button" id="signStudent">입력</button>
-				<span id="signValid"></span>
 			</div>
 		</form>
 	</div>
 	
 	<script type="text/javascript">
-		//이름 유효성 검사
+		//이름
 		var studentName = document.getElementById('studentName');
 		var studentNameValid = document.getElementById('studentNameValid');
-		studentName.addEventListener('blur', function() {
-			if(studentName.value.length<1){
-				studentNameValid.innerHTML = '이름을 적어주세요'
-			}else{
-				studentNameValid.innerHTML = ''
-			}
-		});
-		
-		//나이 유효성 검사
+		//나이
 		var studentAge = document.getElementById('studentAge');
 		var studentAgeValid = document.getElementById('studentAgeValid');
-		studentAge.addEventListener('blur', function() {
-			if(studentAge.value.length<1){
-				studentAgeValid.innerHTML = '나이를 적어주세요'
-			}else{
-				studentAgeValid.innerHTML = ''
-			}
-			for(var i=0 ; i<studentName.value.length ; i++){
-				var check = document.forms.formAction.value.charAt(i);
-				if(!(0<=check && 9>=check)){
-					studentNameValid.innerHTML = '나이는 숫자만 적어주세요.'
-				}
-			}
-		});
-		
-		//하나라도 값이 없는지 검사
+		//버튼
 		var signStudent = document.getElementById('signStudent');
-		var studentCheck = document.getElementsByClassName('studentCheck');
-		var signValid = document.getElementsByClassName('signValid');
-		var studentFlag = true;
-		for(var x=0 ; x<studentCheck.length ; x++){
-			if(studentCheck[x].value == ''){
-				studentFlag = false;
-			}
-		}
+		
+		//유효성 검사
 		signStudent.addEventListener('click', function() {
-			if(studentFlag){
-				document.getElementById('formAction').submit();
+			if(studentName.value.length==''){
+				studentNameValid.innerHTML = '이름을 입력해주세요';
+			}else if(studentAge.value.length==''){
+				studentAgeValid.innerHTML = '나이를 입력해주세요';
 			}else{
-				signValid.innerHTML = '값을 입력해주세요.'
+				document.formAction.submit();
 			}
 		});
 	</script>

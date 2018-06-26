@@ -1,6 +1,6 @@
 //28기 김진우
 //2018-06-26
-//student DAO 작성
+//studentaddr DAO 작성
 package service;
 
 import java.sql.Connection;
@@ -8,26 +8,27 @@ import java.sql.DriverManager;
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
-public class StudentDAO {
+public class studentAddrDAO {
 	
-	//student insert메서드
-	public void studentInsert(Student student){
+	//studentAddr insert메서드
+	public void studentAddrInsert(StudentAddr studentAddr){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		
 		
 		String Driver="com.mysql.jdbc.Driver";
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 		String user = "mysqlcrud_2id";
 		String password = "mysqlcrud_2pw";		//연결 정보 
-		String sql="insert into student(student_name,student_age) values(?,?);";
+		String sql="insert into student_addr(student_no,student_addr_content) values(?,?);";
 		
 		try {	
 			Class.forName(Driver);		//드라이버 연결
 				
 			connection= DriverManager.getConnection(url, user, password);
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, student.getStudentName());
-			preparedStatement.setInt(2, student.getStudentAge());
+			preparedStatement.setInt(1, studentAddr.getStudentNo());
+			preparedStatement.setString(2, studentAddr.getStudentAddrContent());
 			
 			preparedStatement.executeUpdate();
 			
