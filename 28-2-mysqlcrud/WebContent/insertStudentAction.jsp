@@ -1,12 +1,24 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<!-- 28기 김진우 -->
+<!-- 2018-06-26 -->
+<!-- student 입력 처리 작성 -->
+<%@page import="service.StudentDAO"%>
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
-<body>
 
+<body>
+<%
+	request.setCharacterEncoding("euckr");
+%>
+	<jsp:useBean id="student" class="service.Student"/>
+	<jsp:setProperty property="*" name="student"/>
+<%
+	StudentDAO studentDao = new StudentDAO();
+	studentDao.studentInsert(student);
+%>
 </body>
 </html>

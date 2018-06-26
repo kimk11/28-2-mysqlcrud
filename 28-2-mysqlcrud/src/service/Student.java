@@ -1,3 +1,6 @@
+//28기 김진우
+//2018-06-26
+//student DTO(Bean) 작성
 package service;
 
 public class Student {
