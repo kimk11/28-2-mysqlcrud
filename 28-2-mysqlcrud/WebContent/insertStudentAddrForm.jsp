@@ -13,7 +13,7 @@
 	<div>
 		<form action="<%= request.getContextPath() %>/insertStudentAddrAction.jsp" method="post" name="formAction">
 			<div>
-				<input type="hidden" id="studentNo" name="studentNo" value="<%= request.getParameter("studentNo") %>">
+				<input type="hidden" id="studentNo" name="studentNo" value="<%= request.getParameter("studentNo") %>" readonly="readonly">
 			</div>
 			<div>
 				<label>аж╪р : </label>
