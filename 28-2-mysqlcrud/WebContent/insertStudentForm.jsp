@@ -7,11 +7,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insertStudent.css">
+
 </head>
 
 <body>
 	<div>
 		<form action="<%= request.getContextPath() %>/insertStudentAction.jsp" method="post" name="formAction">
+			<p>Student 입력</p>
 			<div>
 				<label>이름 : </label>
 				<input type="text" id="studentName" name="studentName">

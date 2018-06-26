@@ -35,7 +35,7 @@ public class studentAddrDAO {
 			preparedStatement.close();
 			connection.close();
 		} catch (Exception e) { //try문 안에서 예외가 발생했을시 실행되는 문장
-			
+			e.printStackTrace();
 		} finally { //예외와 관계없이 항상 실행되는 문장
 			if(preparedStatement != null) {
 				try {
