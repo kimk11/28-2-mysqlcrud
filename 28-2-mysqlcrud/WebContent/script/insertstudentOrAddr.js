@@ -1,4 +1,12 @@
 /*studentForm js코드*/
+//유효성 검사 문자열 제거
+	function black(){
+		var studentBlank = document.getElementsByClassName('studentBlank');
+		for(var b=0 ; b<studentBlank.length ; b++){
+			studentBlank[b].innerHTML='';
+		}
+	}
+
 	//이름
 	var studentName = document.getElementById('studentName');
 	var studentNameValid = document.getElementById('studentNameValid');
@@ -11,22 +19,17 @@
 	//유효성 검사
 	signStudent.addEventListener('click', function() {
 		if(studentName.value.length==''){
-//			black();
+			black();
 			studentNameValid.innerHTML = '이름을 입력해주세요';
 		}else if(studentAge.value.length==''){
-//			black();
+			black();
 			studentAgeValid.innerHTML = '나이를 입력해주세요';
 		}else{
 			document.formAction.submit();
 		}
 	});
 	
-//	function black(){
-//		var studentBlank = document.getElementsByClassName('studentBlank');
-//		for(int b=0 ; b<studentBlank.length ; b++){
-//			studentBlank[b].innerHTML=' ';
-//		}
-//	}
+
 
 
 /*studentAddrForm js코드*/
