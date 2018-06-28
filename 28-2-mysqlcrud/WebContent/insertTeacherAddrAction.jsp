@@ -12,18 +12,14 @@
 <title>insert Teacher Addr Action</title>
 </head>
 <body>
-<% request.setCharacterEncoding("euc-kr"); %>
+<% 	request.setCharacterEncoding("euc-kr");
+	
+	TeacherAddr teacherAddr = new TeacherAddr();
+	teacherAddr.setTeacherNo(Integer.parseInt(request.getParameter("teacherNo")));
+	teacherAddr.setTeacherAddrContent(request.getParameter("teacherAddrContent"));
 
-<jsp:useBean id="ta" class="service.TeacherAddr"></jsp:useBean>
-<!-- import 역활 패키지 member클래스 및 멤버 클래스 통해 선언 생성 호출 -->
-<jsp:setProperty property="*" name="ta" />
-<!-- * 입력 개수만큼 호출  -->
-<!-- 프로퍼티명 = 전역변수명  -->
-	
-<%	
-	
 	TeacherAddrDAO dao = new TeacherAddrDAO();
-	dao.insertTeacherAddr(ta);
+	dao.insertTeacherAddr(teacherAddr);
 %>
 </body>
 </html>

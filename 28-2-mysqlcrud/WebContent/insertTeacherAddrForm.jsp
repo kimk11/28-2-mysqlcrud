@@ -25,16 +25,18 @@
 </style>
 </head>
 <body>
-	<form action="./insertTeacherAddrAction.jsp" method ="post">
+	<form action="./insertTeacherAddrAction.jsp" method ="post" name="f">
 		<h2>Teacher 주소 입력</h2>
 		<div>
 			<input type = "hidden" id="teacherNo" name ="teacherNo" value="<%= request.getParameter("teacherNo")%>" readonly="readonly">
 			<input type = "text" id="teacherAddrContent" name ="teacherAddrContent" size="30px" id="textAddr">
+			<span id="teacherAddrContentHelper"></span>
 		</div>
 		<div>
 			<input type="submit" value="입력" id="btn">
 		</div>
 		<div id="clear"></div>
 	</form>
+	<script type="text/javascript" src="script/inserteacherOrAddr.js" charset="utf-8"></script>
 </body>
 </html>

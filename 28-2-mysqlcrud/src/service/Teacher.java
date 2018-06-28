@@ -1,11 +1,11 @@
-/*2018.06.26 ������ Teacher DTO*/ 
+/*2018.06.26 송유빈 Teacher DTO*/ 
 
 package service;
 
 public class Teacher {
-	private int teacherNo;
-	private String teacherName;
-	private int teacherAge;
+	private int teacherNo;	//번호
+	private String teacherName;	//이름
+	private int teacherAge;		//나이
 	
 	
 	public int getTeacherNo() {

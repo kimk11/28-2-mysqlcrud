@@ -3,36 +3,23 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
-	<head>
-		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>insertTeacherForm</title>
-		<style>
-		div {
-		display: inline-block;
-					float: left;
-		}
-		
-		#btn {
-			padding: 12px 20px;
-		}
-		
-		#clear {
-			clear: left;
-		}
-		</style>
-	</head>
-	<body>
-		<form action="./insertTeacherAction.jsp" method="post">
-			<h2>Teacher 정보 입력</h2>
-			<div>
-				이름 : <input type="text" id="teacherName" name="teacherName" size="10px"><br>
-				나이 : <input type="text" id="teacherAge" name="teacherAge" size="10px"><br>
-			</div>
-			<div>
-				<input type="submit" value="입력" id="btn">
-			</div>
-			<div id="clear"></div>
-		</form>
-
-	</body>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+<title>insert Teacher Form</title>
+</head>
+<body>
+	<form action="./insertTeacherAction.jsp" method="post" name="f">
+		<h2>Teacher 정보 입력</h2>
+		<div>
+			이름 : <input type="text" id="teacherName" name="teacherName" size="10px"> 
+			<span id="teacherNameHelper"></span><br>
+			나이 : <input type="text" id="teacherAge" name="teacherAge" size="10px">
+			<span id="teacherAgeHelper"></span><br>
+		</div>
+		<div>
+			<button type="button" id="teacherBtn">입력</button>
+		</div>
+	</form>
+	<script type="text/javascript" src="script/inserteacherOrAddr.js" charset="utf-8"></script>
+</body>
 </html>

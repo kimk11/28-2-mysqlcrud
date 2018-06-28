@@ -9,9 +9,7 @@ import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class TeacherDAO {
-	private Connection conn = null;
-	private PreparedStatement pstmt = null;
-	
+
 	
 		/*CREATE TABLE `teacher` (
 			`teacher_no` INT(10) NOT NULL AUTO_INCREMENT,
@@ -25,9 +23,13 @@ public class TeacherDAO {
 		 */
 	
 	
-	// insertTeacher 메서드에 
-	public void insertTeacher(Teacher teacher) {
+
+	public int insertTeacher(Teacher teacher) {
 		System.out.println("insertTeacher TeacherDAO.java");
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int result = 0;
+		
 		try {
 			// 드라이버 로딩
 			Class.forName("com.mysql.jdbc.Driver");
@@ -37,7 +39,7 @@ public class TeacherDAO {
 
 			
 			// 
-			Connection conn = DriverManager.getConnection(Driveraddr, dbUser, dbPass);
+			conn = DriverManager.getConnection(Driveraddr, dbUser, dbPass);
 
 			
 			//  한 명의insert 쿼리에 teacher 객체참조변수 주소값에 있는  TeacherName, TeacherAge의 입력자료를 ?에 순차적으로 대입
@@ -46,7 +48,8 @@ public class TeacherDAO {
 			pstmt.setInt(2, teacher.getTeacherAge());
 			pstmt.executeUpdate();
 
-			
+			pstmt.close();
+			conn.close();
 			// try ... catch 예외처리 후 PreparedStatement와 Connection 종료
 		} catch (Exception e) {
 			e.printStackTrace();
@@ -65,5 +68,6 @@ public class TeacherDAO {
 				}
 
 		}
+		return result;
 	}
 }	
