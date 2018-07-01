@@ -6,6 +6,26 @@ grant select,insert,update,delete,create,drop,alter on mysqlcrud_2.* to 'mysqlcr
 
 mysqlcrud_2id °èÁ¤ Äõ¸®
 
+CREATE TABLE `employee` (
+	`employee_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`employee_name` VARCHAR(50) NOT NULL,
+	`employee_age` INT(10) NOT NULL,
+	PRIMARY KEY (`employee_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `employee_addr` (
+	`employee_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`employee_no` INT(10) NOT NULL,
+	`employee_addr_content` VARCHAR(50) NOT NULL,
+	PRIMARY KEY (`employee_addr_no`),
+	INDEX `FK_employee` (`employee_no`),
+	CONSTRAINT `FK_employee` FOREIGN KEY (`employee_no`) REFERENCES `employee` (`employee_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
 CREATE TABLE `member` (
 	`member_no` INT(10) NOT NULL AUTO_INCREMENT,
 	`member_name` VARCHAR(50) NOT NULL,
@@ -14,7 +34,6 @@ CREATE TABLE `member` (
 )
 COLLATE='euckr_korean_ci'
 ENGINE=InnoDB;
-
 
 CREATE TABLE `member_addr` (
 	`member_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
@@ -38,7 +57,7 @@ ENGINE=InnoDB;
 
 CREATE TABLE `student_addr` (
 	`student_addr_no` INT(10) NOT NULL AUTO_INCREMENT,
-	`student_no` INT(11) NOT NULL,
+	`student_no` INT(10) NOT NULL,
 	`student_addr_content` VARCHAR(50) NOT NULL,
 	PRIMARY KEY (`student_addr_no`),
 	INDEX `FK__student` (`student_no`),
@@ -66,27 +85,3 @@ CREATE TABLE `teacher_addr` (
 )
 COLLATE='euckr_korean_ci'
 ENGINE=InnoDB;
-
-
-CREATE TABLE `employee` (
-	`employee_no` INT(11) NOT NULL AUTO_INCREMENT,
-	`employee_name` VARCHAR(50) NULL DEFAULT NULL,
-	`employee_age` INT(11) NULL DEFAULT NULL,
-	PRIMARY KEY (`employee_no`)
-)
-COLLATE='euckr_korean_ci'
-ENGINE=InnoDB
-;
-
-CREATE TABLE `employee_addr` (
-	`employee_addr_no` INT(11) NOT NULL AUTO_INCREMENT,
-	`employee_no` INT(11) NULL DEFAULT NULL,
-	`employee_addr_content` VARCHAR(50) NULL DEFAULT NULL,
-	PRIMARY KEY (`employee_addr_no`),
-	INDEX `FK_employee` (`employee_no`),
-	CONSTRAINT `FK_employee` FOREIGN KEY (`employee_no`) REFERENCES `employee` (`employee_no`)
-)
-COLLATE='euckr_korean_ci'
-ENGINE=InnoDB
-;
-

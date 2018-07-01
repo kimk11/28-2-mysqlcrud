@@ -6,3 +6,29 @@ commit 하기전에
 무조건 하고 commit and push 하기
 
 commit and push 할 때 메세지에 본인이름 적기
+
+1. commit message [이름]
+
+2. 파일 상단 -> 주석으로 날짜, 이름
+
+3. DriverDb 클래스 X
+
+4. DTO, VO, 도메인
+	private
+	public setter, getter
+
+5. 주석
+
+6. DAO 멤버변수 X -> Connection conn = null; 등... - > 지역변수
+
+7. DAO 메서드 안에 try...catch...finally -> throws 지우기 - > finally 안에 종료
+
+8. 메서드 위에 주석으로 메서드 설명
+//무슨 일을 하는 메서드
+//매개변수의미
+//리턴값의미
+
+Entity / DAO.insertEntity / jsp
+EntityAddr / DAO / jsp
+
+9. useBean 사용금지 -> 각각 세팅 겟팅
