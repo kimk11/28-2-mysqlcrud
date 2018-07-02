@@ -27,12 +27,12 @@
 				<span id="studentAgeValid" class="studentBlank"></span>
 			</div>
 			<div>
-				<button type="submit" id="signStudent">입력</button>
+				<button type="button" id="signStudent">입력</button>
 			</div>
 		</form>
 	</div>
 	
-	<script type="text/javascript" src="script/insertstudentOrAddr.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../script/insertstudentOrAddr.js" charset="utf-8"></script>
 		
 </body>
 </html>

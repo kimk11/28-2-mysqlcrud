@@ -27,12 +27,12 @@
 				<span id="employeeAgeValid"></span>
 			</div>
 			<div>
-				<button type="submit" id="signEmployee">입력</button>
+				<button type="button" id="signEmployee">입력</button>
 			</div>
 		</form>
 	</div>
 	
-	<script type="text/javascript" src="script/insertemployeeOrAddr.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../script/insertemployeeOrAddr.js" charset="utf-8"></script>
 	
 </body>
 </html>
