@@ -17,8 +17,8 @@
 
 	Student student = new Student();
 	
-	student.setStudentName(request.getParameter("StudentName"));
-	student.setStudentAge(Integer.parseInt(request.getParameter("StudentAge")));
+	student.setStudentName(request.getParameter("studentName"));
+	student.setStudentAge(Integer.parseInt(request.getParameter("studentAge")));
 
 	StudentDAO studentDao = new StudentDAO();
 	studentDao.studentInsert(student);

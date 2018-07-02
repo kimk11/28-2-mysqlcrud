@@ -14,7 +14,7 @@
 
 <body>
 	<div>
-		<form action="<%= request.getContextPath() %>/insertStudentAction.jsp" method="post" name="formAction">
+		<form action="<%= request.getContextPath() %>/Employee/insertEmployeeAction.jsp" method="post" name="formAction">
 			<p>employeeAddr 입력</p>
 			<div>
 				<label>이름 : </label>
@@ -27,7 +27,7 @@
 				<span id="employeeAgeValid"></span>
 			</div>
 			<div>
-				<button type="button" id="signEmployee">입력</button>
+				<button type="submit" id="signEmployee">입력</button>
 			</div>
 		</form>
 	</div>

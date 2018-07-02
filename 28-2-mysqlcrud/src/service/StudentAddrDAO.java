@@ -1,6 +1,6 @@
 //28기 김진우
 //2018-06-26
-//employee DAO 작성
+//studentaddr DAO 작성
 package service;
 
 import java.sql.Connection;
@@ -10,43 +10,42 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 
-public class EmployeeDAO {
-// <employee테이블 데이터 추가 메서드 start>
-	//employee insert작성, 리턴값 0 = 쿼리실행 실패, 1 = 쿼리 실행 성공
-	public int employeeInsert(Employee employee){
+public class StudentAddrDAO {
+// <studentAddr테이블 데이터 추가 메서드 start>
+	//studentAddr insert작성, 리턴값 0 = 쿼리실행 실패, 1 = 쿼리 실행 성공
+	public int studentAddrInsert(StudentAddr studentAddr){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		int result = 0;
 		
-		String className="com.mysql.jdbc.Driver";
+		String Driver="com.mysql.jdbc.Driver";
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 		String user = "mysqlcrud_2id";
-		String password = "mysqlcrud_2pw";		
-		String sql="INSERT INTO employee(employee_name,employee_age) VALUES(?,?)";
+		String password = "mysqlcrud_2pw";		//연결 정보
+		String sql="INSERT INTO student_addr(student_no,student_addr_content) VALUES(?,?);";
 		
 		try {	
-			Class.forName(className);	
+			Class.forName(Driver);	
 				
 			connection= DriverManager.getConnection(url, user, password);
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setString(1, employee.getEmployeeName());
-			preparedStatement.setInt(2, employee.getEmployeeAge());
+			preparedStatement.setInt(1, studentAddr.getStudentNo());
+			preparedStatement.setString(2, studentAddr.getStudentAddrContent());
 			
 			result = preparedStatement.executeUpdate();
 			
 			preparedStatement.close();
 			connection.close();
-		} catch (Exception e) { 
+		} catch (Exception e) { //try문에서 예외가 발생할 때 실해
 			e.printStackTrace();
-		} finally { 
+		} finally { //예외 방생 여부 없이 무조건 실행
 			if(preparedStatement != null) {
 				try {
 					preparedStatement.close();
 				} catch (SQLException e) {
 					e.printStackTrace();
 				}
-			}
-			if(connection != null) {
+			}if(connection != null) {
 				try {
 					connection.close();
 				} catch (SQLException e) {
@@ -56,12 +55,12 @@ public class EmployeeDAO {
 		}
 		return result;
 	}
-// <employee테이블 데이터 추가 메서드 end>
+// <studentAddr테이블 데이터 추가 메서드 end>
 
-// <employee테이블 데이터 조회 메서드 start>
-	//employee테이블 리스트로 보기 메서드 _page작업
-	public ArrayList<Employee> selectEmployeeByPage(int page, int pagePerRow){
-		ArrayList<Employee> empployeeList = new ArrayList<>();
+// <studentAddr테이블 데이터 조회 메서드 start>
+	//student테이블 리스트로 보기 메서드 _page작업
+	public ArrayList<StudentAddr> selectStudentAddrByPage(int page, int pagePerRow){
+		ArrayList<StudentAddr> studentAddrList = new ArrayList<>();
 		
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -71,7 +70,7 @@ public class EmployeeDAO {
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 		String user = "mysqlcrud_2id";
 		String password = "mysqlcrud_2pw";		
-		String sql="SELECT employee_name,employee_age FROM employee LIMIT ?,?";
+		String sql="SELECT student_addr_content FROM student_addr LIMIT ?,?";
 		
 		try {
 			Class.forName(className);
@@ -81,10 +80,9 @@ public class EmployeeDAO {
 			preparedStatement.setInt(2, pagePerRow);
 			resultset = preparedStatement.executeQuery();
 			while(resultset.next()) {
-				Employee employee = new Employee();
-				employee.setEmployeeName(resultset.getString(1));
-				employee.setEmployeeAge(resultset.getInt(2));
-				empployeeList.add(employee);
+				StudentAddr studentAddr = new StudentAddr();
+				studentAddr.setStudentAddrContent(resultset.getString(1));
+				studentAddrList.add(studentAddr);
 			}
 			
 		} catch (Exception e) {
@@ -113,7 +111,7 @@ public class EmployeeDAO {
 			}
 		}
 		
-		return empployeeList;
+		return studentAddrList;
 	}
 	
 	// db에 저장된 데이터의 갯수를 구하는 메서드
@@ -127,7 +125,7 @@ public class EmployeeDAO {
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 		String user = "mysqlcrud_2id";
 		String password = "mysqlcrud_2pw";		
-		String sql="SELECT count(employee_no) as count FROM employee";
+		String sql="SELECT count(student_addr_no) as count FROM student_addr";
 		
 		try {
 			Class.forName(className);
@@ -165,11 +163,11 @@ public class EmployeeDAO {
 		}
 		return count;
 	}
-// <employee테이블 데이터 조회 메서드 end>
+// <studentAddr테이블 데이터 조회 메서드 end>
 
-// <employee테이블 데이터 수정 메서드 start>
-// <employee테이블 데이터 수정 메서드 end>
+// <studentAddr테이블 데이터 수정 메서드 start>
+// <studentAddr테이블 데이터 수정 메서드 end>
 
-// <employee테이블 데이터 삭제 메서드 start>
-// <employee테이블 데이터 삭제 메서드 end>
+// <studentAddr테이블 데이터 삭제 메서드 start>
+// <studentAddr테이블 데이터 삭제 메서드 end>
 }
