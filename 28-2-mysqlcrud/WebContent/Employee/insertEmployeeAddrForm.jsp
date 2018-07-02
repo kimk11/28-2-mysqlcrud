@@ -14,7 +14,7 @@
 
 <body>
 	<div>
-		<form action="<%= request.getContextPath() %>/insertStudentAction.jsp" method="post" name="formAction">
+		<form action="<%= request.getContextPath() %>/Employee/insertEmployeeAddrAction.jsp" method="post" name="formAction">
 			<p>employee ют╥б</p>
 			<div>
 				<input type="hidden" id="employeeNo" name="employeeNo" value="<%= request.getParameter("employeeNo") %>">

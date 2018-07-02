@@ -14,7 +14,7 @@
 
 <body>
 	<div>
-		<form action="<%= request.getContextPath() %>/insertStudentAddrAction.jsp" method="post" name="formAction">
+		<form action="<%= request.getContextPath() %>/student/insertStudentAddrAction.jsp" method="post" name="formAction">
 			<p>StudentAddr ют╥б</p>
 			<div>
 				<input type="hidden" id="studentNo" name="studentNo" value="<%= request.getParameter("studentNo") %>" readonly="readonly">
