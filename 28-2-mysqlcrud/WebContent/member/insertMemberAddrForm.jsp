@@ -11,7 +11,7 @@
 	</head>
 	<body>
 		<div>
-			<form action="<%= request.getContextPath() %>/insertMemberAddrAction.jsp" method="post" name="formAction">
+			<form action="<%= request.getContextPath() %>/member/insertMemberAddrAction.jsp" method="post" name="formAction">
 				<p>MemberAddr ют╥б</p>
 				<div>
 					<input type="hidden" id="memberNo" name="memberNo" value="<%= request.getParameter("memberNo") %>">
@@ -26,6 +26,6 @@
 				</div>
 			</form>
 		</div>
-		<script type="text/javascript" src="script/insertmemberOrAddr.js" charset="utf-8"></script>	
+		<script type="text/javascript" src="../script/insertmemberOrAddr.js" charset="utf-8"></script>	
 	</body>
 </html>

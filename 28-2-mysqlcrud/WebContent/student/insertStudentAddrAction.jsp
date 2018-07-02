@@ -2,7 +2,7 @@
 <!-- 2018-06-26 -->
 <!-- studentaddr 입력 처리 작성 -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@page import="service.studentAddrDAO"%>
+<%@page import="service.StudentAddrDAO"%>
 <%@page import="service.StudentAddr"%>
 <!DOCTYPE html>
 <html>
@@ -20,7 +20,7 @@
 	studentAddr.setStudentAddrNo(Integer.parseInt(request.getParameter("StudentAddrNo")));
 	studentAddr.setStudentAddrContent(request.getParameter("StudentAddrContent"));
 	
-	studentAddrDAO studentDao = new studentAddrDAO();
+	StudentAddrDAO studentDao = new StudentAddrDAO();
 	studentDao.studentAddrInsert(studentAddr);
 %>
 

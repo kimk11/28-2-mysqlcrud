@@ -14,7 +14,7 @@
 
 <body>
 	<div>
-		<form action="<%= request.getContextPath() %>/insertMemberAction.jsp" method="post" name="formAction">
+		<form action="<%= request.getContextPath() %>/member/insertMemberAction.jsp" method="post" name="formAction">
 			<p>Member 입력</p>
 			<div>
 				<label>이름 : </label>
@@ -32,7 +32,7 @@
 		</form>
 	</div>
 	
-	<script type="text/javascript" src="script/insertmemberOrAddr.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../script/insertmemberOrAddr.js" charset="utf-8"></script>
 	
 </body>
 </html>
