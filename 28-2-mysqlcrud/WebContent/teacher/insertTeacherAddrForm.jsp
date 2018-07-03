@@ -33,10 +33,10 @@
 			<span id="teacherAddrContentHelper"></span>
 		</div>
 		<div>
-			<input type="submit" value="입력" id="btn">
+			<button type="button" id="btn">입력</button>
 		</div>
 		<div id="clear"></div>
 	</form>
-	<script type="text/javascript" src="script/inserteacherOrAddr.js" charset="utf-8"></script>
+	<script type="text/javascript" src="../script/inserteacherOrAddr.js" charset="utf-8"></script>
 </body>
 </html>
