@@ -25,12 +25,12 @@
 				<span id="studentAddrContentValid"></span>
 			</div>
 			<div>
-				<button type="button" id="signStudentAddr">입력</button>
+				<button type="button" id="signStudent">입력</button>
 			</div>
 		</form>
 	</div>
 	
 	<script type="text/javascript" src="../script/insertstudentOrAddr.js" charset="utf-8"></script>
-	
+
 </body>
 </html>

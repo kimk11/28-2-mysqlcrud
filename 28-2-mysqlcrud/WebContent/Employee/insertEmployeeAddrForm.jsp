@@ -20,7 +20,7 @@
 				<input type="hidden" id="employeeNo" name="employeeNo" value="<%= request.getParameter("employeeNo") %>">
 			</div>
 			<div>
-				<label>나이 : </label>
+				<label>주소 : </label>
 				<input type="text" id="employeeAddrContent" name="employeeAddrContent">
 				<span id="employeeAddrContentValid"></span>
 			</div>

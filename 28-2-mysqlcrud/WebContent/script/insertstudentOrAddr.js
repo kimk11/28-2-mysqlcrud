@@ -18,10 +18,10 @@
 	
 	//유효성 검사
 	signStudent.addEventListener('click', function() {
-		if(studentName.value.length==''){
+		if(studentName.value==''){
 			black();
 			studentNameValid.innerHTML = '이름을 입력해주세요';
-		}else if(studentAge.value.length==''){
+		}else if(studentAge.value==''){
 			black();
 			studentAgeValid.innerHTML = '나이를 입력해주세요';
 		}else{
@@ -33,15 +33,15 @@
 
 
 /*studentAddrForm js코드*/
-//주소
-	var employeeAddrContent = document.getElementById('studentAddrContent');
+	//주소
+	var studentAddrContent = document.getElementById('studentAddrContent');
 	var studentAddrContentValid = document.getElementById('studentAddrContentValid');
 	//버튼
-	var signStudent = document.getElementById('signStudentAddr');
+	var signStudentAddr = document.getElementById('signStudentAddr');
 	
 	//유효성 검사
-	signStudent.addEventListener('click', function() {
-		if(studentAddrContent.value.length==''){
+	signStudentAddr.addEventListener('click', function() {
+		if(studentAddrContent.value==''){
 			studentAddrContentValid.innerHTML = '주소를 입력해주세요';
 		}else{
 			document.formAction.submit();

@@ -10,9 +10,9 @@
 	
 	//유효성 검사
 	signEmployee.addEventListener('click', function() {
-		if(employeeName.value.length==''){
+		if(employeeName.value==''){
 			employeeNameValid.innerHTML = '이름을 입력해주세요';
-		}else if(employeeAge.value.length==''){
+		}else if(employeeAge.value==''){
 			employeeAgeValid.innerHTML = '나이를 입력해주세요';
 		}else{
 			document.formAction.submit();
@@ -28,7 +28,7 @@
 	
 	//유효성 검사
 	signEmployee.addEventListener('click', function() {
-		if(employeeAddrContent.value.length==''){
+		if(employeeAddrContent.value==''){
 			employeeAddrContentValid.innerHTML = '주소를 입력해주세요';
 		}else{
 			document.formAction.submit();

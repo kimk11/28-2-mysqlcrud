@@ -17,7 +17,6 @@
 
 	EmployeeAddr employeeAddr = new EmployeeAddr();
 	
-	employeeAddr.setEmployeeNo(Integer.parseInt(request.getParameter("employeeNo")));
 	employeeAddr.setEmployeeAddrContent(request.getParameter("employeeAddrContent"));
 
 	EmployeeAddrDAO employeeAddrDao = new EmployeeAddrDAO();
