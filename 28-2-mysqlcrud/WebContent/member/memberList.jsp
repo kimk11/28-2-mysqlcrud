@@ -9,18 +9,20 @@
 		<title>memberList</title>
 	</head>
 	<body>
-		<table>
+		<table border ="1">
 			<tr>
 				<td>회원번호</td>
 				<td>회원이름</td>
 				<td>회원나이</td>
+				<td>삭제</td>
+				<td>수정</td>
 			</tr>
 		
 	<%
 		MemberDAO memberdao = new MemberDAO();
 		
 		
-		int rowNumber = memberdao.count();
+		int rowNumber = memberdao.countMember();
 		
 		int currentPage = 1;
 		if (request.getParameter("currentPage") != null) {
@@ -43,8 +45,29 @@
 	%>
 			<tr>
 				<td><%=u.getMemberNo() %></td>
-				<td><%=u.getMemberName() %></td>
+				<td><a href = "<%= request.getContextPath() %>/member/memberAddrList.jsp?memberNo=<%=u.getMemberNo() %>"><%=u.getMemberName() %></a></td>
 				<td><%=u.getMemberAge() %></td>
+				
+				<td>
+					<form action="<%= request.getContextPath() %>/member/insertMemberAddrAction.jsp" method="post" name="formAction">
+					<p>MemberAddr 입력</p>
+					<div>
+						<input type="hidden" id="memberNo" name="memberNo" value="<%=u.getMemberNo() %>">
+					</div>
+					<div>
+						<label>주소 : </label>
+						<input type="text" id="memberAddrContent" name="memberAddrContent">
+						<span id="memberAddrContentValid"></span>
+					</div>
+					<div>
+						<button type="submit" id="signMember">입력</button>
+					</div>
+					</form>
+				</td>
+				
+				<td><a href = "<%= request.getContextPath() %>/member/deleteMemberAction.jsp?memberNo=<%=u.getMemberNo() %>">삭제</a></td>
+				<td><a href = "<%= request.getContextPath() %>/member/updateMemberForm.jsp?memberNo=<%=u.getMemberNo() %>">수정</a></td>
+				<!-- updateMemberForm -> updateMemberAction -->
 			</tr>
 	<%
 		}
@@ -53,9 +76,7 @@
 	<%
 		if (currentPage > 1) {
 	%>
-		<div>
-			<div><a href="./memberList.jsp?currentPage=<%=currentPage - 1%>">◀ 이전</a></div>
-		</div>
+		<a href="./memberList.jsp?currentPage=<%=currentPage - 1%>">◀ 이전</a>
 	<%
 		}
 		int lastPage = rowNumber / rowPerPage;
@@ -64,11 +85,17 @@
 		}
 		if (currentPage < lastPage){
 	%>
-		<div>
-			<div><a href="./memberList.jsp?currentPage=<%=currentPage + 1%>">다음 ▶</a></div>
-		</div>
+		<a href="./memberList.jsp?currentPage=<%=currentPage + 1%>">다음 ▶</a>
 	<%
 		}
 	%>
+		<form>
+			<div>
+				이름 :
+				<input type = "text" name = "searchName">
+				<button type = "button">검색</button>
+			</div>
+		</form>
+	
 	</body>	
 </html>
