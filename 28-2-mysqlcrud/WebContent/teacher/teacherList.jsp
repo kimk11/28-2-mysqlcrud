@@ -53,7 +53,7 @@ width :15%;
 		if (endRow	> list.size()-1) {
 			endRow = list.size()-1;
 		}
-		for(int i=startRow; i<=endRow; i++) {
+		for(int  i=0;i<list.size();i++) {
 			Teacher teacher = list.get(i);
 			
 			int getTeacherNo = teacher.getTeacherNo();

@@ -93,6 +93,7 @@ public class TeacherDAO {
 	
 	}
 	
+	//03 count DB row 수 
 	public int count() {
 		Connection connection = null;
 		ResultSet resultSet = null;
@@ -103,7 +104,7 @@ public class TeacherDAO {
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 		String user = "mysqlcrud_2id";
 		String password = "mysqlcrud_2pw";
-		String sql = "SELECT count(*) FROM teacher;";
+		String sql = "SELECT count(teacher_no) FROM teacher";
 		
 		try {	
 			Class.forName(Driver);	
@@ -114,17 +115,17 @@ public class TeacherDAO {
 			resultSet = preparedStatement.executeQuery();
 			
 			if(resultSet.next()) {
-				totalRow = resultSet.getInt("count(*)");
+				totalRow = resultSet.getInt("count(teacher_no)");
 			}
 		
 		} catch(Exception e) {
 			e.printStackTrace();
 		}finally{
-			//6단계 사용한 Query statement 종료
+	
 			if (resultSet != null) try { resultSet.close(); } catch(SQLException ex) {}
 			if (preparedStatement != null) try { preparedStatement.close(); } catch(SQLException ex) {}
 			
-			//7단계 db 연결 종료
+		
 			if (connection != null) try { connection.close(); } catch(SQLException ex) {}
 		}
 		return totalRow;
