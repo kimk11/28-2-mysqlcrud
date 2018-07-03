@@ -15,11 +15,20 @@
 <% 	request.setCharacterEncoding("euc-kr");
 	
 	TeacherAddr teacherAddr = new TeacherAddr();
+	int teacherNo = Integer.parseInt(request.getParameter("teacherNo"));
+
 	teacherAddr.setTeacherNo(Integer.parseInt(request.getParameter("teacherNo")));
 	teacherAddr.setTeacherAddrContent(request.getParameter("teacherAddrContent"));
 
-	TeacherAddrDAO dao = new TeacherAddrDAO();
-	dao.insertTeacherAddr(teacherAddr);
+	System.out.print(teacherAddr.getTeacherNo());
+	
+	TeacherAddrDAO teacherAddrDao = new TeacherAddrDAO();
+	int check = teacherAddrDao.insertTeacherAddr(teacherAddr);
+	
+
+	
+	
+	/* response.sendRedirect(request.getContextPath() + "/teacher/teacherList.jsp"); */
 %>
 </body>
 </html>
