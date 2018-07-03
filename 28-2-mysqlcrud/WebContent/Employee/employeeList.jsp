@@ -11,6 +11,15 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<style type="text/css">
+	table {
+		border-collapse: collapse;
+	}
+	table, th, td{
+		border: 1px solid #0000ff;
+	}
+</style>
+
 </head>
 <body>
 <%
@@ -25,20 +34,50 @@
 %>
 	<table>
 		<tr>
-			<th>employeeName</th><th>employeeAge</th>
+			<th>employeeNo</th><th>employeeName</th><th>employeeAge</th><th>주소입력</th><th>삭제</th><th>수정</th>
 		</tr>
 		<% 
 			for(int i=0 ; i<employeeList.size() ; i++){
 				Employee employee = employeeList.get(i);
 				%>
 				<tr>
-					<td><%= employee.getEmployeeName() %></td>
+					<td><%= employee.getEmployeeNo() %></td>
+					<td><a href="<%= request.getContextPath() %>/Employee/employeeAddrList.jsp?employeeNo=<%= employee.getEmployeeNo() %>"><%= employee.getEmployeeName() %></a></td>
 					<td><%= employee.getEmployeeAge() %></td>
+					<td>
+						<div>
+							<form action="<%= request.getContextPath() %>/Employee/insertEmployeeAddrAction.jsp" method="post" name="formAction">
+								<div>
+									<input type="hidden" id="employeeNo" name="employeeNo" value="<%= employee.getEmployeeNo() %>">
+								</div>
+								<div>
+									<label>주소 : </label>
+									<input type="text" id="employeeAddrContent" name="employeeAddrContent">
+									<span id="employeeAddrContentValid"></span>
+								</div>
+								<div>
+									<button type="submit" id="signEmployee">입력</button>
+								</div>
+							</form>
+						</div>
+					</td>
+					<td><a href="<%= request.getContextPath() %>/Employee/deleteEmployeeAction.jsp?employeeNo=<%= employee.getEmployeeNo() %>">삭제</a></td>
+					<td><a href="<%= request.getContextPath() %>/Employee/updateEmployeeForm.jsp?employeeNo=<%= employee.getEmployeeNo() %>">수정</a></td>
 				</tr>
 				<%
 			}
 		%>
 	</table>
+	
+<!-- 	검색창 -->
+	<form>
+		<div>
+			이름:
+			<input type="text" name="">
+			<button type="submit">검색</button>
+		</div>
+	</form>
+	
 <%
 	int count = employeeDao.currentPage();
 	int startPage = 1;

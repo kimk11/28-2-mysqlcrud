@@ -14,13 +14,15 @@
 </head>
 <body>
 <%
+	int employeeNo =Integer.parseInt(request.getParameter("employeeNo"));
+	
 	int currentPage = 1;
 	if(request.getParameter("currentPage")!=null){
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
 	int rowPage = 2;
 	EmployeeAddrDAO employeeAddrDao = new EmployeeAddrDAO();
-	ArrayList<EmployeeAddr> employeeAddrList =  employeeAddrDao.selectEmployeeAddrByPage(currentPage, rowPage);
+	ArrayList<EmployeeAddr> employeeAddrList =  employeeAddrDao.selectEmployeeAddrByPage(currentPage, rowPage, employeeNo);
 	
 %>
 	<table>

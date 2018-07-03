@@ -59,7 +59,7 @@ public class EmployeeAddrDAO {
 
 // <employeeAddr테이블 데이터 조회 메서드 start>
 	//employeeAddr테이블 리스트로 보기 메서드 _page작업
-		public ArrayList<EmployeeAddr> selectEmployeeAddrByPage(int page, int pagePerRow){
+		public ArrayList<EmployeeAddr> selectEmployeeAddrByPage(int page, int pagePerRow, int employeeNo){
 			ArrayList<EmployeeAddr> empployeeAddrList = new ArrayList<>();
 			
 			Connection connection = null;
@@ -70,18 +70,22 @@ public class EmployeeAddrDAO {
 			String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 			String user = "mysqlcrud_2id";
 			String password = "mysqlcrud_2pw";		
-			String sql="SELECT employee_addr_content FROM employee_addr LIMIT ?,?";
+			String sql="SELECT employee_addr_no, employee_no, employee_addr_content FROM employee_addr where employee_no = ? LIMIT ?,?";
 			
 			try {
 				Class.forName(className);
 				connection= DriverManager.getConnection(url, user, password);
 				preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setInt(1, (page-1)*pagePerRow);
-				preparedStatement.setInt(2, pagePerRow);
+				preparedStatement.setInt(1, employeeNo);
+				preparedStatement.setInt(2, (page-1)*pagePerRow);
+				preparedStatement.setInt(3, pagePerRow);
+
 				resultset = preparedStatement.executeQuery();
 				while(resultset.next()) {
 					EmployeeAddr employeeAddr = new EmployeeAddr();
-					employeeAddr.setEmployeeAddrContent(resultset.getString(1));
+					employeeAddr.setEmployeeAddrNo(resultset.getInt(1));
+					employeeAddr.setEmployeeNo(resultset.getInt(2));
+					employeeAddr.setEmployeeAddrContent(resultset.getString(3));
 					empployeeAddrList.add(employeeAddr);
 				}
 				
@@ -166,8 +170,147 @@ public class EmployeeAddrDAO {
 // <employeeAddr테이블 데이터 조회 메서드 end>
 
 // <employeeAddr테이블 데이터 수정 메서드 start>
+	//수정 폼에 가져올 데이터 조회
+	public EmployeeAddr selectOneEmployeeAddr(int employeeAddrNo) {
+		EmployeeAddr employeeAddr = new EmployeeAddr();
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultset = null;
+		
+		String className="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		
+		String sql="SELECT employee_addr_no,employee_no,employee_addr_content FROM employee_addr where employee_addr_no = ? ";
+		
+		try {
+			Class.forName(className);
+			connection= DriverManager.getConnection(url, user, password);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, employeeAddrNo);
+			resultset = preparedStatement.executeQuery();
+			if(resultset.next()) {
+				employeeAddr.setEmployeeAddrNo(resultset.getInt(1));
+				employeeAddr.setEmployeeNo(resultset.getInt(2));
+				employeeAddr.setEmployeeAddrContent(resultset.getString(3));
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(resultset != null) {
+				try {
+					resultset.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return employeeAddr;
+	}
+	
+	// 수정폼에서 가져온 값으로 db데이터 변경
+	public int updateEmployeeAddr(EmployeeAddr employeeAddr) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		
+		String className="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		
+		String sql="update employee_addr set employee_addr_content = ? where employee_addr_no = ?";
+		
+		try {	
+			Class.forName(className);	
+				
+			connection= DriverManager.getConnection(url, user, password);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, employeeAddr.getEmployeeAddrContent());
+			preparedStatement.setInt(2, employeeAddr.getEmployeeAddrNo());
+			
+			result = preparedStatement.executeUpdate();
+			
+			preparedStatement.close();
+			connection.close();
+		} catch (Exception e) { 
+			e.printStackTrace();
+		} finally { 
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
 // <employeeAddr테이블 데이터 수정 메서드 end>
 
 // <employeeAddr테이블 데이터 삭제 메서드 start>
+	public int deleteEmployeeAddr(int employeeNo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		
+		String className="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		
+		String sql="DELETE FROM employee_addr WHERE employee_no=?";
+		
+		try {	
+			Class.forName(className);	
+				
+			connection= DriverManager.getConnection(url, user, password);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, employeeNo);
+			
+			result = preparedStatement.executeUpdate();
+			
+			preparedStatement.close();
+			connection.close();
+		} catch (Exception e) { 
+			e.printStackTrace();
+		} finally { 
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
 // <employeeAddr테이블 데이터 삭제 메서드 end>
 }

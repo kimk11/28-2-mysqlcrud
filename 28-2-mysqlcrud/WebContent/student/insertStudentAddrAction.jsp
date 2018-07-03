@@ -17,11 +17,14 @@
 
 	StudentAddr studentAddr = new StudentAddr();
 	
-	studentAddr.setStudentAddrNo(Integer.parseInt(request.getParameter("StudentAddrNo")));
-	studentAddr.setStudentAddrContent(request.getParameter("StudentAddrContent"));
+	studentAddr.setStudentNo(Integer.parseInt(request.getParameter("studentNo")));
+	studentAddr.setStudentAddrContent(request.getParameter("studentAddrContent"));
+	System.out.print(studentAddr.getStudentAddrNo());
 	
 	StudentAddrDAO studentDao = new StudentAddrDAO();
 	studentDao.studentAddrInsert(studentAddr);
+	
+	response.sendRedirect(request.getContextPath()+"/student/studentList.jsp");
 %>
 
 </body>

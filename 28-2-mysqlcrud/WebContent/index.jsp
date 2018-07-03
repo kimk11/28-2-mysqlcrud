@@ -9,10 +9,10 @@
 <body>
 	<h1>index.jsp</h1>
 	<ul>
-		<li><a href="./member/insertMember.jsp">member</a></li>
-		<li><a href="./Employee/insertEmployee.jsp">Employee</a></li>
-		<li><a href="./student/insertStudent.jsp">student</a></li>
-		<li><a href="./teacher/insertTeacher.jsp">teacher</a></li>
+		<li><a href="./member/insertMemberForm.jsp">member</a></li>
+		<li><a href="./Employee/insertEmployeeForm.jsp">Employee</a></li>
+		<li><a href="./student/insertStudentForm.jsp">student</a></li>
+		<li><a href="./teacher/insertTeacherForm.jsp">teacher</a></li>
 	</ul>
 </body>
 </html>

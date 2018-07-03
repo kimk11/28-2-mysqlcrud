@@ -1,29 +1,26 @@
-<!-- 28기 김진우 -->
-<!-- 2018-06-26 -->
-<!-- employee 입력 처리 작성 -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<%@page import="service.EmployeeDAO"%>
 <%@page import="service.EmployeeAddrDAO"%>
-<%@page import="service.EmployeeAddr"%>
+<%@page import="service.Employee"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 </head>
-
 <body>
 <%
 	request.setCharacterEncoding("euckr");
-
-	EmployeeAddr employeeAddr = new EmployeeAddr();
+	int employeeNo = Integer.parseInt(request.getParameter("employeeNo"));
 	
-	employeeAddr.setEmployeeNo(Integer.parseInt(request.getParameter("employeeNo")));
-	employeeAddr.setEmployeeAddrContent(request.getParameter("employeeAddrContent"));
-
 	EmployeeAddrDAO employeeAddrDao = new EmployeeAddrDAO();
-	employeeAddrDao.employeeAddrInsert(employeeAddr);
+	employeeAddrDao.deleteEmployeeAddr(employeeNo);
+	
+	EmployeeDAO employeeDao = new EmployeeDAO();
+	employeeDao.deleteEmployee(employeeNo);
 	
 	response.sendRedirect(request.getContextPath()+"/Employee/employeeList.jsp");
 %>
+
 </body>
 </html>
