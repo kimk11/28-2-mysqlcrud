@@ -23,18 +23,31 @@
 </head>
 <body>
 <%
+	request.setCharacterEncoding("euckr");
+
+	String word="";
+	if(request.getParameter("word")!=null){
+		word = request.getParameter("word");
+	}
+%>
+	<form action="<%= request.getContextPath() %>/student/studentList.jsp" method="post">
+		이름검색 : <input type="text" name="word">
+		<button type="submit">검색</button>
+	</form>
+<%
 	int currentPage = 1;
 	if(request.getParameter("currentPage")!=null){
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
 	int rowPage = 2;
 	StudentDAO studentDao = new StudentDAO();
-	ArrayList<Student> studentList =  studentDao.selectStudentByPage(currentPage, rowPage);
-	
+	ArrayList<Student> studentList =  studentDao.selectStudentByPage(currentPage, rowPage, word);
+// 	System.out.print(studentList.get(1).getStudentName()+"<<<<studentList");
 %>
 	<table>
 		<tr>
-			<th>studentNo</th><th>studentName</th><th>studentAge</th><th>삭제</th><th>수정</th>
+			<th>studentNo</th><th>studentName</th><th>studentAge</th><th>주소입력</th><th>삭제</th><th>수정</th><th>점수입력</th><th>점수보기</th>
+																															<!-- 조인문 연습 -->
 		</tr>
 		<% 
 			for(int i=0 ; i<studentList.size() ; i++){
@@ -53,7 +66,6 @@
 								<div>
 									<label>주소 : </label>
 									<input type="text" id="studentAddrContent" name="studentAddrContent">
-									<span id="studentAddrContentValid"></span>
 								</div>
 								<div>
 									<button type="submit" id="signStudent">입력</button>
@@ -63,20 +75,28 @@
 					</td>
 					<td><a href="<%= request.getContextPath() %>/student/deleteStudentAction.jsp?studentNo=<%= student.getStudentNo() %>">삭제</a></td>
 					<td><a href="<%= request.getContextPath() %>/student/updateStudentform.jsp?studentNo=<%= student.getStudentNo() %>">수정</a></td>
+					<td>
+						<div>
+							<form action="<%= request.getContextPath() %>/student/insertStudentScore.jsp" method="post" name="formAction">
+								<div>
+									<input type="hidden" id="studentNo" name="studentNo" value="<%= student.getStudentNo() %>" readonly="readonly">
+								</div>
+								<div>
+									<label>점수 : </label>
+									<input type="text" name="score">
+								</div>
+								<div>
+									<button type="submit" id="signStudent">입력</button>
+								</div>
+							</form>
+						</div>
+					</td>
+					<td><a href="<%= request.getContextPath() %>/student/studentAndScoreList.jsp?studentNo=<%= student.getStudentNo() %>">점수보기</a></td>
 				</tr>
 				<%
 			}
 		%>
 	</table>
-	
-	<!-- 	검색창 -->
-	<form>
-		<div>
-			이름:
-			<input type="text" name="">
-			<button type="submit">검색</button>
-		</div>
-	</form>
 	
 <%
 	int count = studentDao.currentPage();

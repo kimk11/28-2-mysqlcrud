@@ -23,18 +23,32 @@
 </head>
 <body>
 <%
+	request.setCharacterEncoding("euckr");
+
+	String word="";
+	if(request.getParameter("word")!=null){
+		word = request.getParameter("word");
+	}
+	System.out.print(word+"<<<<word");
+%>
+	<form action="<%= request.getContextPath() %>/Employee/employeeList.jsp" method="post">
+		이름검색 : <input type="text" name="word">
+		<button type="submit">검색</button>
+	</form>
+<%
 	int currentPage = 1;
 	if(request.getParameter("currentPage")!=null){
 		currentPage = Integer.parseInt(request.getParameter("currentPage"));
 	}
 	int rowPage = 2;
 	EmployeeDAO employeeDao = new EmployeeDAO();
-	ArrayList<Employee> employeeList =  employeeDao.selectEmployeeByPage(currentPage, rowPage);
+	ArrayList<Employee> employeeList =  employeeDao.selectEmployeeByPage(currentPage, rowPage, word);
 	
 %>
 	<table>
 		<tr>
-			<th>employeeNo</th><th>employeeName</th><th>employeeAge</th><th>주소입력</th><th>삭제</th><th>수정</th>
+			<th>employeeNo</th><th>employeeName</th><th>employeeAge</th><th>주소입력</th><th>삭제</th><th>수정</th><th>점수입력</th><th>점수보기</th>
+																															<!-- 조인문 연습 -->
 		</tr>
 		<% 
 			for(int i=0 ; i<employeeList.size() ; i++){
@@ -52,8 +66,7 @@
 								</div>
 								<div>
 									<label>주소 : </label>
-									<input type="text" id="employeeAddrContent" name="employeeAddrContent">
-									<span id="employeeAddrContentValid"></span>
+									<input type="text"name="employeeAddrContent">
 								</div>
 								<div>
 									<button type="submit" id="signEmployee">입력</button>
@@ -63,6 +76,23 @@
 					</td>
 					<td><a href="<%= request.getContextPath() %>/Employee/deleteEmployeeAction.jsp?employeeNo=<%= employee.getEmployeeNo() %>">삭제</a></td>
 					<td><a href="<%= request.getContextPath() %>/Employee/updateEmployeeForm.jsp?employeeNo=<%= employee.getEmployeeNo() %>">수정</a></td>
+					<td>
+						<div>
+							<form action="<%= request.getContextPath() %>/Employee/insertEmployScore.jsp" method="post" name="formAction">
+								<div>
+									<input type="hidden" id="employeeNo" name="employeeNo" value="<%= employee.getEmployeeNo() %>">
+								</div>
+								<div>
+									<label>점수 : </label>
+									<input type="text" name="score">
+								</div>
+								<div>
+									<button type="submit" id="signEmployee">입력</button>
+								</div>
+							</form>
+						</div>
+					</td>
+					<td><a href="<%= request.getContextPath() %>/Employee/employeeAndScoreList.jsp?employeeNo=<%= employee.getEmployeeNo() %>">점수보기</a></td>
 				</tr>
 				<%
 			}

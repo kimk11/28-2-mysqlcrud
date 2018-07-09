@@ -58,8 +58,10 @@ public class StudentDAO {
 // <student테이블 데이터 추가 메서드 end>
 
 // <student테이블 데이터 조회 메서드 start>
-	//StudentAddr테이블 리스트로 보기 메서드 _page작업
-	public ArrayList<Student> selectStudentByPage(int page, int pagePerRow){
+	//StudentAddr테이블 리스트로 보기 메서드 _page작업, 검색작업
+	// word의 값 : "" -> 쿼리 1 - 공백일 경우
+	// word의 값 : "검색단어" -> 쿼리 2 - 검색어가 있을 경우
+	public ArrayList<Student> selectStudentByPage(int page, int pagePerRow, String word){
 		ArrayList<Student> studentList = new ArrayList<>();
 		
 		Connection connection = null;
@@ -75,9 +77,18 @@ public class StudentDAO {
 		try {
 			Class.forName(className);
 			connection= DriverManager.getConnection(url, user, password);
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, (page-1)*pagePerRow);
-			preparedStatement.setInt(2, pagePerRow);
+			
+			if(word.equals("")) {
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setInt(1, (page-1)*pagePerRow);
+				preparedStatement.setInt(2, pagePerRow);
+			}else {
+				sql="SELECT student_no, student_name,student_age FROM student where student_name like ? LIMIT 0,2 ";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, "%"+word+"%");
+				preparedStatement.setInt(2, (page-1)*pagePerRow);
+				preparedStatement.setInt(3, pagePerRow);
+			}
 			resultset = preparedStatement.executeQuery();
 			while(resultset.next()) {
 				Student student = new Student();

@@ -59,8 +59,11 @@ public class EmployeeDAO {
 // <employee테이블 데이터 추가 메서드 end>
 
 // <employee테이블 데이터 조회 메서드 start>
-	//employee테이블 리스트로 보기 메서드 _page작업
-	public ArrayList<Employee> selectEmployeeByPage(int page, int pagePerRow){
+	//employee테이블 리스트로 보기 - 메서드 _page작업, 검색작업
+	// word의 값 : "" -> 쿼리 1 - 공백일 경우
+	// word의 값 : "검색단어" -> 쿼리 2 - 검색어가 있을 경우
+	
+	public ArrayList<Employee> selectEmployeeByPage(int page, int pagePerRow, String word){
 		ArrayList<Employee> empployeeList = new ArrayList<>();
 		
 		Connection connection = null;
@@ -76,9 +79,19 @@ public class EmployeeDAO {
 		try {
 			Class.forName(className);
 			connection= DriverManager.getConnection(url, user, password);
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, (page-1)*pagePerRow);
-			preparedStatement.setInt(2, pagePerRow);
+			
+			if(word.equals("")) {
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setInt(1, (page-1)*pagePerRow);
+				preparedStatement.setInt(2, pagePerRow);
+			}else {
+				sql="SELECT employee_no,employee_name,employee_age FROM employee where employee_name like ? LIMIT ?,? ";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, "%"+word+"%");
+				preparedStatement.setInt(2, (page-1)*pagePerRow);
+				preparedStatement.setInt(3, pagePerRow);
+			}
+			
 			resultset = preparedStatement.executeQuery();
 			while(resultset.next()) {
 				Employee employee = new Employee();
