@@ -29,7 +29,7 @@
 		dao.insertTeacher(teacher); // dao 객체참조변수에 insertTeacher메서드 호출
 		
 		
-		response.sendRedirect(request.getContextPath() + "/insertTeacherForm.jsp");
+		response.sendRedirect(request.getContextPath() + "/teacher/insertTeacherForm.jsp");
 	%>
 
 </body>

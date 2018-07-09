@@ -26,7 +26,71 @@ public class TeacherDAO {
 		AUTO_INCREMENT=3;
 		 */
 
-	//02 selectTeacherAll
+	
+	//05
+	public int updateTeacher(Teacher teacher) {
+		System.out.println("04 updateTeacher TeacherDAO.java ");
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String Driveraddr = "jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "mysqlcrud_2id";
+			String dbPass = "mysqlcrud_2pw";
+			String sql = "SELECT teacher_no,teacher_name,teacher_age FROM teacher WHERE teacher_no = ?";
+			connection = DriverManager.getConnection(Driveraddr, dbUser, dbPass);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1,teacher.getTeacherNo());
+			result = preparedStatement.executeUpdate();
+	
+		
+			
+		}catch (Exception e) {
+			// TODO: handle exception
+		}
+		return result;
+	}	
+	
+	//04 deleteTeacherAction.jsp deleteTeacher
+	public void deleteTeacher(int teacher) {
+		System.out.println("04 deleteTeacher TeacherDAO.java");
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String Driveraddr = "jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "mysqlcrud_2id";
+			String dbPass = "mysqlcrud_2pw";
+			String sql = "DELETE FROM teacher WHERE teacher_no = ?";
+			connection = DriverManager.getConnection(Driveraddr, dbUser, dbPass);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1,teacher);
+			preparedStatement.executeUpdate();
+	
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (preparedStatement != null)
+				try {
+					preparedStatement.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+
+		}
+		
+	}
+	
+	
+	//02  selectTeacherByPage
 	public ArrayList<Teacher> selectTeacherByPage(int startRow, int pagePerRow) {
 		System.out.println("02 selectTeacherAll TeacherDAO.java");
 		ArrayList<Teacher> list = new ArrayList<>();

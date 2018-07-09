@@ -34,8 +34,6 @@ public class MemberDAO {
 			
 			result = preparedStatement.executeUpdate();
 			
-			preparedStatement.close();
-			connection.close();
 		} catch (Exception e) { //try문에서 예외가 발생할 때 실해
 			e.printStackTrace();
 		} finally { //예외 방생 여부 없이 무조건 실행
@@ -55,6 +53,8 @@ public class MemberDAO {
 		}
 		return result;
 	}
+	
+	
 	public ArrayList<Member> selectMemberByPage(int begin, int rowPerPage){
 		ArrayList<Member> list = new ArrayList<>();
 		
@@ -99,7 +99,9 @@ public class MemberDAO {
 		
 		return list;
 	}
-	public int count() {
+	
+	
+	public int countMember() {
 		Connection connection = null;
 		ResultSet result = null;
 		PreparedStatement preparedStatement = null;
@@ -134,5 +136,133 @@ public class MemberDAO {
 			if (connection != null) try { connection.close(); } catch(SQLException ex) {}
 		}
 		return rowNumber;
+	}
+	
+	
+	public int memberDelete(int memberNo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		
+		String Driver="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		//연결 정보
+		String sql = "DELETE FROM member WHERE member_no = ?";
+		
+		try {	
+			Class.forName(Driver);	
+				
+			connection= DriverManager.getConnection(url, user, password);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, memberNo);
+			
+			result = preparedStatement.executeUpdate();
+			
+		} catch (Exception e) { //try문에서 예외가 발생할 때 실해
+			e.printStackTrace();
+		} finally { //예외 방생 여부 없이 무조건 실행
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return result;
+	}
+	
+	public Member selectMember(int memberNo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet result = null;
+		
+		Member member = new Member();
+		
+		String Driver="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		//연결 정보
+		String sql = "SELECT member_no, member_name, member_age FROM member WHERE member_no = ?";
+		
+		try {	
+			Class.forName(Driver);	
+				
+			connection= DriverManager.getConnection(url, user, password);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, memberNo);
+			
+			result = preparedStatement.executeQuery();
+			
+			if(result.next()) {
+				member.setMemberNo(result.getInt("member_no"));
+				member.setMemberName(result.getString("member_name"));
+				member.setMemberAge(result.getInt("member_age"));
+			}
+			
+		} catch (Exception e) { //try문에서 예외가 발생할 때 실해
+			e.printStackTrace();
+		} finally{
+			//6단계 사용한 Query statement 종료
+			if (result != null) try { result.close(); } catch(SQLException ex) {}
+			if (preparedStatement != null) try { preparedStatement.close(); } catch(SQLException ex) {}
+			
+			//7단계 db 연결 종료
+			if (connection != null) try { connection.close(); } catch(SQLException ex) {}
+		}
+		
+		return member;
+	}
+	
+	
+	public int updateMember(int memberNo, String memberName, int memberAge) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		
+		String Driver="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		//연결 정보
+		String sql = "UPDATE member SET member_name = ?, member_age = ? WHERE member_no = ?";
+		
+		try {	
+			Class.forName(Driver);	
+				
+			connection= DriverManager.getConnection(url, user, password);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1, memberName);
+			preparedStatement.setInt(2, memberAge);
+			preparedStatement.setInt(3, memberNo);
+			
+			result = preparedStatement.executeUpdate();
+			
+		} catch (Exception e) { //try문에서 예외가 발생할 때 실해
+			e.printStackTrace();
+		} finally { //예외 방생 여부 없이 무조건 실행
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return result;
 	}
 }
