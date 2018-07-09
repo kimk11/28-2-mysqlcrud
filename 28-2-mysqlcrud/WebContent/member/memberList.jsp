@@ -1,3 +1,7 @@
+<!-- 28기 현희문 -->
+<!-- 2018-07-03 -->
+<!-- member 리스트 작성 -->
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.MemberDAO" %>
 <%@ page import = "service.Member" %>
@@ -18,9 +22,12 @@
 				<td>삭제</td>
 				<td>수정</td>
 				<td>점수입력</td><!-- 한번 -->
+				<td>점수보기</td>
 			</tr>
 		
 	<%
+		request.setCharacterEncoding("euckr");
+		
 		MemberDAO memberdao = new MemberDAO();
 		
 		
@@ -88,6 +95,7 @@
 						</div>
 					</form>
 				</td>
+				<td><a href="<%= request.getContextPath() %>/member/memberAndScoreList.jsp?memberNo=<%=member.getMemberNo()%>">점수보기</a></td>
 			</tr>
 	<%
 		}

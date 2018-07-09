@@ -1,3 +1,7 @@
+//28기 현희문
+//2018-07-09
+//MemberScoreDAO 작성
+
 package service;
 
 import java.sql.Connection;
@@ -132,73 +136,56 @@ public class MemberScoreDAO {
 		return result;
 	}
 	
-	
-//	public ArrayList<Member> selectMemberByPage(int begin, int rowPerPage, String word){
-//		//word :
-//		//""->쿼리
-//		//"검색단어" -> 쿼리
-//		//분기문 필요
-//		//요구사항 -> 동적쿼리
-//		
-//		ArrayList<Member> list = new ArrayList<>();
-//		Connection connection = null;
-//		ResultSet result = null;
-//		PreparedStatement preparedStatement = null;
-//		
-//		String Driver="com.mysql.jdbc.Driver";
-//		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
-//		String user = "mysqlcrud_2id";
-//		String password = "mysqlcrud_2pw";		//연결 정보
-//		String sql1 = "SELECT * FROM member ORDER BY no LIMIT ?, ?";
-//		String sql2 = "SELECT * FROM member WHERE member_name like ? ORDER BY no LIMIT ?, ?";
-//		
-//		try {	
-//			Class.forName(Driver);	
-//				
-//			connection= DriverManager.getConnection(url, user, password);
-//			
-//			if(word.equals("")) {
-//				preparedStatement = connection.prepareStatement(sql1);
-//				preparedStatement.setInt(1, begin);
-//				preparedStatement.setInt(2, rowPerPage);
-//			}else {
-//				preparedStatement = connection.prepareStatement(sql2);
-//				preparedStatement.setString(1, "%"+word+"%");
-//				preparedStatement.setInt(2, begin);
-//				preparedStatement.setInt(3, rowPerPage);
-//			}
-//			
-//			
-//			result = preparedStatement.executeQuery();
-//
-//		
-//		} catch(Exception e) {
-//			e.printStackTrace();
-//		}finally{
-//			//6단계 사용한 Query statement 종료
-//			if (result != null) try { result.close(); } catch(SQLException ex) {}
-//			if (preparedStatement != null) try { preparedStatement.close(); } catch(SQLException ex) {}
-//			
-//			//7단계 db 연결 종료
-//			if (connection != null) try { connection.close(); } catch(SQLException ex) {}
-//		}
-//		
-//		return list;
-//	}
-	
-	
-//	public ArrayList<MemberAndScore> selectMemberAndScored(){
-//		ArrayList<MemberAndScore> list = new ArrayList<MemberAndScore>();
-//		String sql = "";
-//		while(rs.next()) {
-//			Member member = new Member();
-//			//rs.get
-//			MemberScore memberScore = new MemberScore();
-//			//rs.get
-//			MemberAndScore memberAndScore = new MemberAndScore();
-//			memberAndScore.setMember(member);
-//			memberAndScore.setMemberScore(memberScore);
-//			list.add(memberAndScore);
-//		}
-//	}
+	public ArrayList<MemberAndScore> selectMemberAndScored(int memberNo){
+		Connection connection = null;
+		ResultSet result = null;
+		PreparedStatement preparedStatement = null;
+		
+		ArrayList<MemberAndScore> list = new ArrayList<>();
+		
+		String Driver="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		//연결 정보
+		String sql = "SELECT ms.member_score_no, ms.member_no, m.member_name, m.member_age, ms.score FROM member_score ms INNER JOIN member m ON ms.member_no = m.member_no WHERE m.member_no = ?";
+		
+		try {	
+			Class.forName(Driver);	
+				
+			connection= DriverManager.getConnection(url, user, password);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, memberNo);
+			
+			result = preparedStatement.executeQuery();
+			
+			while(result.next()) {
+				Member member = new Member();
+				member.setMemberNo(result.getInt("member_no"));
+				member.setMemberName(result.getString("member_name"));
+				member.setMemberAge(result.getInt("member_age"));
+				
+				MemberScore memberScore = new MemberScore();
+				memberScore.setMemberScoreNo(result.getInt("member_score_no"));
+				memberScore.setMemberNo(result.getInt("member_no"));
+				memberScore.setScore(result.getInt("score"));
+				
+				MemberAndScore memberAndScore = new MemberAndScore();
+				memberAndScore.setMember(member);
+				memberAndScore.setMemberScore(memberScore);
+				
+				list.add(memberAndScore);
+			}
+			
+		} catch (Exception e) { //try문에서 예외가 발생할 때 실해
+			e.printStackTrace();
+		} finally{
+			//6단계 사용한 Query statement 종료
+			if (result != null) try { result.close(); } catch(SQLException ex) {}
+			if (preparedStatement != null) try { preparedStatement.close(); } catch(SQLException ex) {}
+			
+			//7단계 db 연결 종료
+			if (connection != null) try { connection.close(); } catch(SQLException ex) {}
+		}
+		return list;
+	}
 }

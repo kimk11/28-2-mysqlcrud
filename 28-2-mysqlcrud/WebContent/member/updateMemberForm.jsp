@@ -1,3 +1,7 @@
+<!-- 28기 현희문 -->
+<!-- 2018-07-03 -->
+<!-- member 업데이트 폼 작성 -->
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.MemberDAO" %>
 <%@ page import = "service.Member" %>

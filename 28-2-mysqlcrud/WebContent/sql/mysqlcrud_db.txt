@@ -1,7 +1,8 @@
-
 create database mysqlcrud_2;
 
 grant select,insert,update,delete,create,drop,alter on mysqlcrud_2.* to 'mysqlcrud_2id'@'localhost' identified by 'mysqlcrud_2pw';
+
+
 
 		김진우
 CREATE TABLE `employee` (
@@ -59,6 +60,18 @@ CREATE TABLE `member_addr` (
 COLLATE='euckr_korean_ci'
 ENGINE=InnoDB;
 
+CREATE TABLE `member_score` (
+	`member_score_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`member_no` INT(10) NOT NULL,
+	`score` INT(10) NOT NULL,
+	PRIMARY KEY (`member_score_no`),
+	INDEX `FK_member_score_member` (`member_no`),
+	CONSTRAINT `FK_member_score_member` FOREIGN KEY (`member_no`) REFERENCES `member` (`member_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=10;
+
 
 
 		김진우
@@ -113,6 +126,17 @@ CREATE TABLE `teacher_addr` (
 	PRIMARY KEY (`teacher_addr_no`),
 	INDEX `FK__teacher` (`teacher_no`),
 	CONSTRAINT `FK__teacher` FOREIGN KEY (`teacher_no`) REFERENCES `teacher` (`teacher_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB;
+
+CREATE TABLE `teacher_score` (
+	`teacher_score_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`teacher_no` INT(10) NOT NULL,
+	`score` INT(10) NOT NULL,
+	PRIMARY KEY (`teacher_score_no`),
+	INDEX `FK_teacher_score_teacher` (`teacher_no`),
+	CONSTRAINT `FK_teacher_score_teacher` FOREIGN KEY (`teacher_no`) REFERENCES `teacher` (`teacher_no`)
 )
 COLLATE='euckr_korean_ci'
 ENGINE=InnoDB;

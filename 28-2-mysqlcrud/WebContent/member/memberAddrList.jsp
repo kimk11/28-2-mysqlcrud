@@ -1,3 +1,7 @@
+<!-- 28기 현희문 -->
+<!-- 2018-07-03 -->
+<!-- memberAddr 리스트 작성 -->
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.MemberAddrDAO" %>
 <%@ page import = "service.MemberAddr" %>
@@ -66,13 +70,5 @@
 	<%
 		}
 	%>
-		<form>
-			<div>
-				이름 :
-				<input type = "text" name = "searchName">
-				<button type = "button">검색</button>
-			</div>
-		</form>
-	
 	</body>	
 </html>

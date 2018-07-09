@@ -1,3 +1,7 @@
+//28기 현희문
+//2018-07-09
+//MemberAndScoreDTO 작성
+
 package service;
 
 public class MemberAndScore {

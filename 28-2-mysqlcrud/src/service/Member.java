@@ -1,6 +1,7 @@
 //28기 현희문
 //2018-06-26
 //member DTO(Bean) 작성
+
 package service;
 
 public class Member {
