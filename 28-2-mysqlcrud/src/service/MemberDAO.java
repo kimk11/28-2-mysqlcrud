@@ -55,7 +55,53 @@ public class MemberDAO {
 	}
 	
 	
-	public ArrayList<Member> selectMemberByPage(int begin, int rowPerPage){
+//	public ArrayList<Member> selectMemberByPage(int begin, int rowPerPage){
+//		ArrayList<Member> list = new ArrayList<>();
+//		
+//		Connection connection = null;
+//		ResultSet result = null;
+//		PreparedStatement preparedStatement = null;
+//		
+//		String Driver="com.mysql.jdbc.Driver";
+//		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+//		String user = "mysqlcrud_2id";
+//		String password = "mysqlcrud_2pw";		//연결 정보
+//		String sql = "SELECT member_no, member_name, member_age FROM member ORDER BY member_no ASC LIMIT ?, ?";
+//		
+//		try {	
+//			Class.forName(Driver);	
+//				
+//			connection= DriverManager.getConnection(url, user, password);
+//			preparedStatement = connection.prepareStatement(sql);
+//			preparedStatement.setInt(1, begin);
+//			preparedStatement.setInt(2, rowPerPage);
+//			
+//			result = preparedStatement.executeQuery();
+//			
+//			while(result.next()) {
+//				Member member = new Member();
+//				member.setMemberNo(result.getInt("member_no"));
+//				member.setMemberName(result.getString("member_name"));
+//				member.setMemberAge(result.getInt("member_age"));
+//				list.add(member);
+//			}
+//		
+//		} catch(Exception e) {
+//			e.printStackTrace();
+//		}finally{
+//			//6단계 사용한 Query statement 종료
+//			if (result != null) try { result.close(); } catch(SQLException ex) {}
+//			if (preparedStatement != null) try { preparedStatement.close(); } catch(SQLException ex) {}
+//			
+//			//7단계 db 연결 종료
+//			if (connection != null) try { connection.close(); } catch(SQLException ex) {}
+//		}
+//		
+//		return list;
+//	}
+	
+	
+	public ArrayList<Member> selectMemberByPage(int begin, int rowPerPage, String searchName){
 		ArrayList<Member> list = new ArrayList<>();
 		
 		Connection connection = null;
@@ -66,15 +112,24 @@ public class MemberDAO {
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 		String user = "mysqlcrud_2id";
 		String password = "mysqlcrud_2pw";		//연결 정보
-		String sql = "SELECT member_no, member_name, member_age FROM member ORDER BY member_no ASC LIMIT ?, ?";
+		String sql1 = "SELECT member_no, member_name, member_age FROM member ORDER BY member_no ASC LIMIT ?, ?";
+		String sql2 = "SELECT member_no, member_name, member_age FROM member WHERE member_name LIKE ? ORDER BY member_no ASC LIMIT ?, ?";		
 		
 		try {	
 			Class.forName(Driver);	
 				
 			connection= DriverManager.getConnection(url, user, password);
-			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, begin);
-			preparedStatement.setInt(2, rowPerPage);
+			
+			if(searchName.equals("")) {
+				preparedStatement = connection.prepareStatement(sql1);
+				preparedStatement.setInt(1, begin);
+				preparedStatement.setInt(2, rowPerPage);
+			}else {
+				preparedStatement = connection.prepareStatement(sql2);
+				preparedStatement.setString(1, "%"+searchName+"%");
+				preparedStatement.setInt(2, begin);
+				preparedStatement.setInt(3, rowPerPage);
+			}
 			
 			result = preparedStatement.executeQuery();
 			

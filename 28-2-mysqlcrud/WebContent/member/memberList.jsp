@@ -14,9 +14,10 @@
 				<td>회원번호</td>
 				<td>회원이름</td>
 				<td>회원나이</td>
-				<td>주소입력</td>
+				<td>주소입력</td><!-- 다수 -->
 				<td>삭제</td>
 				<td>수정</td>
+				<td>점수입력</td><!-- 한번 -->
 			</tr>
 		
 	<%
@@ -30,6 +31,11 @@
 			currentPage = Integer.parseInt(request.getParameter("currentPage"));
 		}
 		
+		String searchName = "";
+		if(request.getParameter("searchName") != null){
+			searchName = request.getParameter("searchName");
+		}
+		
 		int rowPerPage = 5;
 		
 		int begin = (currentPage - 1) * rowPerPage;
@@ -38,37 +44,50 @@
 				end = rowNumber;
 			}
 			
-		ArrayList<Member> list = memberdao.selectMemberByPage(begin, rowPerPage);
+		ArrayList<Member> list = memberdao.selectMemberByPage(begin, rowPerPage, searchName);
 		System.out.println(list + "<-- list");
 		
 		for(int i=0;i<list.size();i++){
-			Member u = list.get(i);
+			Member member = list.get(i);
 	%>
 			<tr>
-				<td><%=u.getMemberNo() %></td>
-				<td><a href = "<%= request.getContextPath() %>/member/memberAddrList.jsp?memberNo=<%=u.getMemberNo() %>"><%=u.getMemberName() %></a></td>
-				<td><%=u.getMemberAge() %></td>
+				<td><%=member.getMemberNo() %></td>
+				<td><a href = "<%= request.getContextPath() %>/member/memberAddrList.jsp?memberNo=<%=member.getMemberNo() %>"><%=member.getMemberName() %></a></td>
+				<td><%=member.getMemberAge() %></td>
 				
 				<td>
-					<form action="<%= request.getContextPath() %>/member/insertMemberAddrAction.jsp" method="post" name="formAction">
-					<p>MemberAddr 입력</p>
-					<div>
-						<input type="hidden" id="memberNo" name="memberNo" value="<%=u.getMemberNo() %>">
-					</div>
-					<div>
-						<label>주소 : </label>
-						<input type="text" id="memberAddrContent" name="memberAddrContent">
-						<span id="memberAddrContentValid"></span>
-					</div>
-					<div>
-						<button type="submit" id="signMember">입력</button>
-					</div>
+					<form action="<%= request.getContextPath() %>/member/insertMemberAddrAction.jsp" method="post" name="insertAddrFormAction">
+						<p>MemberAddr 입력</p>
+						<div>
+							<input type="hidden" id="memberNo" name="memberNo" value="<%=member.getMemberNo() %>">
+						</div>
+						<div>
+							<label>주소 : </label>
+							<input type="text" id="memberAddrContent" name="memberAddrContent">
+							<span id="memberAddrContentValid"></span>
+						</div>
+						<div>
+							<button type="submit" id="signMember">입력</button>
+						</div>
 					</form>
 				</td>
-				
-				<td><a href = "<%= request.getContextPath() %>/member/deleteMemberAction.jsp?memberNo=<%=u.getMemberNo() %>">삭제</a></td>
-				<td><a href = "<%= request.getContextPath() %>/member/updateMemberForm.jsp?memberNo=<%=u.getMemberNo() %>">수정</a></td>
+				<td><a href = "<%= request.getContextPath() %>/member/deleteMemberAction.jsp?memberNo=<%=member.getMemberNo() %>">삭제</a></td>
+				<td><a href = "<%= request.getContextPath() %>/member/updateMemberForm.jsp?memberNo=<%=member.getMemberNo() %>">수정</a></td>
 				<!-- updateMemberForm -> updateMemberAction -->
+				<td>
+					<form action="<%= request.getContextPath() %>/member/insertMemberScoreAction.jsp" method="post" name="insertScoreFormAction">
+						<p>MemberScore 입력</p>
+						<div>
+							<input type="hidden" id="memberNo" name="memberNo" value="<%=member.getMemberNo() %>">
+						</div>
+						<div>
+							<input type="text" id="memberScore" name="memberScore">
+						</div>
+						<div>
+							<button type="submit" id="signMemberScore">입력</button>
+						</div>
+					</form>
+				</td>
 			</tr>
 	<%
 		}
@@ -90,11 +109,11 @@
 	<%
 		}
 	%>
-		<form>
+		<form action="<%= request.getContextPath() %>/member/memberList.jsp" method="post" name="searchMemberFormAction">
 			<div>
 				이름 :
 				<input type = "text" name = "searchName">
-				<button type = "button">검색</button>
+				<button type="submit" id="searchMember">검색</button>
 			</div>
 		</form>
 	
