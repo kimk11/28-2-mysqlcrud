@@ -1,11 +1,9 @@
-root ∞Ë¡§ ƒı∏Æ
 
 create database mysqlcrud_2;
 
 grant select,insert,update,delete,create,drop,alter on mysqlcrud_2.* to 'mysqlcrud_2id'@'localhost' identified by 'mysqlcrud_2pw';
 
-mysqlcrud_2id ∞Ë¡§ ƒı∏Æ
-
+		ÍπÄÏßÑÏö∞
 CREATE TABLE `employee` (
 	`employee_no` INT(10) NOT NULL AUTO_INCREMENT,
 	`employee_name` VARCHAR(50) NOT NULL,
@@ -26,6 +24,21 @@ CREATE TABLE `employee_addr` (
 COLLATE='euckr_korean_ci'
 ENGINE=InnoDB;
 
+CREATE TABLE `employee_score` (
+	`employee_score_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`employee_no` INT(10) NULL DEFAULT NULL,
+	`score` INT(10) NULL DEFAULT NULL,
+	PRIMARY KEY (`employee_score_no`),
+	INDEX `FK_employee_score_employee` (`employee_no`),
+	CONSTRAINT `FK_employee_score_employee` FOREIGN KEY (`employee_no`) REFERENCES `employee` (`employee_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=3;
+
+
+
+		ÌòÑÌù¨Î¨∏
 CREATE TABLE `member` (
 	`member_no` INT(10) NOT NULL AUTO_INCREMENT,
 	`member_name` VARCHAR(50) NOT NULL,
@@ -46,6 +59,9 @@ CREATE TABLE `member_addr` (
 COLLATE='euckr_korean_ci'
 ENGINE=InnoDB;
 
+
+
+		ÍπÄÏßÑÏö∞
 CREATE TABLE `student` (
 	`student_no` INT(10) NOT NULL AUTO_INCREMENT,
 	`student_name` VARCHAR(50) NOT NULL,
@@ -66,6 +82,21 @@ CREATE TABLE `student_addr` (
 COLLATE='euckr_korean_ci'
 ENGINE=InnoDB;
 
+CREATE TABLE `student_score` (
+	`student_score_no` INT(10) NOT NULL AUTO_INCREMENT,
+	`student_no` INT(10) NULL DEFAULT NULL,
+	`score` INT(10) NULL DEFAULT NULL,
+	PRIMARY KEY (`student_score_no`),
+	INDEX `FK_student_score_student` (`student_no`),
+	CONSTRAINT `FK_student_score_student` FOREIGN KEY (`student_no`) REFERENCES `student` (`student_no`)
+)
+COLLATE='euckr_korean_ci'
+ENGINE=InnoDB
+AUTO_INCREMENT=2;
+
+
+
+		ÏÜ°Ïú†Îπà
 CREATE TABLE `teacher` (
 	`teacher_no` INT(10) NOT NULL AUTO_INCREMENT,
 	`teacher_name` VARCHAR(50) NOT NULL,
