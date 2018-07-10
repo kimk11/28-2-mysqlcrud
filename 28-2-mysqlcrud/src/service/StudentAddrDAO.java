@@ -118,7 +118,7 @@ public class StudentAddrDAO {
 	}
 	
 	// db에 저장된 데이터의 갯수를 구하는 메서드
-	public int currentPage() {
+	public int currentPage(int studentNo) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultset = null;
@@ -128,12 +128,13 @@ public class StudentAddrDAO {
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 		String user = "mysqlcrud_2id";
 		String password = "mysqlcrud_2pw";		
-		String sql="SELECT count(student_addr_no) as count FROM student_addr";
+		String sql="SELECT count(student_addr_no) as count FROM student_addr where student_no=?";
 		
 		try {
 			Class.forName(className);
 			connection= DriverManager.getConnection(url, user, password);
 			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, studentNo);
 			resultset = preparedStatement.executeQuery();
 			if(resultset.next()) {
 				count=resultset.getInt(1);

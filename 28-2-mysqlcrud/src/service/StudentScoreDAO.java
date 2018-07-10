@@ -66,7 +66,6 @@ public class StudentScoreDAO {
 	public int insertScore(int studentNo, int score) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		ResultSet resultset = null;
 		
 		int result=0;
 		
@@ -87,13 +86,6 @@ public class StudentScoreDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(resultset != null) {
-				try {
-					resultset.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if(preparedStatement != null) {
 				try {
 					preparedStatement.close();
@@ -117,7 +109,6 @@ public class StudentScoreDAO {
 	public int updateScore(int studentNo, int score) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
-		ResultSet resultset = null;
 		
 		int result=0;
 		
@@ -138,13 +129,6 @@ public class StudentScoreDAO {
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(resultset != null) {
-				try {
-					resultset.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
-				}
-			}
 			if(preparedStatement != null) {
 				try {
 					preparedStatement.close();
@@ -232,4 +216,118 @@ public class StudentScoreDAO {
 	
 	
 //	<Student와 score 테이블을 조인한 결과를 리턴해주는 메서드 end>
+
+//	<Student와 score 테이블을 조인하여 score컴럼의 평균보다 높은 사람만 조회하는 메서드 start>
+	public int selectAvgScore() {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultset = null;
+		
+		int avg = 0;
+		
+		String className="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		
+		String sql="select avg(score) from student_score";
+		
+		try {
+			Class.forName(className);
+			connection= DriverManager.getConnection(url, user, password);
+			
+			preparedStatement = connection.prepareStatement(sql);
+			resultset = preparedStatement.executeQuery();
+			if(resultset.next()) {
+				avg = resultset.getInt(1);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(resultset != null) {
+				try {
+					resultset.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return avg;
+	}
+	//score의 평균보다 높은 사람만 조회하는 메서드
+	public ArrayList<StudentAndScore> selectAvgJoin(){
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		ResultSet resultset = null;
+		
+		ArrayList<StudentAndScore> arJoinList = new ArrayList<>();
+		
+		String className="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		
+		String sql="select s.student_no, s.student_name, ss.score from student s join student_score ss on s.student_no = ss.student_no where ss.score>=(select avg(score) from student_score)";
+		
+		try {
+			Class.forName(className);
+			connection= DriverManager.getConnection(url, user, password);
+			
+			preparedStatement = connection.prepareStatement(sql);
+			resultset = preparedStatement.executeQuery();
+			while(resultset.next()) {
+				StudentAndScore studentAndScore = new StudentAndScore();
+				Student student = new Student();
+				StudentScore studentScore = new StudentScore();
+				student.setStudentNo(resultset.getInt(1));
+				student.setStudentName(resultset.getString(2));
+				studentScore.setScore(resultset.getInt(3));
+				studentAndScore.setStudent(student);
+				studentAndScore.setStudentScore(studentScore);
+				arJoinList.add(studentAndScore);
+			}
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(resultset != null) {
+				try {
+					resultset.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		
+		return arJoinList;
+	}
+//	<Student와 score 테이블을 조인하여 score컴럼의 평균보다 높은 사람만 조회하는 메서드 end>
 }

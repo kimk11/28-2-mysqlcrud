@@ -49,7 +49,9 @@
 %>
 		</table>
 	</div>
-	<button type="button" id="btn">뒤로가기</button>
+	<div>
+		<button type="button" id="btn">뒤로가기</button>
+	</div>
 	
 <script type="text/javascript">
 	var btn = document.getElementById('btn');

@@ -15,8 +15,8 @@
 		</ul>
 		<ul>
 			<li><a href="./member/memberListAboveAvg.jsp">memberListAboveAvg</a></li>
-			<li><a href=".#">employeeListAboveAvg</a></li>
-			<li><a href=".#">studentListAboveAvg</a></li>
+			<li><a href="./Employee/eployeeListAboveAvg.jsp">employeeListAboveAvg</a></li>
+			<li><a href="./student/studentListAboveAvg.jsp">studentListAboveAvg</a></li>
 			<li><a href=".#">teacherListAboveAvg</a></li>
 		</ul>
 	</body>

@@ -11,6 +11,14 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
+<style type="text/css">
+	table {
+		border-collapse: collapse;
+	}
+	table, th, td{
+		border: 1px solid #0000ff;
+	}
+</style>
 </head>
 <body>
 <%
@@ -41,7 +49,7 @@
 		%>
 	</table>
 <%
-	int count = employeeAddrDao.currentPage();
+	int count = employeeAddrDao.currentPage(employeeNo);
 	int startPage = 1;
 	int lastPage = count/rowPage;
 	if((count%rowPage)!=0){
@@ -59,5 +67,15 @@
 		<%
 	}
 %>
+	<div>
+		<button type="button" id="btn">뒤로가기</button>
+	</div>
+	
+<script type="text/javascript">
+	var btn = document.getElementById('btn');
+	btn.addEventListener('click', function() {
+		history.back();
+	});
+</script>
 </body>
 </html>
