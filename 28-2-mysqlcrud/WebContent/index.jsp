@@ -1,18 +1,23 @@
-<%@ page language="java" contentType="text/html; charset=EUC-KR"
-    pageEncoding="EUC-KR"%>
-<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
+<!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
-</head>
-<body>
-	<h1>index.jsp</h1>
-	<ul>
-		<li><a href="./member/insertMemberForm.jsp">member</a></li>
-		<li><a href="./Employee/insertEmployeeForm.jsp">Employee</a></li>
-		<li><a href="./student/insertStudentForm.jsp">student</a></li>
-		<li><a href="./teacher/insertTeacherForm.jsp">teacher</a></li>
-	</ul>
-</body>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+		<title>index</title>
+	</head>
+	<body>
+		<h1>index.jsp</h1>
+		<ul>
+			<li><a href="./member/insertMemberForm.jsp">insertMemberForm</a></li>
+			<li><a href="./Employee/insertEmployeeForm.jsp">insertEmployeeForm</a></li>
+			<li><a href="./student/insertStudentForm.jsp">insertStudentForm</a></li>
+			<li><a href="./teacher/insertTeacherForm.jsp">insertTeacherForm</a></li>
+		</ul>
+		<ul>
+			<li><a href="./member/memberListAboveAvg.jsp">memberListAboveAvg</a></li>
+			<li><a href=".#">employeeListAboveAvg</a></li>
+			<li><a href=".#">studentListAboveAvg</a></li>
+			<li><a href=".#">teacherListAboveAvg</a></li>
+		</ul>
+	</body>
 </html>

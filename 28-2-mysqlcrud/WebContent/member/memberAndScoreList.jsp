@@ -25,9 +25,11 @@
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
 		MemberScoreDAO memberScoreDao = new MemberScoreDAO();
-		ArrayList<MemberAndScore> list = memberScoreDao.selectMemberAndScored(memberNo);
 		
-		for(int i=0 ; i<list.size() ; i++){
+		ArrayList<MemberAndScore> list = new ArrayList<>();
+		list = memberScoreDao.selectMemberAndScored(memberNo);
+		
+		for(int i=0; i<list.size(); i++){
 			MemberAndScore memberAndScore = list.get(i);
 	%>
 				<tr>

@@ -4,7 +4,8 @@ grant select,insert,update,delete,create,drop,alter on mysqlcrud_2.* to 'mysqlcr
 
 
 
-		ÍπÄÏßÑÏö∞
+<±Ë¡¯øÏ>
+
 CREATE TABLE `employee` (
 	`employee_no` INT(10) NOT NULL AUTO_INCREMENT,
 	`employee_name` VARCHAR(50) NOT NULL,
@@ -39,7 +40,8 @@ AUTO_INCREMENT=3;
 
 
 
-		ÌòÑÌù¨Î¨∏
+<«ˆ»ÒπÆ>
+
 CREATE TABLE `member` (
 	`member_no` INT(10) NOT NULL AUTO_INCREMENT,
 	`member_name` VARCHAR(50) NOT NULL,
@@ -74,7 +76,8 @@ AUTO_INCREMENT=10;
 
 
 
-		ÍπÄÏßÑÏö∞
+<±Ë¡¯øÏ>
+
 CREATE TABLE `student` (
 	`student_no` INT(10) NOT NULL AUTO_INCREMENT,
 	`student_name` VARCHAR(50) NOT NULL,
@@ -109,7 +112,8 @@ AUTO_INCREMENT=2;
 
 
 
-		ÏÜ°Ïú†Îπà
+<º€¿Ø∫Û>
+
 CREATE TABLE `teacher` (
 	`teacher_no` INT(10) NOT NULL AUTO_INCREMENT,
 	`teacher_name` VARCHAR(50) NOT NULL,
