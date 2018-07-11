@@ -7,8 +7,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>입력 화면</title>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/index.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/form.css" />
 </head>
 <body>
 	<div id="wrapper clearfix">
@@ -50,21 +50,26 @@
 
 		<div id="light">
 			<form
-				action="<%=request.getContextPath()%>/teacher/insertTeacherAction.jsp"
-				method="post" name="f">
+				action="<%=request.getContextPath()%>/teacher/insertTeacherAction.jsp" method="post" name="f">
 				<h2>Teacher 정보 입력</h2>
-				<div>
-					이름 : <input type="text" id="teacherName" name="teacherName" size="10px"> 
+				<div class="group">
+					<input type="text" id="teacherName" name="teacherName" size="10px" placeholder="Name"> 
+					<span class="bar"></span>
 					<span id="teacherNameHelper"></span><br>
-					나이 : <input type="text" id="teacherAge" name="teacherAge" size="10px">
+				</div>
+				<div class="group">
+					<input type="text" id="teacherAge" name="teacherAge" size="10px" placeholder="Age">
+					<span class="bar"></span>
 					<span id="teacherAgeHelper"></span><br>
 				</div>
 				<div>
-					<button type="button" id="teacherBtn">입력</button>
+					<button type="button" id="teacherBtn" class="button buttonBlue">입력</button>
 				</div>
 			</form>
+			
 			<script type="text/javascript" src="../script/inserteacherOrAddr.js"
-				charset="utf-8"></script>
+				charset="utf-8">
+			</script>
 
 		</div>
 
