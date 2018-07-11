@@ -13,15 +13,12 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css" />
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/table.css" />
 
 <style type="text/css">
-	table {
-		border-collapse: collapse;
-	}
-	table, th, td{
-		border: 1px solid #0000ff;
-	}
+.centered { display: table; margin-left: auto; margin-right: auto; }
 </style>
+
 </head>
 <body>
 <div id="wrapper clearfix">
@@ -65,54 +62,64 @@
 	</div>
 	
 	<div id="light">
-	<%
-		int employeeNo =Integer.parseInt(request.getParameter("employeeNo"));
-		
-		int currentPage = 1;
-		if(request.getParameter("currentPage")!=null){
-			currentPage = Integer.parseInt(request.getParameter("currentPage"));
-		}
-		int rowPage = 2;
-		EmployeeAddrDAO employeeAddrDao = new EmployeeAddrDAO();
-		ArrayList<EmployeeAddr> employeeAddrList =  employeeAddrDao.selectEmployeeAddrByPage(currentPage, rowPage, employeeNo);
-		
-	%>
-		<table>
-			<tr>
-				<th>employeeContet</th>
-			</tr>
-			<% 
-				for(int i=0 ; i<employeeAddrList.size() ; i++){
-					EmployeeAddr employeeAddr = employeeAddrList.get(i);
+		<div class="centered">
+		<%
+			int employeeNo =Integer.parseInt(request.getParameter("employeeNo"));
+			
+			int currentPage = 1;
+			if(request.getParameter("currentPage")!=null){
+				currentPage = Integer.parseInt(request.getParameter("currentPage"));
+			}
+			int rowPage = 2;
+			EmployeeAddrDAO employeeAddrDao = new EmployeeAddrDAO();
+			ArrayList<EmployeeAddr> employeeAddrList =  employeeAddrDao.selectEmployeeAddrByPage(currentPage, rowPage, employeeNo);
+			
+		%>
+			<table>
+				<tr class="even">
+					<th>employeeContet</th>
+				</tr>
+				<% 
+					for(int i=0 ; i<employeeAddrList.size() ; i++){
+						EmployeeAddr employeeAddr = employeeAddrList.get(i);
+						%>
+						<tr class="even">
+							<td><%= employeeAddr.getEmployeeAddrContent() %></td>
+						</tr>
+						<%
+					}
+				%>
+			</table>
+		<%
+			int count = employeeAddrDao.currentPage(employeeNo);
+			int startPage = 1;
+			int lastPage = count/rowPage;
+			if((count%rowPage)!=0){
+				lastPage++;
+			}
+		%>
+			<div class="centered">
+		<%
+				if(currentPage>startPage){
 					%>
-					<tr>
-						<td><%= employeeAddr.getEmployeeAddrContent() %></td>
-					</tr>
+						<a href="<%= request.getContextPath() %>/Employee/employeeAddrList.jsp?currentPage=<%= currentPage-1 %>">이전</a>
 					<%
 				}
-			%>
-		</table>
-	<%
-		int count = employeeAddrDao.currentPage(employeeNo);
-		int startPage = 1;
-		int lastPage = count/rowPage;
-		if((count%rowPage)!=0){
-			lastPage++;
-		}
-		
-		if(currentPage>startPage){
-			%>
-				<a href="<%= request.getContextPath() %>/Employee/employeeAddrList.jsp?currentPage=<%= currentPage-1 %>">이전</a>
-			<%
-		}
-		if(currentPage<lastPage){
-			%>
-				<a href="<%= request.getContextPath() %>/Employee/employeeAddrList.jsp?currentPage=<%= currentPage+1 %>">다음</a>
-			<%
-		}
-	%>
-		<div>
-			<button type="button" id="btn">뒤로가기</button>
+				for(int i=0 ; i<lastPage ; i++){
+					%>
+						<a href="<%= request.getContextPath() %>/Employee/employeeAddrList.jsp?currentPage=<%= i+1 %>"><%= i+1 %></a>
+					<%
+				}
+				if(currentPage<lastPage){
+					%>
+						<a href="<%= request.getContextPath() %>/Employee/employeeAddrList.jsp?currentPage=<%= currentPage+1 %>">다음</a>
+					<%
+				}
+		%>
+			</div>
+			<div>
+				<button type="button" id="btn">뒤로가기</button>
+			</div>
 		</div>
 	</div>
 	

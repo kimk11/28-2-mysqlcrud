@@ -13,14 +13,10 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css" />
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/table.css" />
 
 <style type="text/css">
-	table {
-		border-collapse: collapse;
-	}
-	table, th, td{
-		border: 1px solid #0000ff;
-	}
+.centered { display: table; margin-left: auto; margin-right: auto; }
 </style>
 
 </head>
@@ -66,6 +62,7 @@
 		</div>
 		
 		<div id="light">
+			<div class="centered">
 			<%
 				request.setCharacterEncoding("euckr");
 			
@@ -89,8 +86,8 @@
 				ArrayList<Employee> employeeList =  employeeDao.selectEmployeeByPage(currentPage, rowPage, word);
 				
 			%>
-				<table>
-					<tr>
+				<table >
+					<tr class="even">
 						<th>employeeNo</th><th>employeeName</th><th>employeeAge</th><th>주소입력</th><th>삭제</th><th>수정</th><th>점수입력</th><th>점수보기</th>
 																																		<!-- 조인문 연습 -->
 					</tr>
@@ -98,7 +95,7 @@
 						for(int i=0 ; i<employeeList.size() ; i++){
 							Employee employee = employeeList.get(i);
 							%>
-							<tr>
+							<tr class="even">
 								<td><%= employee.getEmployeeNo() %></td>
 								<td><a href="<%= request.getContextPath() %>/Employee/employeeAddrList.jsp?employeeNo=<%= employee.getEmployeeNo() %>"><%= employee.getEmployeeName() %></a></td>
 								<td><%= employee.getEmployeeAge() %></td>
@@ -143,15 +140,6 @@
 					%>
 				</table>
 				
-			<!-- 	검색창 -->
-				<form>
-					<div>
-						이름:
-						<input type="text" name="">
-						<button type="submit">검색</button>
-					</div>
-				</form>
-				
 			<%
 				int count = employeeDao.currentPage();
 				int startPage = 1;
@@ -159,22 +147,29 @@
 				if((count%rowPage)!=0){
 					lastPage++;
 				}
-				
-				if(currentPage>startPage){
-					%>
-						<a href="<%= request.getContextPath() %>/Employee/employeeList.jsp?currentPage=<%= currentPage-1 %>">이전</a>
-					<%
-				}
-				if(currentPage<lastPage){
-					%>
-						<a href="<%= request.getContextPath() %>/Employee/employeeList.jsp?currentPage=<%= currentPage+1 %>">다음</a>
-					<%
-				}
 			%>
+				<div class="centered">
+			<%
+					if(currentPage>startPage){
+						%>
+							<a href="<%= request.getContextPath() %>/Employee/employeeList.jsp?currentPage=<%= currentPage-1 %>">이전</a>
+						<%
+					}
+					for(int i=0 ; i<lastPage ; i++){
+						%>
+							<a href="<%= request.getContextPath() %>/Employee/employeeList.jsp?currentPage=<%= i+1 %>"><%= i+1 %></a>
+						<%
+					}
+					if(currentPage<lastPage){
+						%>
+							<a href="<%= request.getContextPath() %>/Employee/employeeList.jsp?currentPage=<%= currentPage+1 %>">다음</a>
+						<%
+					}
+			%>
+				</div>
+			</div>
 		</div>
-	
 	<div id="bottom">
-	
 	</div>
 </div>
 </body>

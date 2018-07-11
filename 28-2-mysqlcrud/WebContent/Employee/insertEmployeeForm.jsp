@@ -11,6 +11,10 @@
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insert.css">
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css" />
 
+<style type="text/css">
+.centered { display: table; margin-left: auto; margin-right: auto; }
+</style>
+
 </head>
 
 <body>
@@ -55,23 +59,25 @@
 		</div>
 		
 		<div id="light">
-			<div>
-				<form action="<%= request.getContextPath() %>/Employee/insertEmployeeAction.jsp" method="post" name="formAction">
-					<p>employeeAddr 입력</p>
-					<div>
-						<label>이름 : </label>
-						<input type="text" id="employeeName" name="employeeName">
-						<span id="employeeNameValid"></span>
-					</div>
-					<div>
-						<label>나이 : </label>
-						<input type="text" id="employeeAge" name="employeeAge">
-						<span id="employeeAgeValid"></span>
-					</div>
-					<div>
-						<button type="button" id="signEmployee">입력</button>
-					</div>
-				</form>
+			<div class="centered">
+				<div>
+					<form action="<%= request.getContextPath() %>/Employee/insertEmployeeAction.jsp" method="post" name="formAction">
+						<p>employeeAddr 입력</p>
+						<div>
+							<label>이름 : </label>
+							<input type="text" id="employeeName" name="employeeName">
+							<span id="employeeNameValid"></span>
+						</div>
+						<div>
+							<label>나이 : </label>
+							<input type="text" id="employeeAge" name="employeeAge">
+							<span id="employeeAgeValid"></span>
+						</div>
+						<div>
+							<button type="button" id="signEmployee">입력</button>
+						</div>
+					</form>
+				</div>
 			</div>
 		</div>
 		

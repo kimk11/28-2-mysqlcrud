@@ -9,15 +9,8 @@
 <title>Insert title here</title>
 
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css" />
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/table.css" />
 
-<style type="text/css">
-	table {
-		border-collapse: collapse;
-	}
-	table, th, td{
-		border: 1px solid #0000ff;
-	}
-</style>
 </head>
 <body>
 <div id="wrapper clearfix">
@@ -71,7 +64,7 @@
 		<div>
 			<table>
 				<thead>
-					<tr>
+					<tr class="even">
 						<th>번호</th><th>이름</th><th>나이</th><th>점수번호</th><th>점수</th>
 					</tr>
 				</thead>
@@ -80,7 +73,7 @@
 						StudentAndScore studentAndScore = arJoinList.get(i);
 	%>
 				<tbody>
-					<tr>
+					<tr class="even">
 						<td><%= studentAndScore.getStudent().getStudentNo() %></td>
 						<td><%= studentAndScore.getStudent().getStudentName() %></td>
 						<td><%= studentAndScore.getStudent().getStudentAge() %></td>
