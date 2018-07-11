@@ -8,12 +8,10 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insert.css">
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/form.css" />
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/table.css" />
 
-<style type="text/css">
-.centered { display: table; margin-left: auto; margin-right: auto; }
-</style>
 
 </head>
 
@@ -62,19 +60,19 @@
 			<div class="centered">
 				<div>
 					<form action="<%= request.getContextPath() %>/Employee/insertEmployeeAction.jsp" method="post" name="formAction">
-						<p>employeeAddr 입력</p>
-						<div>
-							<label>이름 : </label>
-							<input type="text" id="employeeName" name="employeeName">
+						<h2>employeeAddr 입력</h2>
+						<div class="group">
+							<input type="text" id="employeeName" name="employeeName" placeholder="Name">
+							<span class="bar"></span>
 							<span id="employeeNameValid"></span>
 						</div>
-						<div>
-							<label>나이 : </label>
-							<input type="text" id="employeeAge" name="employeeAge">
+						<div class="group">
+							<input type="text" id="employeeAge" name="employeeAge" placeholder="Age">
+							<span class="bar"></span>
 							<span id="employeeAgeValid"></span>
 						</div>
 						<div>
-							<button type="button" id="signEmployee">입력</button>
+							<button type="button" id="signEmployee" class="button buttonBlue">입력</button>
 						</div>
 					</form>
 				</div>

@@ -8,12 +8,9 @@
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>Insert title here</title>
 
-<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insert.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/form.css" />
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css" />
-
-<style type="text/css">
-.centered { display: table; margin-left: auto; margin-right: auto; }
-</style>
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/table.css" />
 
 </head>
 
@@ -62,19 +59,19 @@
 		<div class="centered">
 			<div>
 				<form action="<%= request.getContextPath() %>/student/insertStudentAction.jsp" method="post" name="formAction">
-					<p>Student 입력</p>
-					<div>
-						<label>이름 : </label>
-						<input type="text" id="studentName" name="studentName">
+					<h2>Student 입력</h2>
+					<div class="group">
+						<input type="text" id="studentName" name="studentName" placeholder="Name">
+						<span class="bar"></span>
 						<span id="studentNameValid" class="studentBlank"></span>
 					</div>
-					<div>
-						<label>나이 : </label>
-						<input type="text" id="studentAge" name="studentAge">
+					<div class="group">
+						<input type="text" id="studentAge" name="studentAge" placeholder="Age">
+						<span class="bar"></span>
 						<span id="studentAgeValid" class="studentBlank"></span>
 					</div>
 					<div>
-						<button type="button" id="signStudent">입력</button>
+						<button type="button" id="signStudent" class="button buttonBlue">입력</button>
 					</div>
 				</form>
 			</div>

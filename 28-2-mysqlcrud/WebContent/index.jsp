@@ -6,6 +6,7 @@
 <title>Index</title>
 
 <link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css" />
+<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/table.css" />
 
 </head>
 <body>
