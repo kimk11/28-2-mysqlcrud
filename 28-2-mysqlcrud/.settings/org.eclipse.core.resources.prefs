@@ -1,4 +1,7 @@
 eclipse.preferences.version=1
+encoding//src/service=euc-kr
+encoding//src/service/StudentScoreDAO.java=UTF-8
 encoding//src/service/Teacher.java=UTF-8
 encoding//src/service/TeacherAddrDAO.java=UTF-8
 encoding//src/service/TeacherDAO.java=UTF-8
+encoding//src/service/TeacherScoreDAO.java=UTF-8

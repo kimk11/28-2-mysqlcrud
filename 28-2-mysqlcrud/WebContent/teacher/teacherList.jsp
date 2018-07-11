@@ -117,17 +117,17 @@ table, td, th, tr {
 			<td><a href="./updateTeacherForm.jsp?no=<%=getTeacherNo%>">수정</a></td>
 
 			<td>
-				<form>
+				<form action="./insertTeacherScore.jsp" method="post">
 					<div class="display1">
 						<input type="hidden" id="teacherNo" name="teacherNo" value="<%=getTeacherNo%>" readonly="readonly"> 
-						<input type="text" id="teacherAddrContent" name="teacherAddrContent" size="7">
+						<input type="text" id="teacherScore" name="teacherScore" size="7">
 					</div>
 					<div class="display1">
 						<button type="submit" id="btn">입력</button>
 					</div>
 				</form>
 			</td>
-			<td><a href="./updateTeacherForm.jsp?word=<%=getTeacherNo%>">점수보기</a></td>
+			<td><a href="<%= request.getContextPath() %>/teacher/teacherAndScoreList.jsp??no=<%=getTeacherNo%>">점수보기</a></td>
 
 		</tr>
 		<%

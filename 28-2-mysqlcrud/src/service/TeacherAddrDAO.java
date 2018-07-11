@@ -13,10 +13,49 @@ import java.util.ArrayList;
 
 public class TeacherAddrDAO {
 	
+	//04 updateTeacherAddr
+	public void updateTeacherAddr(TeacherAddr teacherAddr,int no) {
+		System.out.println("04 updateTeacherAddr TeacherAddrDAO.java");
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		try {
+			Class.forName("com.mysql.jdbc.Driver");
+			String Driveraddr = "jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+			String dbUser = "mysqlcrud_2id";
+			String dbPass = "mysqlcrud_2pw";
+			String sql = "UPDATE teacher_addr SET teacher_addr_content=? WHERE teacher_no = ?";
+			connection = DriverManager.getConnection(Driveraddr, dbUser, dbPass);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setString(1,teacherAddr.getTeacherAddrContent());
+			preparedStatement.setInt(1,no);
+			preparedStatement.executeUpdate();
+			
+			preparedStatement.close();
+			connection.close();
+			
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if (preparedStatement != null)
+				try {
+					preparedStatement.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+			if (connection != null)
+				try {
+					connection.close();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
+				}
+		}
 
+		}
+		
+	
 	//03  selectTeacherByPage
 		public TeacherAddr selectAllTeacherAddr(int teacher) {
-			System.out.println("03 selectAllTeacherAddr TeacherDAO.java");
+			System.out.println("03 selectAllTeacherAddr TeacherAddDAO.java");
 			TeacherAddr teacherAddr = new TeacherAddr();
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
@@ -70,7 +109,7 @@ public class TeacherAddrDAO {
 	
 	//02  selectTeacherByPage
 		public ArrayList<TeacherAddr> selectTeacherAddr(int teacher) {
-			System.out.println("02 selectTeacherAll TeacherDAO.java");
+			System.out.println("02 selectTeacherAll TeacherAddDAO.java");
 			ArrayList<TeacherAddr> list2 = new ArrayList<>();
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;

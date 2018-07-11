@@ -38,12 +38,11 @@ width :200px;
 	TeacherAddrDAO teacherAddrDao = new TeacherAddrDAO(); 
 	TeacherDAO teacherDao = new TeacherDAO();
 	Teacher teacher = teacherDao.selectTeacher(no);
-	teacherDao.updateTeacher(teacher, no);
 	TeacherAddr teacherAddr = teacherAddrDao.selectAllTeacherAddr(no);
-	
+
 %>
 <h2>내 정보 수정</h2>
-<form action ="./updateTeacherForm.jsp" method="post">
+<form action ="./updateTeacherAction.jsp" method="post">
 <table>
 	<tr>
 		<th id="no">No</th>
@@ -57,7 +56,7 @@ width :200px;
 		<td><%= no %></td>
 		<td><input type="text" name="teacherName" value="<%= teacher.getTeacherName()%>"></td>
 		<td><input type="text" name="teacherAge" value="<%= teacher.getTeacherAge()%>"></td>
-		<td><input type="text" name="teacherAge" value="<%= teacherAddr.getTeacherAddrContent()%>"></td>
+		<td><input type="text" name="teacherAddrContent" value="<%= teacherAddr.getTeacherAddrContent()%>"></td>
 		<td><input type="submit" value = "수정완료"></td>
 	</tr>
 	
