@@ -9,24 +9,73 @@
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>insertMemberAddrForm</title>
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insertAddr.css">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css" />
 	</head>
 	<body>
-		<div>
-			<form action="<%= request.getContextPath() %>/member/insertMemberAddrAction.jsp" method="post" name="formAction">
-				<p>MemberAddr 입력</p>
+		<div id="wrapper clearfix">
+		
+			<div id="header">
+					<h1>&lt;/&gt; 28 - 2 mysqlcrud</h1>
+			</div>
+			
+			<div id="left">
 				<div>
-					<input type="hidden" id="memberNo" name="memberNo" value="<%= request.getParameter("memberNo") %>">
+					<ul class="menuOne">
+						<li>
+							Insert
+							<ul class="menuTwo">
+								<li><a href="<%=request.getContextPath()%>/Employee/insertEmployeeForm.jsp">Employee</a></li>
+								<li><a href="<%=request.getContextPath()%>/member/insertMemberForm.jsp">Member</a></li>
+								<li><a href="<%=request.getContextPath()%>/student/insertStudentForm.jsp">Student</a></li>
+								<li><a href="<%=request.getContextPath()%>/teacher/insertTeacherForm.jsp">Teacher</a></li>
+							</ul>
+						</li>
+						<li>
+							List
+							<ul class="menuTwo">
+								<li><a href="<%=request.getContextPath()%>/Employee/employeeList.jsp">Employee</a></li>
+								<li><a href="<%=request.getContextPath()%>/member/memberList.jsp">Member</a></li>
+								<li><a href="<%=request.getContextPath()%>/student/studentList.jsp">Student</a></li>
+								<li><a href="<%=request.getContextPath()%>/teacher/teacherList.jsp">Teacher</a></li>
+							</ul>
+						</li>
+						<li>
+							ScoreAVG
+							<ul class="menuTwo">
+								<li><a href="<%=request.getContextPath()%>/Employee/eployeeListAboveAvg.jsp">Employee</a></li>
+								<li><a href="<%=request.getContextPath()%>/member/memberListAboveAvg.jsp">Member</a></li>
+								<li><a href="<%=request.getContextPath()%>/student/studentListAboveAvg.jsp">Student</a></li>
+								<li><a href="<%=request.getContextPath()%>/teacher/teacherListAboveAvg.jsp">Teacher</a></li>
+							</ul>
+						</li>
+					</ul>
 				</div>
-				<div>
-					<label>주소 : </label>
-					<input type="text" id="memberAddrContent" name="memberAddrContent">
-					<span id="memberAddrContentValid"></span>
-				</div>
-				<div>
-					<button type="button" id="signMember">입력</button>
-				</div>
-			</form>
+			</div>
+			
+			<div id="light">
+				<form action="<%= request.getContextPath() %>/member/insertMemberAddrAction.jsp" method="post" name="formAction">
+					<p>MemberAddr 입력</p>
+					<div>
+						<input type="hidden" id="memberNo" name="memberNo" value="<%= request.getParameter("memberNo") %>">
+					</div>
+					<div>
+						<label>주소 : </label>
+						<input type="text" id="memberAddrContent" name="memberAddrContent">
+						<span id="memberAddrContentValid"></span>
+					</div>
+					<div>
+						<button type="button" id="signMember">입력</button>
+					</div>
+				</form>
+			</div>
+			
+			<div id="bottom">
+			
+			</div>
+			
 		</div>
-		<script type="text/javascript" src="../script/insertmemberOrAddr.js" charset="utf-8"></script>	
+		
+		
+		<script type="text/javascript" src="../script/insertmemberOrAddr.js" charset="utf-8"></script>
 	</body>
 </html>

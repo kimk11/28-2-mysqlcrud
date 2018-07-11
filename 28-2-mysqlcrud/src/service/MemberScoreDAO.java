@@ -276,4 +276,45 @@ public class MemberScoreDAO {
 		
 		return list;
 	}
+	
+	public int deleteMemberScore(int memberNo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		int result = 0;
+		
+		String Driver="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		//연결 정보
+		String sql = "DELETE FROM member_score WHERE member_no = ?";
+		
+		try {	
+			Class.forName(Driver);	
+				
+			connection= DriverManager.getConnection(url, user, password);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, memberNo);
+			
+			result = preparedStatement.executeUpdate();
+			
+		} catch (Exception e) { //try문에서 예외가 발생할 때 실해
+			e.printStackTrace();
+		} finally { //예외 방생 여부 없이 무조건 실행
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
 }

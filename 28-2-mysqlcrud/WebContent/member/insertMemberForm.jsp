@@ -5,35 +5,79 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>insertMemberForm</title>
-
-<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insert.css">
-
-</head>
-
-<body>
-	<div>
-		<form action="<%= request.getContextPath() %>/member/insertMemberAction.jsp" method="post" name="formAction">
-			<p>Member 입력</p>
-			<div>
-				<label>이름 : </label>
-				<input type="text" id="memberName" name="memberName">
-				<span id="memberNameValid" class="memberBlank"></span>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+		<title>insertMemberForm</title>
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insert.css">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css" />
+	</head>
+	<body>
+		<div id="wrapper clearfix">
+		
+			<div id="header">
+					<h1>&lt;/&gt; 28 - 2 mysqlcrud</h1>
 			</div>
-			<div>
-				<label>나이 : </label>
-				<input type="text" id="memberAge" name="memberAge">
-				<span id="memberAgeValid" class="memberBlank"></span>
+			
+			<div id="left">
+				<div>
+					<ul class="menuOne">
+						<li>
+							Insert
+							<ul class="menuTwo">
+								<li><a href="<%=request.getContextPath()%>/Employee/insertEmployeeForm.jsp">Employee</a></li>
+								<li><a href="<%=request.getContextPath()%>/member/insertMemberForm.jsp">Member</a></li>
+								<li><a href="<%=request.getContextPath()%>/student/insertStudentForm.jsp">Student</a></li>
+								<li><a href="<%=request.getContextPath()%>/teacher/insertTeacherForm.jsp">Teacher</a></li>
+							</ul>
+						</li>
+						<li>
+							List
+							<ul class="menuTwo">
+								<li><a href="<%=request.getContextPath()%>/Employee/employeeList.jsp">Employee</a></li>
+								<li><a href="<%=request.getContextPath()%>/member/memberList.jsp">Member</a></li>
+								<li><a href="<%=request.getContextPath()%>/student/studentList.jsp">Student</a></li>
+								<li><a href="<%=request.getContextPath()%>/teacher/teacherList.jsp">Teacher</a></li>
+							</ul>
+						</li>
+						<li>
+							ScoreAVG
+							<ul class="menuTwo">
+								<li><a href="<%=request.getContextPath()%>/Employee/eployeeListAboveAvg.jsp">Employee</a></li>
+								<li><a href="<%=request.getContextPath()%>/member/memberListAboveAvg.jsp">Member</a></li>
+								<li><a href="<%=request.getContextPath()%>/student/studentListAboveAvg.jsp">Student</a></li>
+								<li><a href="<%=request.getContextPath()%>/teacher/teacherListAboveAvg.jsp">Teacher</a></li>
+							</ul>
+						</li>
+					</ul>
+				</div>
 			</div>
-			<div>
-				<button type="button" id="signMember">입력</button>
+			
+			<div id="light">
+				<form action="<%= request.getContextPath() %>/member/insertMemberAction.jsp" method="post" name="formAction">
+					<p>Member 입력</p>
+					<div>
+						<label>이름 : </label>
+						<input type="text" id="memberName" name="memberName">
+						<span id="memberNameValid" class="memberBlank"></span>
+					</div>
+					<div>
+						<label>나이 : </label>
+						<input type="text" id="memberAge" name="memberAge">
+						<span id="memberAgeValid" class="memberBlank"></span>
+					</div>
+					<div>
+						<button type="button" id="signMember">입력</button>
+					</div>
+				</form>
 			</div>
-		</form>
-	</div>
-	
-	<script type="text/javascript" src="../script/insertmemberOrAddr.js" charset="utf-8"></script>
-	
-</body>
+			
+			<div id="bottom">
+			
+			</div>
+			
+		</div>
+		
+		
+		<script type="text/javascript" src="../script/insertmemberOrAddr.js" charset="utf-8"></script>
+	</body>
 </html>

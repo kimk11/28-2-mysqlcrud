@@ -3,8 +3,9 @@
 <!-- member 昏力 贸府 累己 -->
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import = "service.MemberDAO" %>
-<%@ page import = "service.MemberAddrDAO" %>
+<%@ page import = "service.MemberDAO"%>
+<%@ page import = "service.MemberAddrDAO"%>
+<%@ page import = "service.MemberScoreDAO"%>
 
 
 <!DOCTYPE html>
@@ -15,11 +16,15 @@
 	int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 	System.out.println(memberNo + "<-- memberNo");
 	
-	MemberDAO memberDao = new MemberDAO();
-	memberDao.memberDelete(memberNo);
+	MemberScoreDAO memberScoreDao = new MemberScoreDAO();
+	memberScoreDao.deleteMemberScore(memberNo);
 	
 	MemberAddrDAO memberAddrDao = new MemberAddrDAO();
 	memberAddrDao.memberAddrDelete(memberNo);
+	
+	MemberDAO memberDao = new MemberDAO();
+	memberDao.memberDelete(memberNo);
+
 	
 	
 	response.sendRedirect(request.getContextPath() + "/member/memberList.jsp");
