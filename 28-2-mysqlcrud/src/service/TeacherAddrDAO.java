@@ -13,6 +13,49 @@ import java.util.ArrayList;
 
 public class TeacherAddrDAO {
 	
+	
+	// 한 명의 점수 테이블 삭제 
+		public void deleteAddr(int no) {
+			System.out.println(" deleteAddr TeacherAddrDAO.java");
+			Connection connection = null;
+			PreparedStatement preparedStatement = null;
+			
+			String className="com.mysql.jdbc.Driver";
+			String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+			String user = "mysqlcrud_2id";
+			String password = "mysqlcrud_2pw";		
+			String sql="DELETE FROM teacher_addr WHERE teacher_no = ?";
+			
+			try {
+				Class.forName(className);
+				connection= DriverManager.getConnection(url, user, password);
+				
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setInt(1, no);
+				preparedStatement.executeUpdate();
+			} catch (Exception e) {
+				e.printStackTrace();
+			} finally {
+				if(preparedStatement != null) {
+					try {
+						preparedStatement.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+				if(connection != null) {
+					try {
+						connection.close();
+					} catch (SQLException e) {
+						e.printStackTrace();
+					}
+				}
+			}
+
+		}
+		
+	
+	
 	//04 updateTeacherAddr
 	public void updateTeacherAddr(TeacherAddr teacherAddr,int no) {
 		System.out.println("04 updateTeacherAddr TeacherAddrDAO.java");

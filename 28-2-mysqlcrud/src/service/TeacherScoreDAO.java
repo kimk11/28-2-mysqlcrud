@@ -8,9 +8,56 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class TeacherScoreDAO {
+	
+	
+	// 한 명의 점수 테이블 삭제 
+	public void deleteScore(int no) {
+		System.out.println("07 deleteScore TeacherScoreDao.java");
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		
+		String className="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		
+		String sql="DELETE FROM teacher_score WHERE teacher_no = ?";
+		
+		try {
+			Class.forName(className);
+			connection= DriverManager.getConnection(url, user, password);
+			
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, no);
+			preparedStatement.executeUpdate();
+		} catch (Exception e) {
+			e.printStackTrace();
+		} finally {
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+
+	}
+	
+	
+	
+	
+	
 	// 한 사람의 DB에 score 값이 있는지 없는지
 	// 있으면 1 , 없으면 0
 	public int selectCheck(int no) {
+		System.out.println("06 selectCheck TeacherScoreDao.java");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultset = null;
@@ -65,6 +112,7 @@ public class TeacherScoreDAO {
 	
 	// 점수 입력 시 update(수정)처리
 	public int updateScore(int no, int score) {
+		System.out.println("05 updateScore TeacherScoreDao.java");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
@@ -111,6 +159,7 @@ public class TeacherScoreDAO {
 		
 	// 평균 구하기
 	public int scoreAvg() {
+		System.out.println("04 scoreAvg TeacherScoreDao.java");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultset = null;
@@ -166,7 +215,7 @@ public class TeacherScoreDAO {
 	
 	//평균보다 높은 teacher 리스트
 	public ArrayList<TeacherAndScore> selectAvg() {
-		System.out.println("04 selectAvg TeacherScoreDao.java");
+		System.out.println("03 selectAvg TeacherScoreDao.java");
 		Connection connection = null;
 		ResultSet resultSet = null;
 		PreparedStatement preparedStatement = null;
@@ -221,7 +270,7 @@ public class TeacherScoreDAO {
 
 	/* teacherAndScoreList.jsp의 점수보기 */
 	public ArrayList<TeacherAndScore> selectTeacherAndScore(int teacherNo) {
-		System.out.println("03 selectTeacherAndScore TeacherScoreDao.java");
+		System.out.println("02 selectTeacherAndScore TeacherScoreDao.java");
 		Connection connection = null;
 		ResultSet resultSet = null;
 		PreparedStatement preparedStatement = null;
@@ -279,29 +328,6 @@ public class TeacherScoreDAO {
 		return list;
 	}
 
-	/*
-	 * public void selectTeacherScore(int teacherNo) {
-	 * System.out.println("02 selectTeacherScore TeacherScoreDao.java"); Connection
-	 * connection = null; ResultSet resultSet = null; PreparedStatement
-	 * preparedStatement = null; String Driver="com.mysql.jdbc.Driver"; String url=
-	 * "jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
-	 * String user = "mysqlcrud_2id"; String password = "mysqlcrud_2pw"; String sql
-	 * ="SELECT ts.teacher_score_no, ts.teacher_no, t.teacher_name, t.teacher_age, ts.score FROM teacher_score ts INNER JOIN teacher t ON ts.teacher_no =t.teacher_no WHERE teacher_score_no =?"
-	 * ;
-	 * 
-	 * try { Class.forName(Driver); connection= DriverManager.getConnection(url,
-	 * user, password); preparedStatement = connection.prepareStatement(sql);
-	 * preparedStatement.setInt(1, teacherNo); preparedStatement.executeUpdate();
-	 * 
-	 * preparedStatement.close(); connection.close();
-	 * 
-	 * } catch (Exception e) { e.printStackTrace(); } finally{
-	 * 
-	 * if (resultSet != null) try { resultSet.close(); } catch(SQLException ex) {}
-	 * if (preparedStatement != null) try { preparedStatement.close(); }
-	 * catch(SQLException ex) {} if (connection != null) try { connection.close(); }
-	 * catch(SQLException ex) {} } }
-	 */
 
 	public int insertTeacherScore(int score, int teacherNo) {
 		System.out.println("01 insertTeacherScore TeacherScoreDao.java");
