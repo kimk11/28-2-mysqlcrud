@@ -5,7 +5,6 @@
 <%@ page import="service.TeacherDAO"%>
 <%@ page import = "service.TeacherAddr" %>
 <%@ page import = "service.Teacher" %>
-
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page %>
 <!DOCTYPE html>
