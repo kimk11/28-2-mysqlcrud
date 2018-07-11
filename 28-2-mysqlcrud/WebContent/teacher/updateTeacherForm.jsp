@@ -53,16 +53,13 @@ width :200px;
 	</tr>
 	
 	<tr>
-		<td><%= no %></td>
+		
+		<td><input type = "hidden" name="teacherNo" value="<%=no%>"><%= no %></td>
 		<td><input type="text" name="teacherName" value="<%= teacher.getTeacherName()%>"></td>
 		<td><input type="text" name="teacherAge" value="<%= teacher.getTeacherAge()%>"></td>
 		<td><input type="text" name="teacherAddrContent" value="<%= teacherAddr.getTeacherAddrContent()%>"></td>
 		<td><input type="submit" value = "수정완료"></td>
 	</tr>
-	
-	<%
-		
-	%>
 </table>
 </form>
 </body>

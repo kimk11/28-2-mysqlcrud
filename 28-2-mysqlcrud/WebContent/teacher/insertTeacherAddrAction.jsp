@@ -28,7 +28,7 @@
 
 	
 	
-	/* response.sendRedirect(request.getContextPath() + "/teacher/teacherList.jsp"); */
+	response.sendRedirect(request.getContextPath() + "/teacher/teacherList.jsp");
 %>
 </body>
 </html>

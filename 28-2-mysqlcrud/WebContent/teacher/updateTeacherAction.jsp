@@ -18,7 +18,7 @@
 	<%
 	request.setCharacterEncoding("euckr");
 	
-	int no = Integer.parseInt(request.getParameter("no"));
+	int no = Integer.parseInt(request.getParameter("teacherNo"));
 	System.out.println(no +"<--no");
 	
 	Teacher teacher = new Teacher(); 
@@ -37,7 +37,7 @@
 	teacherAddrDao.updateTeacherAddr(teacherAddr, no);
 	
 	
-/* 	response.sendRedirect(request.getContextPath() + "/teacher/teacherList.jsp"); */
+ 	response.sendRedirect(request.getContextPath() + "/teacher/teacherList.jsp"); 
 	%>
 </body>
 </html>

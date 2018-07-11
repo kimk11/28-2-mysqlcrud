@@ -107,7 +107,7 @@ public class TeacherAddrDAO {
 	
 	
 	
-	//02  selectTeacherByPage
+	//02  selectTeacherByPage 주소테이블 select 
 		public ArrayList<TeacherAddr> selectTeacherAddr(int teacher) {
 			System.out.println("02 selectTeacherAll TeacherAddDAO.java");
 			ArrayList<TeacherAddr> list2 = new ArrayList<>();

@@ -4,7 +4,6 @@ package service;
 public class TeacherScore {
 	
 		private int teacherScoreNo;
-		private int teacherScore;
 		private int Score;
 		
 		
@@ -13,12 +12,6 @@ public class TeacherScore {
 		}
 		public void setTeacherScoreNo(int teacherScoreNo) {
 			this.teacherScoreNo = teacherScoreNo;
-		}
-		public int getTeacherScore() {
-			return teacherScore;
-		}
-		public void setTeacherScore(int teacherScore) {
-			this.teacherScore = teacherScore;
 		}
 		public int getScore() {
 			return Score;

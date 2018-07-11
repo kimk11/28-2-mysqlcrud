@@ -148,7 +148,7 @@ public class TeacherDAO {
 
 	}
 
-	// 02 selectTeacherByPage
+	// 02 selectTeacherByPage 페이징 작업 및 검색
 	public ArrayList<Teacher> selectTeacherByPage(int startRow, int pagePerRow, String searchWord) {
 		System.out.println("02 selectTeacherAll TeacherDAO.java");
 		ArrayList<Teacher> list = new ArrayList<>();
@@ -162,12 +162,15 @@ public class TeacherDAO {
 			String dbUser = "mysqlcrud_2id";
 			String dbPass = "mysqlcrud_2pw";
 			connection = DriverManager.getConnection(Driveraddr, dbUser, dbPass);
-
+			
+			// 검색창이 null 값이면 페이징 작업으로
 			if (searchWord == null) {
 				String sql = "SELECT teacher_no,teacher_name,teacher_age  FROM Teacher ORDER BY teacher_no LIMIT ?, ?;";
 				preparedStatement = connection.prepareStatement(sql);
 				preparedStatement.setInt(1, startRow);
 				preparedStatement.setInt(2, pagePerRow);
+			
+			// 검색창이 null이 아니라면 검색된 내용과 일치하는 내용 표시
 			} else {
 				String sql = "SELECT teacher_no,teacher_name,teacher_age  FROM Teacher WHERE teacher_name = ?";
 				preparedStatement = connection.prepareStatement(sql);
@@ -209,6 +212,8 @@ public class TeacherDAO {
 
 		}
 		return list;
+		
+		
 		// JDBC API SELECT ResultSet -> ArrayList<Member> : 멤버타입의 배열을 만듬
 
 		// 배열의 사용을 편하게-> List, Set, Map

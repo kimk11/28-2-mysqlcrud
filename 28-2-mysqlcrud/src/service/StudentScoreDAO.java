@@ -8,9 +8,9 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class StudentScoreDAO {
-//  <score 테이블 데이터 추가 메서드 start>
-	//한사람당 하나의 값만 들어가고 있다면 값을 수정할 수 있도록 확인
-	//리턴값  - 0 : 없음, 1 : 있음
+//  <score ���대� �곗�댄�� 異�媛� 硫����� start>
+	//���щ���� ������ 媛�留� �ㅼ�닿�怨� ���ㅻ㈃ 媛��� ������ �� ����濡� ����
+	//由ы�닿�  - 0 : ����, 1 : ����
 	public int selectCheck(int studentNo) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -61,8 +61,8 @@ public class StudentScoreDAO {
 		}
 		return check;
 	}
-	//테이블에 데이터 추가
-	//리턴값 - 0 : 실패, 1 : 성공
+	//���대��� �곗�댄�� 異�媛�
+	//由ы�닿� - 0 : �ㅽ��, 1 : �깃났
 	public int insertScore(int studentNo, int score) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -82,30 +82,33 @@ public class StudentScoreDAO {
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, studentNo);
 			preparedStatement.setInt(2, score);
-			result = preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
+		
+		
+		
+			preparedStatement.close();
+			connection.close();
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
-			if(preparedStatement != null) {
+			if (preparedStatement != null)
 				try {
 					preparedStatement.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
 				}
-			}
-			if(connection != null) {
+			if (connection != null)
 				try {
 					connection.close();
-				} catch (SQLException e) {
-					e.printStackTrace();
+				} catch (SQLException ex) {
+					ex.printStackTrace();
 				}
-			}
 		}
-		
 		return result;
+	
 	}
-	//테이블에 데이터 수정
-	//리턴값 - 0 : 실패, 1 : 성공
+	//���대��� �곗�댄�� ����
+	//由ы�닿� - 0 : �ㅽ��, 1 : �깃났
 	public int updateScore(int studentNo, int score) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -147,9 +150,9 @@ public class StudentScoreDAO {
 		
 		return result;
 	}
-//  <score 테이블 데이터 추가 메서드 end>
+//  <score ���대� �곗�댄�� 異�媛� 硫����� end>
 	
-//	<Student와 score 테이블을 조인한 결과를 리턴해주는 메서드 start>
+//	<Student�� score ���대��� 議곗�명�� 寃곌낵瑜� 由ы�댄�댁＜�� 硫����� start>
 	
 	public ArrayList<StudentAndScore> selectJoin(int studentNo){
 		Connection connection = null;
@@ -171,6 +174,7 @@ public class StudentScoreDAO {
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, studentNo);
 			resultset = preparedStatement.executeQuery();
+			
 			while(resultset.next()) {
 				StudentAndScore studentAndScore = new StudentAndScore();
 				Student student = new Student();
@@ -215,9 +219,9 @@ public class StudentScoreDAO {
 	}
 	
 	
-//	<Student와 score 테이블을 조인한 결과를 리턴해주는 메서드 end>
+//	<Student�� score ���대��� 議곗�명�� 寃곌낵瑜� 由ы�댄�댁＜�� 硫����� end>
 
-//	<Student와 score 테이블을 조인하여 score컴럼의 평균보다 높은 사람만 조회하는 메서드 start>
+//	<Student�� score ���대��� 議곗�명���� score而대�쇱�� ��洹�蹂대�� ���� �щ��留� 議고������ 硫����� start>
 	public int selectAvgScore() {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -269,7 +273,7 @@ public class StudentScoreDAO {
 		
 		return avg;
 	}
-	//score의 평균보다 높은 사람만 조회하는 메서드
+	//score�� ��洹�蹂대�� ���� �щ��留� 議고������ 硫�����
 	public ArrayList<StudentAndScore> selectAvgJoin(){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -329,5 +333,5 @@ public class StudentScoreDAO {
 		
 		return arJoinList;
 	}
-//	<Student와 score 테이블을 조인하여 score컴럼의 평균보다 높은 사람만 조회하는 메서드 end>
+//	<Student�� score ���대��� 議곗�명���� score而대�쇱�� ��洹�蹂대�� ���� �щ��留� 議고������ 硫����� end>
 }
