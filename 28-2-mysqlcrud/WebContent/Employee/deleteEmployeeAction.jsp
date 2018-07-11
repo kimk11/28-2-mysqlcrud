@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@page import="service.EmployeeDAO"%>
 <%@page import="service.EmployeeAddrDAO"%>
+<%@page import="service.EmployeeScoreDAO"%>
 <%@page import="service.Employee"%>
 <!DOCTYPE html>
 <html>
@@ -15,6 +16,9 @@
 	
 	EmployeeAddrDAO employeeAddrDao = new EmployeeAddrDAO();
 	employeeAddrDao.deleteEmployeeAddr(employeeNo);
+	
+	EmployeeScoreDAO employeeScoreDAO = new EmployeeScoreDAO();
+	employeeScoreDAO.deleteScore(employeeNo);
 	
 	EmployeeDAO employeeDao = new EmployeeDAO();
 	employeeDao.deleteEmployee(employeeNo);

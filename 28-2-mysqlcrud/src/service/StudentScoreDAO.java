@@ -334,4 +334,49 @@ public class StudentScoreDAO {
 		return arJoinList;
 	}
 //	<Student�� score ���대��� 議곗�명���� score而대�쇱�� ��洹�蹂대�� ���� �щ��留� 議고������ 硫����� end>
+
+//	< score 테이블삭제 메서드 start>
+	public int deleteScore(int studentNo) {
+		Connection connection = null;
+		PreparedStatement preparedStatement = null;
+		int result = 0;
+		
+		String className="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		
+		String sql="DELETE FROM student_score WHERE student_no=?";
+		
+		try {	
+			Class.forName(className);	
+				
+			connection= DriverManager.getConnection(url, user, password);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, studentNo);
+			
+			result = preparedStatement.executeUpdate();
+			
+			preparedStatement.close();
+			connection.close();
+		} catch (Exception e) { 
+			e.printStackTrace();
+		} finally { 
+			if(preparedStatement != null) {
+				try {
+					preparedStatement.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+			if(connection != null) {
+				try {
+					connection.close();
+				} catch (SQLException e) {
+					e.printStackTrace();
+				}
+			}
+		}
+		return result;
+	}
+//	< score 테이블삭제 메서드 end>
 }
