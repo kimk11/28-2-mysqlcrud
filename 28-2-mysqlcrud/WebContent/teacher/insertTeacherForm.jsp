@@ -9,6 +9,7 @@
 <title>입력 화면</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/form.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/table.css" />
 </head>
 <body>
 	<div id="wrapper clearfix">
