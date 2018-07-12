@@ -12,6 +12,11 @@ import java.sql.SQLException;
 import java.util.ArrayList;
 
 public class MemberScoreDAO {
+	
+	//회원점수 조회하는 메서드 작성
+	//memberAndScoreList.jsp에서 사용
+	//리턴 값 0 = 쿼리 실행 실패
+	//리턴 값 1 = 쿼리 실행 성공
 	public int selectMemberScore(int memberNo) {
 		Connection connection = null;
 		ResultSet result = null;
@@ -52,6 +57,10 @@ public class MemberScoreDAO {
 		
 	}
 	
+	//회원점수 입력 메서드 작성
+	//insertMemberScoreAction.jsp에서 사용
+	//리턴 값 0 = 쿼리 실행 실패
+	//리턴 값 1 = 쿼리 실행 성공
 	public int insertMemberScore(int memberNo, int memberScore) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -94,6 +103,8 @@ public class MemberScoreDAO {
 		return result;
 	}
 	
+	//회원점수 수정 메서드 작성
+	//회원
 	public int updateMemberScore(int memberNo, int memberScore) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -316,5 +327,47 @@ public class MemberScoreDAO {
 			}
 		}
 		return result;
+	}
+	
+	public MemberScore selectMemberScoreForUpdateMemberScore(int memberNo) {
+		Connection connection = null;
+		ResultSet result = null;
+		PreparedStatement preparedStatement = null;
+		
+		MemberScore memberScore = new MemberScore();
+		
+		String Driver="com.mysql.jdbc.Driver";
+		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
+		String user = "mysqlcrud_2id";
+		String password = "mysqlcrud_2pw";		//연결 정보
+		String sql = "SELECT member_score_no, member_no, score FROM member_score WHERE member_no = ?";
+		
+		try {	
+			Class.forName(Driver);	
+				
+			connection= DriverManager.getConnection(url, user, password);
+			preparedStatement = connection.prepareStatement(sql);
+			preparedStatement.setInt(1, memberNo);
+			
+			result = preparedStatement.executeQuery();
+			
+			while(result.next()) {
+				memberScore.setMemberScoreNo(result.getInt("member_score_no"));
+				memberScore.setMemberNo(result.getInt("member_no"));
+				memberScore.setScore(result.getInt("score"));
+			}
+			
+		} catch (Exception e) { //try문에서 예외가 발생할 때 실해
+			e.printStackTrace();
+		} finally{
+			//6단계 사용한 Query statement 종료
+			if (result != null) try { result.close(); } catch(SQLException ex) {}
+			if (preparedStatement != null) try { preparedStatement.close(); } catch(SQLException ex) {}
+			
+			//7단계 db 연결 종료
+			if (connection != null) try { connection.close(); } catch(SQLException ex) {}
+		}
+		
+		return memberScore;
 	}
 }

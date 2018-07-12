@@ -1,6 +1,6 @@
 //28기 현희문
 //2018-06-26
-//memberAddr DTO(Bean) 작성
+//MemberAddrDTO 작성
 
 package service;
 

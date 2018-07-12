@@ -54,7 +54,7 @@
 			
 			<div id="light">
 				<form action="<%= request.getContextPath() %>/member/insertMemberAddrAction.jsp" method="post" name="formAction">
-					<p>MemberAddr 입력</p>
+					<h2>회원 주소 입력</h2>
 					<div>
 						<input type="hidden" id="memberNo" name="memberNo" value="<%= request.getParameter("memberNo") %>">
 					</div>

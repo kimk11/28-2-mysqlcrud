@@ -3,9 +3,11 @@
 <!-- member 리스트 작성 -->
 
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import = "service.MemberDAO" %>
-<%@ page import = "service.Member" %>
-<%@ page import = "java.util.ArrayList" %>
+<%@ page import = "service.MemberDAO"%>
+<%@ page import = "service.Member"%>
+<%@ page import = "java.util.ArrayList"%>
+<%@ page import = "service.MemberScoreDAO"%>
+<%@ page import = "service.MemberScore"%>
 <!DOCTYPE html>
 <html>
 	<head>
@@ -19,7 +21,6 @@
 		request.setCharacterEncoding("euckr");
 		
 		MemberDAO memberdao = new MemberDAO();
-		
 		
 		int rowNumber = memberdao.countMember();
 		
@@ -99,8 +100,8 @@
 							<td>회원나이</td>
 							<td>주소입력</td><!-- 다수 -->
 							<td>주소보기</td>
-							<td>회원삭제</td>
 							<td>회원수정</td>
+							<td>회원삭제</td>
 							<td>점수입력</td><!-- 한번 -->
 							<td>점수보기</td>
 						</tr>
@@ -112,7 +113,6 @@
 							<td><%=member.getMemberNo() %></td>
 							<td><a href = "<%= request.getContextPath() %>/member/memberAddrList.jsp?memberNo=<%=member.getMemberNo() %>"><%=member.getMemberName() %></a></td>
 							<td><%=member.getMemberAge() %></td>
-							
 							<td>
 								<form action="<%= request.getContextPath() %>/member/insertMemberAddrAction.jsp" method="post" name="insertAddrFormAction">
 									<p>MemberAddr 입력</p>
@@ -130,9 +130,14 @@
 								</form>
 							</td>
 							<td><a href = "<%= request.getContextPath() %>/member/memberAddrList.jsp">주소보기</a></td>
-							<td><a href = "<%= request.getContextPath() %>/member/deleteMemberAction.jsp?memberNo=<%=member.getMemberNo() %>">삭제</a></td>
 							<td><a href = "<%= request.getContextPath() %>/member/updateMemberForm.jsp?memberNo=<%=member.getMemberNo() %>">수정</a></td>
+							<td><a href = "<%= request.getContextPath() %>/member/deleteMemberAction.jsp?memberNo=<%=member.getMemberNo() %>">삭제</a></td>
 							<!-- updateMemberForm -> updateMemberAction -->
+	<%
+		MemberScoreDAO memberScoreDao = new MemberScoreDAO();
+		int check = memberScoreDao.selectMemberScore(member.getMemberNo());
+		if(check == 0){
+							%>
 							<td>
 								<form action="<%= request.getContextPath() %>/member/insertMemberScoreAction.jsp" method="post" name="insertScoreFormAction">
 									<p>MemberScore 입력</p>
@@ -147,6 +152,13 @@
 									</div>
 								</form>
 							</td>
+							<%
+							}else{
+							%>
+							<td><a href = "<%= request.getContextPath() %>/member/updateMemberScoreForm.jsp?memberNo=<%=member.getMemberNo() %>">점수수정</a></td>
+							<%
+							}
+							%>
 							<td><a href = "<%= request.getContextPath() %>/member/memberAndScoreList.jsp?memberNo=<%=member.getMemberNo()%>">점수보기</a></td>
 						</tr>
 	<%

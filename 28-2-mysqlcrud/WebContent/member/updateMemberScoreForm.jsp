@@ -1,29 +1,30 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.MemberScoreDAO"%>
-<%@ page import = "service.MemberAndScore"%>
-<%@ page import = "java.util.ArrayList"%>
+<%@ page import = "service.MemberScore"%>
 <!DOCTYPE html>
 <html>
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-		<title>memberListAboveAvg</title>
+		<title>updateMemberScoreForm</title>
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css" />
 		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/table.css" />
 	</head>
 	<body>
-		<%
-			MemberScoreDAO memberScoreDao = new MemberScoreDAO();
-			int average = memberScoreDao.selectScoreAvg();
-		
-			ArrayList<MemberAndScore> list = new ArrayList<>();
-			list = memberScoreDao.selectMemberListAboveAvg();
-		%>
+	<%
+	request.setCharacterEncoding("euckr");
+
+	int memberNo = Integer.parseInt(request.getParameter("memberNo"));
+	
+	MemberScoreDAO memberScoreDao = new MemberScoreDAO();
+	MemberScore memberScore = memberScoreDao.selectMemberScoreForUpdateMemberScore(memberNo);
+	%>
+	
 		<div id="wrapper clearfix">
-		
+
 			<div id="header">
 					<h1>&lt;/&gt; 28 - 2 mysqlcrud</h1>
 			</div>
-			
+		
 			<div id="left">
 				<div>
 					<ul class="menuOne">
@@ -57,44 +58,33 @@
 					</ul>
 				</div>
 			</div>
-			
+					
 			<div id="light">
-				<h2>평균 이상 리스트</h2><br>
 				<div>
-					평균 : <%=average%>
-				</div>
-				<div>
-					<table border = "1">
-						<thead>
+					<h2>회원점수 수정</h2>
+					<form action ="updateMemberScoreAction.jsp" method = "post">
+						<table border = "1">
 							<tr>
-								<th>회원번호</th>
-								<th>회원이름</th>
-								<th>회원점수</th>
+								<td>점수번호</td>
+								<td>회원번호</td>
+								<td>회원점수</td>
+								<td>수정</td>
 							</tr>
-						</thead>
-						<tbody>
-							<%
-							for(int i=0 ; i<list.size(); i++){
-								MemberAndScore memberAndScore = list.get(i);
-							%>
 							<tr>
-								<td><%=memberAndScore.getMemberScore().getMemberNo()%></td>
-								<td><%=memberAndScore.getMember().getMemberName()%></td>
-								<td><%=memberAndScore.getMemberScore().getScore()%></td>
+								<td><input type = "text" name = "memberScoreNo" value = "<%=memberScore.getMemberScoreNo()%>" readonly></td>
+								<td><input type = "text" name = "memberNo" value = "<%=memberScore.getMemberNo()%>" readonly></td>
+								<td><input type = "text" name = "memberScore" value = "<%=memberScore.getScore()%>"></td>
+								<td><input type = "submit" value = "수정"></td>
 							</tr>
-							
-							<%
-							}
-							%>
-						</tbody>
-					</table>
+						</table>
+					</form>
 				</div>
 			</div>
-			
+		
 			<div id="bottom">
 			
 			</div>
-			
+		
 		</div>
 	</body>
 </html>

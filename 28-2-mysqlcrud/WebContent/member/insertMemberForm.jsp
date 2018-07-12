@@ -8,8 +8,9 @@
 	<head>
 		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 		<title>insertMemberForm</title>
-		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/insert.css">
-		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css" />
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/form.css">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/index.css">
+		<link rel="stylesheet" type="text/css" href="<%= request.getContextPath() %>/css/table.css">
 	</head>
 	<body>
 		<div id="wrapper clearfix">
@@ -54,19 +55,19 @@
 			
 			<div id="light">
 				<form action="<%= request.getContextPath() %>/member/insertMemberAction.jsp" method="post" name="formAction">
-					<p>Member 입력</p>
-					<div>
-						<label>이름 : </label>
-						<input type="text" id="memberName" name="memberName">
+					<h2>회원 입력</h2>
+					<div class="group">
+						<input type="text" id="memberName" name="memberName" placeholder="Name">
+						<span class="bar"></span>
 						<span id="memberNameValid" class="memberBlank"></span>
 					</div>
-					<div>
-						<label>나이 : </label>
-						<input type="text" id="memberAge" name="memberAge">
+					<div class="group">
+						<input type="text" id="memberAge" name="memberAge" placeholder="Age">
+						<span class="bar"></span>
 						<span id="memberAgeValid" class="memberBlank"></span>
 					</div>
 					<div>
-						<button type="button" id="signMember">입력</button>
+						<button type="button" id="signMember" class="button buttonBlue">입력</button>
 					</div>
 				</form>
 			</div>

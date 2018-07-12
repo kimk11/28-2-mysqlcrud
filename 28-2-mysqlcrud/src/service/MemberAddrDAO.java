@@ -1,6 +1,6 @@
 //28기 현희문
 //2018-06-26
-//memberAddr DAO 작성
+//MemberAddrDAO 작성
 
 package service;
 
@@ -13,10 +13,14 @@ import java.util.ArrayList;
 
 public class MemberAddrDAO {
 	
-	//memberAddr Insert작성, 리턴값 0 = 쿼리실행 실패, 1 = 쿼리 실행 성공
+	//회원주소 입력 메서드 작성
+	//insertMemberAddrAction.jsp에서 사용
+	//리턴 값 0 = 쿼리 실행 실패
+	//리턴 값 1 = 쿼리 실행 성공
 	public int memberAddrInsert(MemberAddr memberAddr){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
+		
 		int result = 0;
 		
 		String Driver="com.mysql.jdbc.Driver";
@@ -57,7 +61,9 @@ public class MemberAddrDAO {
 		return result;
 	}
 	
-	
+	//회원주소 리스트 페이징 메서드 작성
+	//memberAddrList.jsp에서 사용
+	//리턴 값 list = 쿼리 실행 결과들이 세팅 된 MemberAddr 클래스의 객체들을 담은 ArrayList 클래스 객체의 객체참조변수
 	public ArrayList<MemberAddr> selectMemberAddrByPage(int begin, int rowPerPage){
 		ArrayList<MemberAddr> list = new ArrayList<>();
 		
@@ -99,15 +105,18 @@ public class MemberAddrDAO {
 			//7단계 db 연결 종료
 			if (connection != null) try { connection.close(); } catch(SQLException ex) {}
 		}
-		
 		return list;
 	}
 	
-	
+	//회원주소의 총 갯수를 조회하는 메서드 작성
+	//memberAddrList.jsp에서 사용
+	//리턴 값 0 = 쿼리 실행 실패
+	//리턴 값 rowNumber > 0 = 회원주소의 총 갯수
 	public int countMemberAddr() {
 		Connection connection = null;
 		ResultSet result = null;
 		PreparedStatement preparedStatement = null;
+		
 		int rowNumber = 0;
 		
 		String Driver="com.mysql.jdbc.Driver";
@@ -141,7 +150,10 @@ public class MemberAddrDAO {
 		return rowNumber;
 	}
 	
-	
+	//회원주소 삭제 메서드 작성
+	//deleteMemberAddrAction.jsp에서 사용
+	//리턴 값 0 = 쿼리 실행 실패
+	//리턴 값 1 = 쿼리 실행 성공
 	public int memberAddrDelete(int memberNo) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;

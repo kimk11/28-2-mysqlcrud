@@ -7,23 +7,24 @@
 <%@page import="service.Member"%>
 <!DOCTYPE html>
 <html>
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>insertMemberAction</title>
-</head>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
+		<title>insertMemberAction</title>
+	</head>
 
-<body>
-<%
-	request.setCharacterEncoding("euckr");
-
-	Member member = new Member();
+	<body>
+	<%
+		request.setCharacterEncoding("euckr");
 	
-	member.setMemberName(request.getParameter("memberName"));
-	member.setMemberAge(Integer.parseInt(request.getParameter("memberAge")));
-	
-	MemberDAO memberDao = new MemberDAO();
-	memberDao.memberInsert(member);
-%>
-
-</body>
+		Member member = new Member();
+		
+		member.setMemberName(request.getParameter("memberName"));
+		member.setMemberAge(Integer.parseInt(request.getParameter("memberAge")));
+		
+		MemberDAO memberDao = new MemberDAO();
+		memberDao.memberInsert(member);
+		
+		response.sendRedirect(request.getContextPath() + "/member/insertMemberForm.jsp");
+	%>
+	</body>
 </html>

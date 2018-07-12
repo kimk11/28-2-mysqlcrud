@@ -1,6 +1,6 @@
 //28기 현희문
 //2018-06-26
-//member DAO 작성
+//MemberDAO 작성
 
 package service;
 
@@ -13,7 +13,10 @@ import java.sql.ResultSet;
 
 public class MemberDAO {
 	
-	//member Insert작성, 리턴값 0 = 쿼리실행 실패, 1 = 쿼리 실행 성공
+	//회원 입력 메서드 작성
+	//insertMemberAction.jsp에서 사용
+	//리턴 값 0 = 쿼리 실행 실패
+	//리턴 값 1 = 쿼리 실행 성공
 	public int memberInsert(Member member){
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -54,7 +57,6 @@ public class MemberDAO {
 		}
 		return result;
 	}
-	
 	
 //	public ArrayList<Member> selectMemberByPage(int begin, int rowPerPage){
 //		ArrayList<Member> list = new ArrayList<>();
@@ -101,7 +103,9 @@ public class MemberDAO {
 //		return list;
 //	}
 	
-	
+	//회원 리스트 페이징 메서드 작성
+	//memberList.jsp에서 사용
+	//리턴 값 list = 쿼리 실행 결과들이 세팅 된 Member 클래스의 객체들을 담은 ArrayList 클래스 객체의 객체참조변수
 	public ArrayList<Member> selectMemberByPage(int begin, int rowPerPage, String searchName){
 		ArrayList<Member> list = new ArrayList<>();
 		
@@ -152,11 +156,13 @@ public class MemberDAO {
 			//7단계 db 연결 종료
 			if (connection != null) try { connection.close(); } catch(SQLException ex) {}
 		}
-		
 		return list;
 	}
 	
-	
+	//회원의 총 인원을 조회하는 메서드 작성
+	//memberList.jsp에서 사용
+	//리턴 값 0 = 쿼리 실행 실패
+	//리턴 값 rowNumber > 0 = 회원의 총 인원
 	public int countMember() {
 		Connection connection = null;
 		ResultSet result = null;
@@ -194,7 +200,10 @@ public class MemberDAO {
 		return rowNumber;
 	}
 	
-	
+	//회원 삭제 메서드 작성
+	//deleteMemberAction.jsp에서 사용
+	//리턴 값 0 = 쿼리 실행 실패
+	//리턴 값 1 = 쿼리 실행 성공
 	public int memberDelete(int memberNo) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -232,10 +241,12 @@ public class MemberDAO {
 				}
 			}
 		}
-		
 		return result;
 	}
 	
+	//회원 수정을 위한 회원 조회 메서드 작성
+	//updateMemberForm.jsp에서 사용
+	//리턴 값 member = 쿼리 실행 결과들이 세팅된 Member 클래스 객체의 객체참조변수
 	public Member selectMember(int memberNo) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -274,11 +285,13 @@ public class MemberDAO {
 			//7단계 db 연결 종료
 			if (connection != null) try { connection.close(); } catch(SQLException ex) {}
 		}
-		
 		return member;
 	}
 	
-	
+	//회원 수정 메서드 작성
+	//updateMemberAction.jsp에서 사용
+	//리턴 값 0 = 쿼리 실행 실패
+	//리턴 값 1 = 쿼리 실행 성공
 	public int updateMember(int memberNo, String memberName, int memberAge) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
@@ -318,7 +331,6 @@ public class MemberDAO {
 				}
 			}
 		}
-		
 		return result;
 	}
 }
