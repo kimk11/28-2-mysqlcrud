@@ -11,8 +11,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>수정화면</title>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/index.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/table.css" />
 <style>
 table, td, th, tr {
 	border: solid 1px #cccccc;
@@ -86,14 +86,15 @@ table, td, th, tr {
 			<h2>내 정보 수정</h2>
 			<form action="./updateTeacherAction.jsp" method="post">
 				<table>
-					<tr>
+					<tr class="even">
 						<th id="no">No</th>
 						<th id="name">이름</th>
 						<th id="age">나이</th>
 						<th id="addr">주소</th>
+						<th>수정</th>
 
 					</tr>
-					<tr>
+					<tr class="even">
 						<td><input type = "hidden" name="teacherNo" value="<%=no%>"><%= no %></td>
 						<td><input type="text" name="teacherName" value="<%= teacher.getTeacherName()%>"></td>
 						<td><input type="text" name="teacherAge" value="<%= teacher.getTeacherAge()%>"></td>

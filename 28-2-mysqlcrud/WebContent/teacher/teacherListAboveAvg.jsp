@@ -15,6 +15,7 @@
 table, th, td, tr {
 	border-collapse: collapse;
 }
+
 </style>
 </head>
 <body>
