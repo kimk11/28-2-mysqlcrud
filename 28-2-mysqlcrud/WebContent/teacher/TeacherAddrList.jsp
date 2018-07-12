@@ -10,8 +10,8 @@
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
 <title>주소리스트</title>
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/css/index.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/table.css" />
 <style>
 table, tr, td, th {
 	border: solid 1px;
@@ -68,7 +68,7 @@ table, tr, td, th {
 			%>
 
 			<table>
-				<tr>
+				<tr class = "even">
 					<th>번호</th>
 					<th>주소</th>
 				</tr>
@@ -76,7 +76,7 @@ table, tr, td, th {
 					for (int i = 0; i < list2.size(); i++) {
 						TeacherAddr teacherAddr = list2.get(i);
 				%>
-				<tr>
+				<tr class = "even">
 					<td><%=teacherAddr.getTeacherAddrNo()%></td>
 					<td><%=teacherAddr.getTeacherAddrContent()%></td>
 				</tr>
