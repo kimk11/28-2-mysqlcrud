@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.EmployeeAndScore" %>
-<%@ page import="service.EmployeeScoreDAO" %>
+<%@page import="service.EmployeeAndScore"%>
+<%@page import="service.EmployeeScoreDAO"%>
 <!DOCTYPE html>
 <html>
 <head>
@@ -8,17 +8,11 @@
 <title>Insert title here</title>
 </head>
 <body>
-<%	
+<%
+	request.setCharacterEncoding("euckr");
 	int employeeNo = Integer.parseInt(request.getParameter("employeeNo"));
-	int score = Integer.parseInt(request.getParameter("score"));
-
-	EmployeeScoreDAO employeeScoreDAO = new EmployeeScoreDAO();
-
-	int insertCheck = employeeScoreDAO.insertScore(employeeNo, score);
-	//0이면 입력 실패
-	if(insertCheck==0){
-		System.out.print("데이터 추가 실패");
-	}
+	int employeScore = Integer.parseInt(request.getParameter("employeScore"));
+	new EmployeeScoreDAO().updateScore(employeeNo, employeScore);
 	
 	response.sendRedirect(request.getContextPath()+"/Employee/employeeList.jsp");
 %>
