@@ -1,3 +1,6 @@
+<!-- 2018.07.11 -->
+<!-- 28±â 2Á¶_ÇöÈñ¹®,±èÁø¿ì,¼ÛÀ¯ºó -->
+<!-- Insert, List, ScoreAvg °æ·Î -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <!DOCTYPE html>
 <html>
