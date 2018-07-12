@@ -164,17 +164,19 @@ public class TeacherDAO {
 			connection = DriverManager.getConnection(Driveraddr, dbUser, dbPass);
 			
 			// 검색창이 null 값이면 페이징 작업으로
-			if (searchWord == null) {
+			if (searchWord.equals("")) {
 				String sql = "SELECT teacher_no,teacher_name,teacher_age  FROM Teacher ORDER BY teacher_no LIMIT ?, ?;";
 				preparedStatement = connection.prepareStatement(sql);
 				preparedStatement.setInt(1, startRow);
 				preparedStatement.setInt(2, pagePerRow);
-			
+				System.out.print("searchWord 공백");
 			// 검색창이 null이 아니라면 검색된 내용과 일치하는 내용 표시
-			} else {
-				String sql = "SELECT teacher_no,teacher_name,teacher_age  FROM Teacher WHERE teacher_name = ?";
+			} else if(!searchWord.equals("")) {
+				String sql = "SELECT teacher_no,teacher_name,teacher_age  FROM Teacher WHERE teacher_name LIKE ? ORDER BY teacher_no ASC LIMIT ?, ?";
 				preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setString(1, searchWord);
+				preparedStatement.setString(1, "%"+searchWord+"%");
+				preparedStatement.setInt(2, startRow);
+				preparedStatement.setInt(3, pagePerRow);
 				System.out.print("searchWord : " + searchWord);
 			}
 
@@ -225,7 +227,7 @@ public class TeacherDAO {
 	}
 
 	// 03 count DB row 개수
-	public int count() {
+	public int count(String searchWord) {
 		Connection connection = null;
 		ResultSet resultSet = null;
 		PreparedStatement preparedStatement = null;
@@ -236,13 +238,17 @@ public class TeacherDAO {
 		String user = "mysqlcrud_2id";
 		String password = "mysqlcrud_2pw";
 		String sql = "SELECT count(teacher_no) FROM teacher";
-
+		String sql2 = "SELECT count(teacher_no) FROM teacher WHERE teacher_name LIKE ?";
 		try {
 			Class.forName(Driver);
 
 			connection = DriverManager.getConnection(url, user, password);
-			preparedStatement = connection.prepareStatement(sql);
-
+			if(searchWord == null || searchWord.equals("")) {
+				preparedStatement = connection.prepareStatement(sql);
+			}else if(searchWord != null || !searchWord.equals("")) {
+				preparedStatement = connection.prepareStatement(sql2);
+				preparedStatement.setString(1, "%"+searchWord+"%");
+			}
 			resultSet = preparedStatement.executeQuery();
 
 			if (resultSet.next()) {

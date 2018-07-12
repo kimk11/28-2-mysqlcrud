@@ -1,14 +1,19 @@
+<!-- 2018.07.12 송유빈 -->
+<!-- teacherList.jsp -->
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import="java.util.ArrayList"%>
 <%@ page import="service.TeacherDAO"%>
 <%@ page import="service.TeacherAddr"%>
 <%@ page import="service.Teacher"%>
+<%@page import="service.TeacherScoreDAO"%>
+<%@page import="service.TeacherScore"%>
 <%@ page import="service.TeacherAddrDAO"%>
+<%@ page import="service.TeacherAndScore"%>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>Insert title here</title>
+<title>목록</title>
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css" />
 <link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/table.css" />
 <style>
@@ -111,31 +116,40 @@ table, th, td, th, tr {
 					}
 
 					String searchWord = request.getParameter("searchWord"); // 이름 검색창
+					if(request.getParameter("searchWord")==null){
+						searchWord="";
+					}
 					int startRow = (currentPage - 1) * pagePerRow; // 시작 페이지
 					int endRow = startRow + (pagePerRow - 1); // 끝날 페이지
-
+					
+					
 					TeacherDAO teacherDao = new TeacherDAO();
-					int totalRow = teacherDao.count(); // 총 row 수 
+					int totalRow = teacherDao.count(searchWord); // 총 row 수 
 					ArrayList<Teacher> list = teacherDao.selectTeacherByPage(startRow, pagePerRow, searchWord);
-
+					
+					
 					TeacherAddr teacherAddr = new TeacherAddr();
 					TeacherAddrDAO teacherAddrDao = new TeacherAddrDAO();
 
 					if (endRow > list.size() - 1) {
 						endRow = list.size() - 1;
 					}
-
+					
 					// 반복문  list : TeacherDAO.java 페이징 작업 및 검색
+					
 					for (int i = 0; i < list.size(); i++) {
 						Teacher teacher = list.get(i);
-
+						
 						int getTeacherNo = teacher.getTeacherNo();
 						String getTeacherName = teacher.getTeacherName();
 						int getTeacherAge = teacher.getTeacherAge();
-
+						
+						TeacherScoreDAO teacherScoreDao = new TeacherScoreDAO();
+						int check = teacherScoreDao.selectCheck(getTeacherNo);
+					
 						// list2 : TeacherAddrDAO.java 한 명의 주소 테이블 
 						ArrayList<TeacherAddr> list2 = teacherAddrDao.selectTeacherAddr(getTeacherNo);
-						String getTeacherAddrContent = teacherAddr.getTeacherAddrContent();
+						String getTeacherAddrContent = teacherAddr.getTeacherAddrContent();	
 				%>
 				<tr class = "even">
 					<td><%=getTeacherNo%></td>
@@ -158,12 +172,18 @@ table, th, td, th, tr {
 
 						</form>
 					</td>
-					<td><a href="./deleteTeacherAction.jsp?no=<%=getTeacherNo%>">삭제</a></td>
-					<td><a href="./updateTeacherForm.jsp?no=<%=getTeacherNo%>">수정</a></td>
+					<td><a href="<%= request.getContextPath() %>/teacher/deleteTeacherAction.jsp?no=<%=getTeacherNo%>">삭제</a></td>
+					<td><a href="<%= request.getContextPath() %>/teacher/updateTeacherForm.jsp?no=<%=getTeacherNo%>">수정</a></td>
 
 					<!-- 점수 입력 폼 -->
 					<td>
-						<form action="./insertTeacherScore.jsp" method="post">
+					<%
+						// check가 0이면 점수가 없음으로 입력폼과 점수 없음이 나타나게 한다
+						// check가 1이면 점수가 있음으로 수정버튼과 점수 보기가 나타나게 된다.
+						
+						if(check == 0) {
+					%>
+						<form action="<%= request.getContextPath() %>/teacher/insertTeacherScore.jsp" method="post">
 							<div class="display1">
 								<input type="hidden" id="teacherNo" name="teacherNo" value="<%=getTeacherNo%>" readonly="readonly"> 
 								<input type="text" id="teacherScore" name="teacherScore" size="7">
@@ -172,22 +192,42 @@ table, th, td, th, tr {
 								<button type="submit" id="btn">입력</button>
 							</div>
 						</form>
+						
+					<%
+					System.out.println(getTeacherNo + "<--no");
+						}else if(check == 1) {
+					%>
+							<a href="<%= request.getContextPath() %>/teacher/updateTeacherScoreForm.jsp?teacherNo=<%=getTeacherNo%>"><button type="submit" id="btn">점수수정</button></a>
+					<%
+						}
+					%>
 					</td>
-					<td><a
-						href="<%=request.getContextPath()%>/teacher/teacherAndScoreList.jsp?no=<%=getTeacherNo%>">점수보기</a></td>
+					
+					
+					<td>
+					<%
+						if(check == 0) {
+					%>
+						점수없음
+					<%
+						} else if(check == 1) {
+					%>
+						<a href="<%=request.getContextPath()%>/teacher/teacherAndScoreList.jsp?no=<%=getTeacherNo%>"><button>점수보기</button></a>
+					<%
+						}
+					%>
+					</td>
 
 				</tr>
 				<%
-					}
+						}
 				%>
 			</table>
-
-
-
+		
 			<%
 				if (currentPage > 1) {
 			%>
-			<a href="./teacherList.jsp?currentPage=<%=currentPage - 1%>">이전</a>
+			<a href="<%= request.getContextPath() %>/teacher/teacherList.jsp?currentPage=<%=currentPage - 1%>&searchWord=<%=searchWord%>">이전</a>
 			<%
 				}
 
@@ -197,21 +237,23 @@ table, th, td, th, tr {
 				}
 				if (currentPage < lastPage) {
 			%>
-			<a href="./teacherList.jsp?currentPage=<%=currentPage + 1%>">다음</a> <br>
+			<a href="<%= request.getContextPath() %>/teacher/teacherList.jsp?currentPage=<%=currentPage + 1%>&searchWord=<%=searchWord%>">다음</a> <br>
 			<br>
 			<%
 				}
 			%>
+			
 			<!-- 검색창 -->
-			<form action="./teacherList.jsp" method="post">
+			<!-- 검색창에 입력한 이름 값과 이름 DB의 내용이 한 글자라도 같다면 일치하는 테이블이 보이도록 구현 -->
+			<form action="./teacherList.jsp" method="get">
 				<div>
 					이름 : <input type="text" name="searchWord">
 					<button type="submit">검색</button>
 				</div>
 			</form>
-			<br> <br> <br> <a href="./teacherListAboveAvg.jsp"><button>평균
-					이상</button></a>
-
+			<br><br><br> 
+			<a href="<%= request.getContextPath() %>/teacher/teacherListAboveAvg.jsp"><button>평균 이상</button></a>
+			<a href="<%= request.getContextPath() %>/teacher/teacherList.jsp"><button>전체리스트</button></a>
 		</div>
 		<div id="bottom"></div>
 	</div>

@@ -1,48 +1,28 @@
-<!-- 2018.07.09 송유빈 -->
-<!-- updateTeacherForm.jsp -->
+<!-- 2018.07.12 송유빈 -->
+<!-- updateTeacherScore.jsp -->
+<%@page import="service.TeacherScoreDAO"%>
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@ page import="service.TeacherDAO"%>
-<%@ page import="service.Teacher"%>
-<%@ page import="service.TeacherAddr"%>
-<%@ page import="service.TeacherAddrDAO"%>
-<%@page import="java.util.ArrayList"%>
+<%@ page import ="service.TeacherAndScore" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=EUC-KR">
-<title>수정화면</title>
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css" />
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/table.css" />
+<title>점수 수정화면</title>
 <style>
-table, td, th, tr {
-	border: solid 1px #cccccc;
+table, th, td, tr {
 	border-collapse: collapse;
-	padding: 5px 10px;
-}
-
-#no {
-	width: 50px;
-}
-
-#name {
-	width: 150px;
-}
-
-#age {
-	width: 80px;
-}
-
-#addr {
-	width: 200px;
 }
 </style>
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/table.css" />
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath()%>/css/index.css" />
 </head>
 <body>
 	<div id="wrapper clearfix">
 		<div id="header">
 			<h1>&lt;/&gt; 28 - 2 mysqlcrud</h1>
 		</div>
-
+		<!-- left 왼쪽메뉴 -->
 		<div id="left">
 			<div>
 				<ul class="menuOne">
@@ -74,41 +54,35 @@ table, td, th, tr {
 			</div>
 
 		</div>
-
+		<!-- light 중앙메뉴 -->
 		<div id="light">
-			<%
-				int no = Integer.parseInt(request.getParameter("no"));
-				TeacherAddrDAO teacherAddrDao = new TeacherAddrDAO();
-				TeacherDAO teacherDao = new TeacherDAO();
-				Teacher teacher = teacherDao.selectTeacher(no);
-				TeacherAddr teacherAddr = teacherAddrDao.selectAllTeacherAddr(no);
-			%>
-			<h2>내 정보 수정</h2>
-			<form action="<%= request.getContextPath() %>/teacher/updateTeacherAction.jsp" method="post">
-				<table>
-					<tr class="even">
-						<th id="no">No</th>
-						<th id="name">이름</th>
-						<th id="age">나이</th>
-						<th id="addr">주소</th>
-						<th>수정</th>
-
-					</tr>
-					<tr class="even">
-						<td><input type = "hidden" name="teacherNo" value="<%=no%>"><%= no %></td>
-						<td><input type="text" name="teacherName" value="<%= teacher.getTeacherName()%>"></td>
-						<td><input type="text" name="teacherAge" value="<%= teacher.getTeacherAge()%>"></td>
-						<td><input type="text" name="teacherAddrContent" value="<%= teacherAddr.getTeacherAddrContent()%>"></td>
-						<td><input type="submit" value = "수정완료"></td>
-					</tr>
-				</table>
-			</form>
-			<div>
-				<a href ="<%= request.getContextPath() %>/teacher/teacherList.jsp"><button>뒤로가기</button></a>
-			</div>
-		</div>
-		
-
+	<%
+		int no = Integer.parseInt(request.getParameter("teacherNo"));
+		TeacherAndScore teacherAndScore =new TeacherAndScore();
+		TeacherScoreDAO teacherScoreDao = new TeacherScoreDAO();
+		ArrayList<TeacherAndScore> list = teacherScoreDao.selectTeacherAndScore(no);
+		teacherAndScore = list.get(0);
+	
+	%>	 
+	<form action="<%=request.getContextPath()%>/teacher/updateTeacherScoreAction.jsp?teacherNo=<%=no %>" method="post">
+		<table border=1>
+			<tr class="even">
+				<th>번호</th>
+				<td><input type="hidden" name="teacherNo"><%=teacherAndScore.getTeacher().getTeacherNo()%></td>
+			</tr>
+			<tr>
+				<th>이름</th>
+				<td><%= teacherAndScore.getTeacher().getTeacherName()%></td>
+			</tr>
+			<tr class="even">
+				<th>점수</th>
+				<td><input type="text" name="score" value="<%= teacherAndScore.getTeacherScore().getScore()%>" size ="7">
+					<button type="submit">수정</button></td>
+			</tr>
+		</table>
+	</form>
+	</div>
+		<!--bottom 하단 메뉴  -->
 		<div id="bottom"></div>
 	</div>
 </body>

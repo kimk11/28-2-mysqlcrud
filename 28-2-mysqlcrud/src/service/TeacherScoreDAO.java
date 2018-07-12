@@ -131,7 +131,9 @@ public class TeacherScoreDAO {
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1, score);
 			preparedStatement.setInt(2, no);
-			result = preparedStatement.executeUpdate();
+			preparedStatement.executeUpdate();
+			
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
@@ -345,8 +347,8 @@ public class TeacherScoreDAO {
 			Class.forName(Driver);
 			connection = DriverManager.getConnection(url, user, password);
 			preparedStatement = connection.prepareStatement(sql);
-			preparedStatement.setInt(1, score);
-			preparedStatement.setInt(2, teacherNo);
+			preparedStatement.setInt(2, score);
+			preparedStatement.setInt(1, teacherNo);
 			preparedStatement.executeUpdate();
 
 			preparedStatement.close();

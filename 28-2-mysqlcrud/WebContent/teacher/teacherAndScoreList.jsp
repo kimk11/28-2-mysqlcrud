@@ -87,6 +87,9 @@ table, tr, td {
 					}
 				%>
 			</table>
+			<div>
+				<a href ="./teacherList.jsp"><button>뒤로가기</button></a>
+			</div>
 		</div>
 
 		<div id="bottom"></div>
