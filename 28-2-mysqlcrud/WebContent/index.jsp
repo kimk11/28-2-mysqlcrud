@@ -59,10 +59,8 @@
 	
 	<div id="bottom">
 		<p class="groupContent">
-				泅锐巩 : Member | 
-				辫柳快 : Employee,Student | 
-				价蜡后 : Teacher
-			</p>
+				泅锐巩 : Member | 辫柳快 : Employee,Student | 价蜡后 : Teacher
+		</p>
 	</div>
 </div>
 </body>
