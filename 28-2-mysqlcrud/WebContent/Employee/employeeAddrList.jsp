@@ -122,10 +122,12 @@
 			</div>
 		</div>
 	</div>
-	
+		
 	<div id="bottom">
-	
-</div>
+		<p class="groupContent">
+				ÇöÈñ¹® : Member | ±èÁø¿ì : Employee,Student | ¼ÛÀ¯ºó : Teacher
+		</p>
+	</div>
 </div>
 <script type="text/javascript">
 	var btn = document.getElementById('btn');

@@ -80,7 +80,9 @@
 		</div>
 		
 	<div id="bottom">
-	
+		<p class="groupContent">
+				ÇöÈñ¹® : Member | ±èÁø¿ì : Employee,Student | ¼ÛÀ¯ºó : Teacher
+		</p>
 	</div>
 </div>
 	<script type="text/javascript" src="../script/insertemployeeOrAddr.js" charset="utf-8"></script>
