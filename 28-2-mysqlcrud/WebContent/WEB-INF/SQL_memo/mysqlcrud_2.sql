@@ -235,8 +235,8 @@ INSERT INTO `teacher_addr` (`teacher_addr_no`, `teacher_no`, `teacher_addr_conte
 	(7, 7, 'rlawlsdn@naver.com'),
 	(8, 8, 'dldmdqls@naver.com'),
 	(9, 9, 'rlathgml@naver.com'),
-	(11, 2, 'hi@naver.com'),
-	(13, 1, '삼천동 1가 777-777');
+	(10, 2, 'hi@naver.com'),
+	(11, 1, '삼천동 1가 777-777');
 
 /*!40000 ALTER TABLE `teacher_addr` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
@@ -257,11 +257,11 @@ CREATE TABLE IF NOT EXISTS `teacher_score` (
 -- Dumping data for table mysqlcrud_2.teacher_score: ~9 rows (대략적)
 /*!40000 ALTER TABLE `teacher_score` DISABLE KEYS */;
 INSERT INTO `teacher_score` (`teacher_score_no`, `teacher_no`, `score`) VALUES
-	(3, 3, 50),
-	(5, 5, 10),
-	(6, 6, 100),
-	(8, 8, 60),
-	(9, 9, 100),
-	(41, 1, 15),
-	(43, 7, 100),
-	(44, 2, 100);
+	(1, 1, 50),
+	(2, 3, 10),
+	(3, 4, 100),
+	(4, 5, 60),
+	(5, 7, 100),
+	(6, 8, 15),
+	(7, 9, 100);
+	
