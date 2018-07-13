@@ -60,8 +60,10 @@ public class StudentDAO {
 // <student테이블 데이터 조회 메서드 start>
 	//StudentAddr테이블 리스트로 보기 메서드 _page작업, 검색작업
 	// word의 값 : "" -> 쿼리 1 - 공백일 경우
+	//			번호, 이름, 나이의 오름차순 내림차순에 따른 쿼리 1~6
 	// word의 값 : "검색단어" -> 쿼리 2 - 검색어가 있을 경우
-	public ArrayList<Student> selectStudentByPage(int page, int pagePerRow, String word){
+	//			번호, 이름, 나이의 오름차순 내림차순에 따른 쿼리 1~6
+	public ArrayList<Student> selectStudentByPage(int page, int pagePerRow, String word, String order){
 		ArrayList<Student> studentList = new ArrayList<>();
 		
 		Connection connection = null;
@@ -79,15 +81,75 @@ public class StudentDAO {
 			connection= DriverManager.getConnection(url, user, password);
 			
 			if(word.equals("")) {
-				preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setInt(1, (page-1)*pagePerRow);
-				preparedStatement.setInt(2, pagePerRow);
+				if(order.equals("noASC")) {
+					sql="SELECT student_no, student_name,student_age FROM student order by student_no ASC LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}else if(order.equals("noDESC")) {
+					sql="SELECT student_no, student_name,student_age FROM student order by student_no desc LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}else if(order.equals("nameASC")) {
+					sql="SELECT student_no, student_name,student_age FROM student order by student_name asc LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}else if(order.equals("nameDESC")) {
+					sql="SELECT student_no, student_name,student_age FROM student order by student_name desc LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}else if(order.equals("ageASC")) {
+					sql="SELECT student_no, student_name,student_age FROM student order by student_age asc LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}else if(order.equals("ageDESC")) {
+					sql="SELECT student_no, student_name,student_age FROM student order by student_age desc LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}
 			}else {
-				sql="SELECT student_no, student_name,student_age FROM student where student_name like ? LIMIT 0,2 ";
-				preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setString(1, "%"+word+"%");
-				preparedStatement.setInt(2, (page-1)*pagePerRow);
-				preparedStatement.setInt(3, pagePerRow);
+				if(order.equals("noASC")) {
+					sql="SELECT student_no, student_name,student_age FROM student where student_name like ? order by student_no asc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}else if(order.equals("noDESC")) {
+					sql="SELECT student_no, student_name,student_age FROM student where student_name like ? order by student_no desc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}else if(order.equals("nameASC")) {
+					sql="SELECT student_no, student_name,student_age FROM student where student_name like ? order by student_name asc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}else if(order.equals("nameDESC")) {
+					sql="SELECT student_no, student_name,student_age FROM student where student_name like ? order by student_name desc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}else if(order.equals("ageASC")) {
+					sql="SELECT student_no, student_name,student_age FROM student where student_name like ? order by student_age asc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}else if(order.equals("ageDESC")) {
+					sql="SELECT student_no, student_name,student_age FROM student where student_name like ? order by student_age desc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}
 			}
 			resultset = preparedStatement.executeQuery();
 			while(resultset.next()) {
@@ -128,7 +190,7 @@ public class StudentDAO {
 	}
 	
 	// db에 저장된 데이터의 갯수를 구하는 메서드
-	public int currentPage() {
+	public int currentPage(String word) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultset = null;
@@ -143,7 +205,15 @@ public class StudentDAO {
 		try {
 			Class.forName(className);
 			connection= DriverManager.getConnection(url, user, password);
-			preparedStatement = connection.prepareStatement(sql);
+				
+			if(word.equals("")) {
+				preparedStatement = connection.prepareStatement(sql);
+			}else {
+				sql="SELECT count(student_no) as count FROM student where student_name like '김%'";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, "%"+word+"%");
+			}
+			
 			resultset = preparedStatement.executeQuery();
 			if(resultset.next()) {
 				count=resultset.getInt(1);

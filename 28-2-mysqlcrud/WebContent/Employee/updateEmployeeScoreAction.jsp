@@ -1,5 +1,4 @@
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
-<%@page import="service.EmployeeAndScore"%>
 <%@page import="service.EmployeeScoreDAO"%>
 <!DOCTYPE html>
 <html>

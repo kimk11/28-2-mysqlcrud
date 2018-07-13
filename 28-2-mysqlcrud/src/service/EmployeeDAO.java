@@ -61,9 +61,10 @@ public class EmployeeDAO {
 // <employee테이블 데이터 조회 메서드 start>
 	//employee테이블 리스트로 보기 - 메서드 _page작업, 검색작업
 	// word의 값 : "" -> 쿼리 1 - 공백일 경우
+	//			번호, 이름, 나이의 오름차순 내림차순에 따른 쿼리 1~6
 	// word의 값 : "검색단어" -> 쿼리 2 - 검색어가 있을 경우
-	
-	public ArrayList<Employee> selectEmployeeByPage(int page, int pagePerRow, String word){
+	//			번호, 이름, 나이의 오름차순 내림차순에 따른 쿼리 1~6
+	public ArrayList<Employee> selectEmployeeByPage(int page, int pagePerRow, String word, String order){
 		ArrayList<Employee> empployeeList = new ArrayList<>();
 		
 		Connection connection = null;
@@ -74,22 +75,82 @@ public class EmployeeDAO {
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 		String user = "mysqlcrud_2id";
 		String password = "mysqlcrud_2pw";		
-		String sql="SELECT employee_no,employee_name,employee_age FROM employee LIMIT ?,?";
+		String sql="SELECT employee_no,employee_name,employee_age FROM employee order by employee_no desc LIMIT ?,?";
 		
 		try {
 			Class.forName(className);
 			connection= DriverManager.getConnection(url, user, password);
 			
 			if(word.equals("")) {
-				preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setInt(1, (page-1)*pagePerRow);
-				preparedStatement.setInt(2, pagePerRow);
+				if(order.equals("noASC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee order by employee_no ASC LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}else if(order.equals("noDESC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee order by employee_no desc LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}else if(order.equals("nameASC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee order by employee_name asc LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}else if(order.equals("nameDESC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee order by employee_name desc LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}else if(order.equals("ageASC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee order by employee_age asc LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}else if(order.equals("ageDESC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee order by employee_age desc LIMIT ?,?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, (page-1)*pagePerRow);
+					preparedStatement.setInt(2, pagePerRow);
+				}
 			}else {
-				sql="SELECT employee_no,employee_name,employee_age FROM employee where employee_name like ? LIMIT ?,? ";
-				preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setString(1, "%"+word+"%");
-				preparedStatement.setInt(2, (page-1)*pagePerRow);
-				preparedStatement.setInt(3, pagePerRow);
+				if(order.equals("noASC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee where employee_name like ? order by employee_no asc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}else if(order.equals("noDESC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee where employee_name like ? order by employee_no desc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}else if(order.equals("nameASC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee where employee_name like ? order by employee_name asc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}else if(order.equals("nameDESC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee where employee_name like ? order by employee_name desc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}else if(order.equals("ageASC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee where employee_name like ? order by employee_age asc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}else if(order.equals("ageDESC")) {
+					sql="SELECT employee_no,employee_name,employee_age FROM employee where employee_name like ? order by employee_age desc LIMIT ?,? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+word+"%");
+					preparedStatement.setInt(2, (page-1)*pagePerRow);
+					preparedStatement.setInt(3, pagePerRow);
+				}
 			}
 			
 			resultset = preparedStatement.executeQuery();
@@ -131,7 +192,7 @@ public class EmployeeDAO {
 	}
 	
 	// db에 저장된 데이터의 갯수를 구하는 메서드
-	public int currentPage() {
+	public int currentPage(String word) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultset = null;
@@ -146,7 +207,15 @@ public class EmployeeDAO {
 		try {
 			Class.forName(className);
 			connection= DriverManager.getConnection(url, user, password);
-			preparedStatement = connection.prepareStatement(sql);
+			
+			if(word.equals("")) {
+				preparedStatement = connection.prepareStatement(sql);
+				
+			}else {
+				sql="SELECT count(employee_no) as count FROM employee where employee_name like ?";
+				preparedStatement = connection.prepareStatement(sql);
+				preparedStatement.setString(1, "%"+word+"%");
+			}
 			resultset = preparedStatement.executeQuery();
 			if(resultset.next()) {
 				count=resultset.getInt(1);
