@@ -17,10 +17,10 @@
 	<body>
 		<%
 			MemberScoreDAO memberScoreDao = new MemberScoreDAO();
-			int average = memberScoreDao.selectScoreAvg();
+			int average = memberScoreDao.selectAvgScore();
 		
 			ArrayList<MemberAndScore> list = new ArrayList<>();
-			list = memberScoreDao.selectMemberListAboveAvg();
+			list = memberScoreDao.selectAvgJoin();
 		%>
 		<div id="wrapper clearfix">
 		
@@ -96,7 +96,9 @@
 			</div>
 			
 			<div id="bottom">
-			
+				<p class="groupContent">
+						ÇöÈñ¹® : Member | ±èÁø¿ì : Employee,Student | ¼ÛÀ¯ºó : Teacher
+				</p>
 			</div>
 			
 		</div>

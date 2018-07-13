@@ -21,7 +21,7 @@
 		MemberScoreDAO memberScoreDao = new MemberScoreDAO();
 		
 		ArrayList<MemberAndScore> list = new ArrayList<>();
-		list = memberScoreDao.selectMemberAndScored(memberNo);
+		list = memberScoreDao.selectJoin(memberNo);
 	%>
 		<div id="wrapper clearfix">
 	
@@ -90,7 +90,9 @@
 			</div>
 		
 			<div id="bottom">
-			
+				<p class="groupContent">
+						ÇöÈñ¹® : Member | ±èÁø¿ì : Employee,Student | ¼ÛÀ¯ºó : Teacher
+				</p>
 			</div>
 		
 		</div>

@@ -18,7 +18,7 @@
 		int memberScore = Integer.parseInt(request.getParameter("memberScore"));
 		
 		MemberScoreDAO memberScoreDao = new MemberScoreDAO();
-		memberScoreDao.updateMemberScore(memberNo, memberScore);
+		memberScoreDao.updateScore(memberNo, memberScore);
 		
 		response.sendRedirect(request.getContextPath() + "/member/memberList.jsp");
 	%>

@@ -14,10 +14,10 @@ import java.util.ArrayList;
 public class MemberScoreDAO {
 	
 	//회원점수 조회하는 메서드 작성
-	//memberAndScoreList.jsp에서 사용
+	//memberList.jsp에서 사용
 	//리턴 값 0 = 쿼리 실행 실패
 	//리턴 값 1 = 쿼리 실행 성공
-	public int selectMemberScore(int memberNo) {
+	public int selectCheck(int memberNo) {
 		Connection connection = null;
 		ResultSet result = null;
 		PreparedStatement preparedStatement = null;
@@ -30,7 +30,7 @@ public class MemberScoreDAO {
 		String password = "mysqlcrud_2pw";		//연결 정보
 		String sql = "SELECT member_score_no, member_no, score FROM member_score WHERE member_no = ?";
 		
-		try {	
+		try {
 			Class.forName(Driver);	
 				
 			connection= DriverManager.getConnection(url, user, password);
@@ -61,7 +61,7 @@ public class MemberScoreDAO {
 	//insertMemberScoreAction.jsp에서 사용
 	//리턴 값 0 = 쿼리 실행 실패
 	//리턴 값 1 = 쿼리 실행 성공
-	public int insertMemberScore(int memberNo, int memberScore) {
+	public int insertScore(int memberNo, int memberScore) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
@@ -104,8 +104,10 @@ public class MemberScoreDAO {
 	}
 	
 	//회원점수 수정 메서드 작성
-	//회원
-	public int updateMemberScore(int memberNo, int memberScore) {
+	//updateMemberScoreAction.jsp에서 사용
+	//리턴 값 0 = 쿼리 실행 실패
+	//리턴 값 1 = 쿼리 실행 성공
+	public int updateScore(int memberNo, int memberScore) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
@@ -147,7 +149,10 @@ public class MemberScoreDAO {
 		return result;
 	}
 	
-	public ArrayList<MemberAndScore> selectMemberAndScored(int memberNo){
+	//member 테이블과 member_score 테이블을 INNER JOIN하여 조회하는 메서드 작성
+	//memberAndScoreList.jsp에서 사용
+	//리턴 값 list = 쿼리 실행 결과들이 세팅 된 MemberAndScore 클래스의 객체들을 담은 ArrayList 클래스 객체의 객체참조변수
+	public ArrayList<MemberAndScore> selectJoin(int memberNo){
 		Connection connection = null;
 		ResultSet result = null;
 		PreparedStatement preparedStatement = null;
@@ -200,13 +205,14 @@ public class MemberScoreDAO {
 		return list;
 	}
 	
-	public int selectScoreAvg() {
+	//member_score 테이블의 score 컬럼의 평균을 조회하는 메서드 작성
+	//memberListAboveAvg.jsp에서 사용
+	//리턴 값 average = member_score 테이블의 score 컬럼의 평균
+	public int selectAvgScore() {
 		Connection connection = null;
 		ResultSet result = null;
 		PreparedStatement preparedStatement = null;
-		
 		int average = 0;
-		
 		String Driver="com.mysql.jdbc.Driver";
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 		String user = "mysqlcrud_2id";
@@ -238,7 +244,10 @@ public class MemberScoreDAO {
 		return average;
 	}
 	
-	public ArrayList<MemberAndScore> selectMemberListAboveAvg(){
+	//member 테이블과 member_score 테이블을 INNER JOIN 하여 member_score 테이블의 score 컬럼의 평균보다 높은 회원을 조회하는 메서드 작성
+	//memberListAboveAvg.jsp에서 사용
+	//리턴 값 list = 쿼리 실행 결과들이 세팅 된 MemberAndScore 클래스의 객체들을 담은 ArrayList 클래스 객체의 객체참조변수
+	public ArrayList<MemberAndScore> selectAvgJoin(){
 		ArrayList<MemberAndScore> list = new ArrayList<>();
 		
 		Connection connection = null;
@@ -288,7 +297,11 @@ public class MemberScoreDAO {
 		return list;
 	}
 	
-	public int deleteMemberScore(int memberNo) {
+	//회원점수 삭제 메서드 작성
+	//deleteMemberAction.jsp에서 사용
+	//리턴 값 0 = 쿼리 실행 실패
+	//리턴 값 1 = 쿼리 실행 성공
+	public int deleteScore(int memberNo) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		
@@ -329,6 +342,9 @@ public class MemberScoreDAO {
 		return result;
 	}
 	
+	//회원점수 수정을 위한 회원점수 조회 메서드 작성
+	//updateMemberScoreForm.jsp에서 사용
+	//리턴 값 memberScore = 쿼리 실행 결과가 세팅된 MemberScore 클래스 객체의 객체참조변수
 	public MemberScore selectMemberScoreForUpdateMemberScore(int memberNo) {
 		Connection connection = null;
 		ResultSet result = null;

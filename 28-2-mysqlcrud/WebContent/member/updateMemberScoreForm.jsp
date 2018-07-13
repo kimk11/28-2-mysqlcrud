@@ -86,7 +86,9 @@
 			</div>
 		
 			<div id="bottom">
-			
+				<p class="groupContent">
+						ÇöÈñ¹® : Member | ±èÁø¿ì : Employee,Student | ¼ÛÀ¯ºó : Teacher
+				</p>
 			</div>
 		
 		</div>

@@ -15,6 +15,8 @@ public class MemberDAO {
 	
 	//회원 입력 메서드 작성
 	//insertMemberAction.jsp에서 사용
+	//매개변수 Member member = insertMemberForm.jsp에서 받은 값이 세팅된 Member 클래스 객체의 객체참조변수
+	//insertMemberForm.jsp에서 받은 값을 member 테이블의 member_name, member_age 컬럼에 데이터 입력
 	//리턴 값 0 = 쿼리 실행 실패
 	//리턴 값 1 = 쿼리 실행 성공
 	public int memberInsert(Member member){
@@ -103,8 +105,11 @@ public class MemberDAO {
 //		return list;
 //	}
 	
-	//회원 리스트 페이징 메서드 작성
+	//회원 리스트 페이징, 검색 메서드 작성
 	//memberList.jsp에서 사용
+	//매개변수 int begin, int rowPerPage, String searchName = memberList.jsp에서의 페이지 시작번호와 페이지마다 띄우는 회원주소의 갯수, 검색단어
+	//검색단어가 공백이면 member 테이블의 member_no, member_name, member_age 컬럼의 값을 매개변수로 LIMIT를 걸어 오름차순으로 조회
+	//검색단어가 공백이 아니면 member 테이블의 member_name 컬럼의 값 중 검색단어를 가지고 있는 member_no, member_name, member_age 컬럼의 값을 매개변수로 LIMIT를 걸어 오름차순으로 조회
 	//리턴 값 list = 쿼리 실행 결과들이 세팅 된 Member 클래스의 객체들을 담은 ArrayList 클래스 객체의 객체참조변수
 	public ArrayList<Member> selectMemberByPage(int begin, int rowPerPage, String searchName){
 		ArrayList<Member> list = new ArrayList<>();
@@ -161,13 +166,14 @@ public class MemberDAO {
 	
 	//회원의 총 인원을 조회하는 메서드 작성
 	//memberList.jsp에서 사용
+	//매개변수 없음
 	//리턴 값 0 = 쿼리 실행 실패
 	//리턴 값 rowNumber > 0 = 회원의 총 인원
-	public int countMember() {
+	public int currentPage() {
 		Connection connection = null;
 		ResultSet result = null;
 		PreparedStatement preparedStatement = null;
-		int rowNumber = 0;
+		int count = 0;
 		
 		String Driver="com.mysql.jdbc.Driver";
 		String url="jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
@@ -184,7 +190,7 @@ public class MemberDAO {
 			result = preparedStatement.executeQuery();
 			
 			if(result.next()) {
-				rowNumber = result.getInt("count");
+				count = result.getInt("count");
 			}
 		
 		} catch(Exception e) {
@@ -197,14 +203,15 @@ public class MemberDAO {
 			//7단계 db 연결 종료
 			if (connection != null) try { connection.close(); } catch(SQLException ex) {}
 		}
-		return rowNumber;
+		return count;
 	}
 	
 	//회원 삭제 메서드 작성
 	//deleteMemberAction.jsp에서 사용
+	//매개변수 int memberNo = memberList.jsp에서 받아온 memberNo
 	//리턴 값 0 = 쿼리 실행 실패
 	//리턴 값 1 = 쿼리 실행 성공
-	public int memberDelete(int memberNo) {
+	public int deleteMember(int memberNo) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		int result = 0;
@@ -246,8 +253,9 @@ public class MemberDAO {
 	
 	//회원 수정을 위한 회원 조회 메서드 작성
 	//updateMemberForm.jsp에서 사용
+	//매개변수 int memberNo = memberList.jsp에서 받아온 memberNo
 	//리턴 값 member = 쿼리 실행 결과들이 세팅된 Member 클래스 객체의 객체참조변수
-	public Member selectMember(int memberNo) {
+	public Member selectOneMember(int memberNo) {
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet result = null;

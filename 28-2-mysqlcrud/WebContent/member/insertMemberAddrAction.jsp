@@ -14,7 +14,7 @@
 	<body>
 	<%
 		request.setCharacterEncoding("euckr");
-	
+		
 		MemberAddr memberAddr = new MemberAddr();
 		
 		memberAddr.setMemberNo(Integer.parseInt(request.getParameter("memberNo")));

@@ -18,7 +18,7 @@
 		
 		MemberScoreDAO memberScoreDao = new MemberScoreDAO();
 		
-		memberScoreDao.insertMemberScore(memberNo, memberScore);
+		memberScoreDao.insertScore(memberNo, memberScore);
 		
 		response.sendRedirect(request.getContextPath() + "/member/memberList.jsp");
 	%>

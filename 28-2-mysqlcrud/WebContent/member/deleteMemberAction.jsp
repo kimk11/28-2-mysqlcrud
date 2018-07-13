@@ -17,13 +17,13 @@
 	System.out.println(memberNo + "<-- memberNo");
 	
 	MemberScoreDAO memberScoreDao = new MemberScoreDAO();
-	memberScoreDao.deleteMemberScore(memberNo);
+	memberScoreDao.deleteScore(memberNo);
 	
 	MemberAddrDAO memberAddrDao = new MemberAddrDAO();
-	memberAddrDao.memberAddrDelete(memberNo);
+	memberAddrDao.deleteMemberAddr(memberNo);
 	
 	MemberDAO memberDao = new MemberDAO();
-	memberDao.memberDelete(memberNo);
+	memberDao.deleteMember(memberNo);
 
 	
 	

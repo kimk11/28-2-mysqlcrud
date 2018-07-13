@@ -22,7 +22,7 @@
 		
 		MemberDAO memberdao = new MemberDAO();
 		
-		int rowNumber = memberdao.countMember();
+		int rowNumber = memberdao.currentPage();
 		
 		int currentPage = 1;
 		if (request.getParameter("currentPage") != null) {
@@ -135,7 +135,7 @@
 							<!-- updateMemberForm -> updateMemberAction -->
 	<%
 		MemberScoreDAO memberScoreDao = new MemberScoreDAO();
-		int check = memberScoreDao.selectMemberScore(member.getMemberNo());
+		int check = memberScoreDao.selectCheck(member.getMemberNo());
 		if(check == 0){
 							%>
 							<td>
@@ -194,7 +194,9 @@
 			</div>
 			
 			<div id="bottom">
-				
+				<p class="groupContent">
+						ÇöÈñ¹® : Member | ±èÁø¿ì : Employee,Student | ¼ÛÀ¯ºó : Teacher
+				</p>
 			</div>
 			
 		</div>

@@ -35,7 +35,7 @@
 		int memberNo = Integer.parseInt(request.getParameter("memberNo"));
 		
 		MemberDAO memberDao = new MemberDAO();
-		Member member = memberDao.selectMember(memberNo);
+		Member member = memberDao.selectOneMember(memberNo);
 	
 	%>
 		<div id="wrapper clearfix">
@@ -101,7 +101,9 @@
 			</div>
 		
 			<div id="bottom">
-			
+				<p class="groupContent">
+						ÇöÈñ¹® : Member | ±èÁø¿ì : Employee,Student | ¼ÛÀ¯ºó : Teacher
+				</p>
 			</div>
 			
 		</div>

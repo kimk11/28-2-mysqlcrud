@@ -19,7 +19,7 @@
 		MemberAddrDAO memberAddrDao = new MemberAddrDAO();
 		
 		
-		int rowNumber = memberAddrDao.countMemberAddr();
+		int rowNumber = memberAddrDao.currentPage();
 		
 		int currentPage = 1;
 		if (request.getParameter("currentPage") != null) {
@@ -117,7 +117,9 @@
 			</div>
 			
 			<div id="bottom">
-			
+				<p class="groupContent">
+						ÇöÈñ¹® : Member | ±èÁø¿ì : Employee,Student | ¼ÛÀ¯ºó : Teacher
+				</p>
 			</div>
 			
 		</div>
