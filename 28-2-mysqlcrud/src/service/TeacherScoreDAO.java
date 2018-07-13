@@ -10,7 +10,9 @@ import java.util.ArrayList;
 public class TeacherScoreDAO {
 	
 	
-	// 한 명의 점수 테이블 삭제 
+	// 삭제 버튼을 누를 시 한 명의 점수 테이블 삭제
+	// int no = teacher_no
+	
 	public void deleteScore(int no) {
 		System.out.println("07 deleteScore TeacherScoreDao.java");
 		Connection connection = null;
@@ -55,7 +57,7 @@ public class TeacherScoreDAO {
 	
 	
 	// 한 사람의 DB에 score 값이 있는지 없는지
-	// 있으면 1 , 없으면 0
+	// 리턴 값 int check = 값이 있으면 1 , 없으면 0
 	public int selectCheck(int no) {
 		System.out.println("06 selectCheck TeacherScoreDao.java");
 		Connection connection = null;
@@ -111,6 +113,7 @@ public class TeacherScoreDAO {
 	
 	
 	// 점수 입력 시 update(수정)처리
+	
 	public int updateScore(int no, int score) {
 		System.out.println("05 updateScore TeacherScoreDao.java");
 		Connection connection = null;
@@ -159,7 +162,8 @@ public class TeacherScoreDAO {
 	
 		
 		
-	// 평균 구하기
+	// 점수 평균 구하기
+	// 리턴값 int avg = DB에서 구한 점수 평균이 리턴됩니다.
 	public int scoreAvg() {
 		System.out.println("04 scoreAvg TeacherScoreDao.java");
 		Connection connection = null;
@@ -215,8 +219,9 @@ public class TeacherScoreDAO {
 	
 	
 	
-	//평균보다 높은 teacher 리스트
-	public ArrayList<TeacherAndScore> selectAvg() {
+	// 평균보다 높은 teacher 리스트
+	// 리턴값 list = resultSet 각 레코드 리턴
+	public ArrayList<TeacherAndScore> selectAvgJoin() {
 		System.out.println("03 selectAvg TeacherScoreDao.java");
 		Connection connection = null;
 		ResultSet resultSet = null;
@@ -271,7 +276,10 @@ public class TeacherScoreDAO {
 
 
 	/* teacherAndScoreList.jsp의 점수보기 */
-	public ArrayList<TeacherAndScore> selectTeacherAndScore(int teacherNo) {
+	// 매개변수 int teacherNo = teacher_no 
+	// 점수보기 클릭 시 teacherNo로 select한 한 명의 점수 레코드가 나온다.
+	// 리턴값 list = 한 명의 레코드 리턴
+	public ArrayList<TeacherAndScore> selectJoin(int teacherNo) {
 		System.out.println("02 selectTeacherAndScore TeacherScoreDao.java");
 		Connection connection = null;
 		ResultSet resultSet = null;
@@ -330,7 +338,8 @@ public class TeacherScoreDAO {
 		return list;
 	}
 
-
+	/*점수를 입력받아 테이블 삽입 */
+	// int score = score , int teacherNo = teacher_no
 	public int insertTeacherScore(int score, int teacherNo) {
 		System.out.println("01 insertTeacherScore TeacherScoreDao.java");
 		Connection connection = null;

@@ -23,7 +23,7 @@
 	System.out.print(teacherAddr.getTeacherNo());
 	
 	TeacherAddrDAO teacherAddrDao = new TeacherAddrDAO();
-	int check = teacherAddrDao.insertTeacherAddr(teacherAddr);
+	int check = teacherAddrDao.teacherAddrInsert(teacherAddr);
 	
 
 	

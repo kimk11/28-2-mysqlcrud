@@ -21,8 +21,12 @@ public class TeacherDAO {
 	 * AUTO_INCREMENT=3;
 	 */
 
+	
+	
 	// 06 selectTeacher
-	public Teacher selectTeacher(int getTeacherNo) {
+	// int getTeacherNo = teacher_no
+	// Teacher 리턴 타입으로 teacher클래스에서 리턴을 받는다
+	public Teacher selectOneTeacher(int getTeacherNo) {
 		System.out.println("05 updateTeacher TeacherDAO.java ");
 		Teacher teacher = new Teacher();
 		Connection connection = null;
@@ -38,10 +42,11 @@ public class TeacherDAO {
 			String sql = "SELECT teacher_no,teacher_name,teacher_age FROM teacher WHERE teacher_no = ?";
 			preparedStatement = connection.prepareStatement(sql);
 			preparedStatement.setInt(1,getTeacherNo);
-			resultSet = preparedStatement.executeQuery();
+			resultSet = preparedStatement.executeQuery();		//	  쿼리의 결과를 resultSet으로 리턴
+																//	 resultSet에 결과값이 있다면 다음 레코드로 
 			
-			if(resultSet.next()) {
-				teacher.setTeacherNo(resultSet.getInt(1));
+			if(resultSet.next()) {								
+				teacher.setTeacherNo(resultSet.getInt(1));		//	   첫 번째 결과값을 int 형으로 1인덱스에 넣는다
 				teacher.setTeacherName(resultSet.getString(2));
 				teacher.setTeacherAge(resultSet.getInt(3));
 				
@@ -70,6 +75,8 @@ public class TeacherDAO {
 	}
 
 	// 05 updateTeacher
+	// teacher 테이블에서 한 명의 이름과 나이를 수정할 수 있다.
+	// int getTeacherNo = teacher_no  
 	public void updateTeacher(Teacher teacher, int getTeacherNo) {
 		System.out.println("05 updateTeacher TeacherDAO.java ");
 		Connection connection = null;
@@ -113,6 +120,7 @@ public class TeacherDAO {
 	}
 
 	// 04 deleteTeacherAction.jsp deleteTeacher
+	// teacher 테이블에서 한 행을 삭제 
 	public void deleteTeacher(int teacher) {
 		System.out.println("04 deleteTeacher TeacherDAO.java");
 		Connection connection = null;
@@ -149,6 +157,7 @@ public class TeacherDAO {
 	}
 
 	// 02 selectTeacherByPage 페이징 작업 및 검색
+	// 리턴값 list = 번호 이름 나이 DB 
 	public ArrayList<Teacher> selectTeacherByPage(int startRow, int pagePerRow, String searchWord) {
 		System.out.println("02 selectTeacherAll TeacherDAO.java");
 		ArrayList<Teacher> list = new ArrayList<>();
@@ -227,18 +236,18 @@ public class TeacherDAO {
 	}
 
 	// 03 count DB row 개수
-	public int count(String searchWord) {
+	public int currentPage(String searchWord) {
 		Connection connection = null;
 		ResultSet resultSet = null;
 		PreparedStatement preparedStatement = null;
-		int totalRow = 0;
+		int totalRow = 0;	// 초기값 0에서 리턴을 받게 되면 총 레코드 수만큼 증가하게 된다.
 
 		String Driver = "com.mysql.jdbc.Driver";
 		String url = "jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
 		String user = "mysqlcrud_2id";
 		String password = "mysqlcrud_2pw";
-		String sql = "SELECT count(teacher_no) FROM teacher";
-		String sql2 = "SELECT count(teacher_no) FROM teacher WHERE teacher_name LIKE ?";
+		String sql = "SELECT count(teacher_no) FROM teacher"; 						     // teacher 테이블에 있는 총 레코드 수 
+		String sql2 = "SELECT count(teacher_no) FROM teacher WHERE teacher_name LIKE ?"; // 검색해서 나오는 데이터의 총 레코드 수  
 		try {
 			Class.forName(Driver);
 
@@ -252,7 +261,7 @@ public class TeacherDAO {
 			resultSet = preparedStatement.executeQuery();
 
 			if (resultSet.next()) {
-				totalRow = resultSet.getInt("count(teacher_no)");
+				totalRow = resultSet.getInt("count(teacher_no)");	// 여기서 나오는 수를 int 형으로 totalRow에 할당한다.
 			}
 
 		} catch (Exception e) {
@@ -276,7 +285,7 @@ public class TeacherDAO {
 				} catch (SQLException ex) {
 				}
 		}
-		return totalRow;
+		return totalRow;	// 할당받은 수를 리턴한다.
 	}
 
 	// 01 insertTeacher

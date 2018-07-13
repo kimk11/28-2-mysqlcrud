@@ -60,7 +60,7 @@ table, th, td, tr {
 		int no = Integer.parseInt(request.getParameter("teacherNo"));
 		TeacherAndScore teacherAndScore =new TeacherAndScore();
 		TeacherScoreDAO teacherScoreDao = new TeacherScoreDAO();
-		ArrayList<TeacherAndScore> list = teacherScoreDao.selectTeacherAndScore(no);
+		ArrayList<TeacherAndScore> list = teacherScoreDao.selectJoin(no);
 		teacherAndScore = list.get(0);
 	
 	%>	 
@@ -83,7 +83,11 @@ table, th, td, tr {
 	</form>
 	</div>
 		<!--bottom ÇÏ´Ü ¸Þ´º  -->
-		<div id="bottom"></div>
+		<div id="bottom">
+			<p class="groupContent">
+				ÇöÈñ¹® : Member | ±èÁø¿ì : Employee,Student | ¼ÛÀ¯ºó : Teacher
+			</p>
+		</div>
 	</div>
 </body>
 </html>

@@ -80,7 +80,7 @@ table, td, th, tr {
 				int no = Integer.parseInt(request.getParameter("no"));
 				TeacherAddrDAO teacherAddrDao = new TeacherAddrDAO();
 				TeacherDAO teacherDao = new TeacherDAO();
-				Teacher teacher = teacherDao.selectTeacher(no);
+				Teacher teacher = teacherDao.selectOneTeacher(no);
 				TeacherAddr teacherAddr = teacherAddrDao.selectAllTeacherAddr(no);
 			%>
 			<h2>내 정보 수정</h2>
@@ -109,7 +109,11 @@ table, td, th, tr {
 		</div>
 		
 
-		<div id="bottom"></div>
+		<div id="bottom">
+			<p class="groupContent">
+				현희문 : Member | 김진우 : Employee,Student | 송유빈 : Teacher
+			</p>
+		</div>
 	</div>
 </body>
 </html>

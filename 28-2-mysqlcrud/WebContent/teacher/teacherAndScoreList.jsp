@@ -61,7 +61,7 @@ table, tr, td {
 				int no = Integer.parseInt(request.getParameter("no"));
 				System.out.print(no + "<--no");
 				TeacherScoreDAO teacherScoreDao = new TeacherScoreDAO();
-				ArrayList<TeacherAndScore> list = teacherScoreDao.selectTeacherAndScore(no);
+				ArrayList<TeacherAndScore> list = teacherScoreDao.selectJoin(no);
 			%>
 
 			<table>
@@ -92,7 +92,11 @@ table, tr, td {
 			</div>
 		</div>
 
-		<div id="bottom"></div>
+		<div id="bottom">
+			<p class="groupContent">
+				ÇöÈñ¹® : Member | ±èÁø¿ì : Employee,Student | ¼ÛÀ¯ºó : Teacher
+			</p>
+		</div>
 	</div>
 </body>
 </html>

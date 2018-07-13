@@ -124,7 +124,7 @@ table, th, td, th, tr {
 					
 					
 					TeacherDAO teacherDao = new TeacherDAO();
-					int totalRow = teacherDao.count(searchWord); // ÃÑ row ¼ö 
+					int totalRow = teacherDao.currentPage(searchWord); // ÃÑ row ¼ö 
 					ArrayList<Teacher> list = teacherDao.selectTeacherByPage(startRow, pagePerRow, searchWord);
 					
 					
@@ -255,7 +255,11 @@ table, th, td, th, tr {
 			<a href="<%= request.getContextPath() %>/teacher/teacherListAboveAvg.jsp"><button>Æò±Õ ÀÌ»ó</button></a>
 			<a href="<%= request.getContextPath() %>/teacher/teacherList.jsp"><button>ÀüÃ¼¸®½ºÆ®</button></a>
 		</div>
-		<div id="bottom"></div>
+		<div id="bottom">
+			<p class="groupContent">
+				ÇöÈñ¹® : Member | ±èÁø¿ì : Employee,Student | ¼ÛÀ¯ºó : Teacher
+			</p>
+		</div>
 	</div>
 </body>
 </html>

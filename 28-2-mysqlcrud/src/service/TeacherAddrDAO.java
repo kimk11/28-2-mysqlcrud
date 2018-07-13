@@ -15,7 +15,7 @@ public class TeacherAddrDAO {
 	
 	
 	// 한 명의 점수 테이블 삭제 
-		public void deleteAddr(int no) {
+		public void deleteTeacherAddr(int no) {
 			System.out.println(" deleteAddr TeacherAddrDAO.java");
 			Connection connection = null;
 			PreparedStatement preparedStatement = null;
@@ -56,7 +56,9 @@ public class TeacherAddrDAO {
 		
 	
 	
-	//04 updateTeacherAddr
+	// 04 updateTeacherAddr
+	// int no = teacher_no
+	// teacher_no를 이용해서 주소를 수정할 수 있다.
 	public void updateTeacherAddr(TeacherAddr teacherAddr,int no) {
 		System.out.println("04 updateTeacherAddr TeacherAddrDAO.java");
 		Connection connection = null;
@@ -96,7 +98,8 @@ public class TeacherAddrDAO {
 		}
 		
 	
-	//03  selectTeacherByPage
+	// 03  selectAllTeacherAddr
+	// 한 사람의 주소페이지를 보여주기 위한 조회 메서드 
 		public TeacherAddr selectAllTeacherAddr(int teacher) {
 			System.out.println("03 selectAllTeacherAddr TeacherAddDAO.java");
 			TeacherAddr teacherAddr = new TeacherAddr();
@@ -120,8 +123,8 @@ public class TeacherAddrDAO {
 				
 				
 				if(resultSet.next()) {
-					teacherAddr.setTeacherAddrContent(resultSet.getString(1));
-				}
+					teacherAddr.setTeacherAddrContent(resultSet.getString(1));	// resultSet에 값이 있을 때
+				}																// 1번째 인덱스의 내용을 가져온다.
 				
 				
 				preparedStatement.close();
@@ -150,8 +153,9 @@ public class TeacherAddrDAO {
 	
 	
 	
-	//02  selectTeacherByPage 주소테이블 select 
-		public ArrayList<TeacherAddr> selectTeacherAddr(int teacher) {
+		// 02  selectTeacherByPage 주소테이블 select 
+		// 주소테이블번호와 주소내용을 teacher_no로 조회
+ 		public ArrayList<TeacherAddr> selectTeacherAddr(int teacher) {
 			System.out.println("02 selectTeacherAll TeacherAddDAO.java");
 			ArrayList<TeacherAddr> list2 = new ArrayList<>();
 			Connection connection = null;
@@ -173,11 +177,11 @@ public class TeacherAddrDAO {
 				
 				
 				
-				while(resultSet.next()) {
-					TeacherAddr teacherAddr = new TeacherAddr();
-					teacherAddr.setTeacherAddrNo(resultSet.getInt(1));
-					teacherAddr.setTeacherAddrContent(resultSet.getString(2));
-					list2.add(teacherAddr);
+				while(resultSet.next()) {										// resultSet에 값이 있다면 다음 레코드로 	
+					TeacherAddr teacherAddr = new TeacherAddr();				
+					teacherAddr.setTeacherAddrNo(resultSet.getInt(1));			// 첫번째 인덱스 값을 teacherAddr DTO에 setting 한다.
+					teacherAddr.setTeacherAddrContent(resultSet.getString(2));	
+					list2.add(teacherAddr);										// ArrayList 안에 teacherAddr 객체를 더해준다.
 				}
 				
 				
@@ -205,7 +209,8 @@ public class TeacherAddrDAO {
 		}
 	
 	
-	public int insertTeacherAddr(TeacherAddr  teacherAddr) {
+ 		// 주소를 입력을 처리하는  메서드
+	public int teacherAddrInsert(TeacherAddr  teacherAddr) {
 		System.out.println("01 insertTeacherAddr TeacherAddrDAO.java");
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;

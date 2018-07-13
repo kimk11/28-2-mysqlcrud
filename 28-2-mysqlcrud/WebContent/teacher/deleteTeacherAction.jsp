@@ -19,7 +19,7 @@
 	Teacher teacher = new Teacher();
 	int no = Integer.parseInt(request.getParameter("no"));
 	teacherScoreDao.deleteScore(no);
-	teacherAddrDao.deleteAddr(no);
+	teacherAddrDao.deleteTeacherAddr(no);
 	teacherDao.deleteTeacher(no);
 	System.out.println(no + "<--no");
 	

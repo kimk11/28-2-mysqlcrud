@@ -32,3 +32,6 @@ Entity / DAO.insertEntity / jsp
 EntityAddr / DAO / jsp
 
 9. useBean 사용금지 -> 각각 세팅 겟팅
+
+10. DAO 메서드명 통일하기
+

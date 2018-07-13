@@ -60,7 +60,7 @@ table, th, td, tr {
 
 			<%
 				TeacherScoreDAO teacherScoreDao = new TeacherScoreDAO();
-				ArrayList<TeacherAndScore> list = teacherScoreDao.selectAvg();
+				ArrayList<TeacherAndScore> list = teacherScoreDao.selectAvgJoin();
 				int avg = teacherScoreDao.scoreAvg(); //리턴된 결과값을 가져오기 위해 메서드를 사용한다 
 				System.out.println(avg + "<--avg");
 			%>
@@ -89,7 +89,11 @@ table, th, td, tr {
 			</table>
 
 		</div>
-		<div id="bottom"></div>
+		<div id="bottom">
+			<p class="groupContent">
+				현희문 : Member | 김진우 : Employee,Student | 송유빈 : Teacher
+			</p>
+		</div>
 	</div>
 
 </body>
