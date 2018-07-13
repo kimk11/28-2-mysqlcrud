@@ -200,6 +200,16 @@ CREATE TABLE IF NOT EXISTS `teacher` (
 
 -- Dumping data for table mysqlcrud_2.teacher: ~0 rows (대략적)
 /*!40000 ALTER TABLE `teacher` DISABLE KEYS */;
+INSERT INTO `teacher` (`teacher_no`, `teacher_name`, `teacher_age`) VALUES
+	(1, '정규룡', 26),
+	(2, '전재현', 26),
+	(3, '이원상', 28),
+	(4, '공세준', 32),
+	(5, '정민수', 25),
+	(6, '현희문', 26),
+	(7, '김진우', 25),
+	(8, '이응빈', 24),
+	(9, '김소희', 26);
 /*!40000 ALTER TABLE `teacher` ENABLE KEYS */;
 
 
@@ -215,7 +225,43 @@ CREATE TABLE IF NOT EXISTS `teacher_addr` (
 
 -- Dumping data for table mysqlcrud_2.teacher_addr: ~0 rows (대략적)
 /*!40000 ALTER TABLE `teacher_addr` DISABLE KEYS */;
+INSERT INTO `teacher_addr` (`teacher_addr_no`, `teacher_no`, `teacher_addr_content`) VALUES
+	(1, 1, 'wjdrbfyd@naver.com'),
+	(2, 2, 'wjswogus@naver.com'),
+	(3, 3, 'dldnjstkd@naver.com'),
+	(4, 4, 'rhdtpwns@naver.com'),
+	(5, 5, 'wjdalstn@naver.com'),
+	(6, 6, 'gusgmlans@naver.com'),
+	(7, 7, 'rlawlsdn@naver.com'),
+	(8, 8, 'dldmdqls@naver.com'),
+	(9, 9, 'rlathgml@naver.com'),
+	(11, 2, 'hi@naver.com'),
+	(13, 1, '삼천동 1가 777-777');
+
 /*!40000 ALTER TABLE `teacher_addr` ENABLE KEYS */;
 /*!40101 SET SQL_MODE=IFNULL(@OLD_SQL_MODE, '') */;
 /*!40014 SET FOREIGN_KEY_CHECKS=IF(@OLD_FOREIGN_KEY_CHECKS IS NULL, 1, @OLD_FOREIGN_KEY_CHECKS) */;
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
+
+
+-- 테이블 mysqlcrud_2의 구조를 덤프합니다. teacher_score
+CREATE TABLE IF NOT EXISTS `teacher_score` (
+  `teacher_score_no` int(10) NOT NULL AUTO_INCREMENT,
+  `teacher_no` int(10) NOT NULL,
+  `score` int(10) NOT NULL,
+  PRIMARY KEY (`teacher_score_no`),
+  KEY `FK_teacher_score_teacher` (`teacher_no`),
+  CONSTRAINT `FK_teacher_score_teacher` FOREIGN KEY (`teacher_no`) REFERENCES `teacher` (`teacher_no`)
+) ENGINE=InnoDB AUTO_INCREMENT=46 DEFAULT CHARSET=euckr;
+
+-- Dumping data for table mysqlcrud_2.teacher_score: ~9 rows (대략적)
+/*!40000 ALTER TABLE `teacher_score` DISABLE KEYS */;
+INSERT INTO `teacher_score` (`teacher_score_no`, `teacher_no`, `score`) VALUES
+	(3, 3, 50),
+	(5, 5, 10),
+	(6, 6, 100),
+	(8, 8, 60),
+	(9, 9, 100),
+	(41, 1, 15),
+	(43, 7, 100),
+	(44, 2, 100);
