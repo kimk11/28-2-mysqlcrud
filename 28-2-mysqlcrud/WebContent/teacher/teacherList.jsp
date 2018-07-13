@@ -88,11 +88,36 @@ table, th, td, th, tr {
 		</div>
 
 		<div id="light">
+<%
+	request.setCharacterEncoding("euckr");
+	// sortNo 변수에 값을 넣어준다.
+	String sortNo = "ASC";
+	if(request.getParameter("sortNo")!=null){
+		sortNo = request.getParameter("sortNo");
+	}
+	System.out.println(sortNo+"<--sortNo");
 
+	int currentPage = 1; //현재페이지
+	int pagePerRow = 5; //한 페이지에 나올 row 수
+	if (request.getParameter("currentPage") != null) {
+		currentPage = Integer.parseInt(request.getParameter("currentPage"));
+	}
+
+	String searchWord = request.getParameter("searchWord"); // 이름 검색창
+	if(request.getParameter("searchWord")==null){
+		searchWord="";
+	}
+	int startRow = (currentPage - 1) * pagePerRow; // 시작 페이지
+	int endRow = startRow + (pagePerRow - 1); // 끝날 페이지
+%>
 			<h2>선생님 List!</h2>
 			<table>
 				<tr class="even">
-					<th id="no">No</th>
+					<th id="no">No
+						<!-- 번호 정렬(오름차순, 내림차순) -->
+						<input type="hidden" name="sortNo" id="sortNo" size="5" value="<%= sortNo %>">
+						<button type ="button" id="sortBtn">정렬</button>
+					</th>
 					<th id="name">이름</th>
 					<th id="age">나이</th>
 					<th>주소</th>
@@ -108,24 +133,10 @@ table, th, td, th, tr {
 				</tr>
 
 				<%
-					request.setCharacterEncoding("EUC-KR");
-					int currentPage = 1; //현재페이지
-					int pagePerRow = 5; //한 페이지에 나올 row 수
-					if (request.getParameter("currentPage") != null) {
-						currentPage = Integer.parseInt(request.getParameter("currentPage"));
-					}
-
-					String searchWord = request.getParameter("searchWord"); // 이름 검색창
-					if(request.getParameter("searchWord")==null){
-						searchWord="";
-					}
-					int startRow = (currentPage - 1) * pagePerRow; // 시작 페이지
-					int endRow = startRow + (pagePerRow - 1); // 끝날 페이지
-					
-					
+				
 					TeacherDAO teacherDao = new TeacherDAO();
 					int totalRow = teacherDao.currentPage(searchWord); // 총 row 수 
-					ArrayList<Teacher> list = teacherDao.selectTeacherByPage(startRow, pagePerRow, searchWord);
+					ArrayList<Teacher> list = teacherDao.selectTeacherByPage(startRow, pagePerRow, searchWord, sortNo);
 					
 					
 					TeacherAddr teacherAddr = new TeacherAddr();
@@ -159,8 +170,7 @@ table, th, td, th, tr {
 					<td>
 						<!-- 주소 입력 폼 -->
 						<form
-							action="<%=request.getContextPath()%>/teacher/insertTeacherAddrAction.jsp"
-							method="post" name="f">
+							action="<%=request.getContextPath()%>/teacher/insertTeacherAddrAction.jsp" method="post" name="f">
 							<div class="fl">
 								<input type="hidden" id="teacherNo" name="teacherNo" value="<%=getTeacherNo%>" readonly="readonly"> 
 								<input type="text" id="teacherAddrContent" name="teacherAddrContent" size="30px" id="textAddr"> 
@@ -227,7 +237,7 @@ table, th, td, th, tr {
 			<%
 				if (currentPage > 1) {
 			%>
-			<a href="<%= request.getContextPath() %>/teacher/teacherList.jsp?currentPage=<%=currentPage - 1%>&searchWord=<%=searchWord%>">이전</a>
+			<a href="<%= request.getContextPath() %>/teacher/teacherList.jsp?currentPage=<%=currentPage - 1%>&searchWord=<%=searchWord%>&sortNo=<%= sortNo%>">이전</a>
 			<%
 				}
 
@@ -237,7 +247,7 @@ table, th, td, th, tr {
 				}
 				if (currentPage < lastPage) {
 			%>
-			<a href="<%= request.getContextPath() %>/teacher/teacherList.jsp?currentPage=<%=currentPage + 1%>&searchWord=<%=searchWord%>">다음</a> <br>
+			<a href="<%= request.getContextPath() %>/teacher/teacherList.jsp?currentPage=<%=currentPage + 1%>&searchWord=<%=searchWord%>&sortNo=<%= sortNo%>">다음</a> <br>
 			<br>
 			<%
 				}
@@ -245,7 +255,7 @@ table, th, td, th, tr {
 			
 			<!-- 검색창 -->
 			<!-- 검색창에 입력한 이름 값과 이름 DB의 내용이 한 글자라도 같다면 일치하는 테이블이 보이도록 구현 -->
-			<form action="./teacherList.jsp" method="get">
+			<form action="<%= request.getContextPath() %>/teacher/teacherList.jsp" method="post">
 				<div>
 					이름 : <input type="text" name="searchWord">
 					<button type="submit">검색</button>
@@ -261,5 +271,21 @@ table, th, td, th, tr {
 			</p>
 		</div>
 	</div>
+	<script>
+		// 정렬 버튼을 누르기 전엔 ASC, 누르면 DESC, 다시 누르면 ASC가 작동되게
+		var sortBtn = document.getElementById('sortBtn'); 		// 정렬버튼
+		var sortNo = document.getElementById('sortNo'); 		// 내림차순, 오름차순 구분 
+		
+		// 정렬버튼을 클릭 했을 때 ASC이면 sortNo = DESC로 이동 
+		sortBtn.addEventListener('click', function() {
+			if('ASC' == sortNo.value){
+				location.href='<%=request.getContextPath()%>/teacher/teacherList.jsp?sortNo=DESC&searchWord=<%=searchWord%>';
+			}else if('DESC' == sortNo.value){
+				location.href='<%=request.getContextPath()%>/teacher/teacherList.jsp?sortNo=ASC&searchWord=<%=searchWord%>';
+			}else{
+				location.href='<%=request.getContextPath()%>/teacher/teacherList.jsp?sortNo=ASC&searchWord=<%=searchWord%>';
+			}
+		});
+	</script>
 </body>
 </html>

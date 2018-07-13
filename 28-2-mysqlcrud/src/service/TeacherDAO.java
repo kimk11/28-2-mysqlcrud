@@ -158,13 +158,19 @@ public class TeacherDAO {
 
 	// 02 selectTeacherByPage 페이징 작업 및 검색
 	// 리턴값 list = 번호 이름 나이 DB 
-	public ArrayList<Teacher> selectTeacherByPage(int startRow, int pagePerRow, String searchWord) {
+	// Sting sortNo = DESC와 ASC 구분 
+	public ArrayList<Teacher> selectTeacherByPage(int startRow, int pagePerRow, String searchWord, String sortNo) {
 		System.out.println("02 selectTeacherAll TeacherDAO.java");
 		ArrayList<Teacher> list = new ArrayList<>();
 		Connection connection = null;
 		PreparedStatement preparedStatement = null;
 		ResultSet resultSet = null;
-
+		
+		System.out.println(startRow+"<<<startRow");
+		System.out.println(pagePerRow+"<<<pagePerRow");
+		System.out.println(searchWord+"<<<searchWord");
+		System.out.println(sortNo+"<<<sortNo");
+		
 		try {
 			Class.forName("com.mysql.jdbc.Driver");
 			String Driveraddr = "jdbc:mysql://localhost:3306/mysqlcrud_2?useUnicode=true&characterEncoding=euckr";
@@ -172,21 +178,43 @@ public class TeacherDAO {
 			String dbPass = "mysqlcrud_2pw";
 			connection = DriverManager.getConnection(Driveraddr, dbUser, dbPass);
 			
-			// 검색창이 null 값이면 페이징 작업으로
+			// 검색창이 null 값이고 sortNo가 ASC이면 오름차순과 페이징
 			if (searchWord.equals("")) {
-				String sql = "SELECT teacher_no,teacher_name,teacher_age  FROM Teacher ORDER BY teacher_no LIMIT ?, ?;";
-				preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setInt(1, startRow);
-				preparedStatement.setInt(2, pagePerRow);
-				System.out.print("searchWord 공백");
-			// 검색창이 null이 아니라면 검색된 내용과 일치하는 내용 표시
-			} else if(!searchWord.equals("")) {
-				String sql = "SELECT teacher_no,teacher_name,teacher_age  FROM Teacher WHERE teacher_name LIKE ? ORDER BY teacher_no ASC LIMIT ?, ?";
-				preparedStatement = connection.prepareStatement(sql);
-				preparedStatement.setString(1, "%"+searchWord+"%");
-				preparedStatement.setInt(2, startRow);
-				preparedStatement.setInt(3, pagePerRow);
-				System.out.print("searchWord : " + searchWord);
+				if(sortNo.equals("ASC")) {
+					String sql="SELECT teacher_no,teacher_name,teacher_age  FROM Teacher ORDER BY teacher_no ASC LIMIT ?, ?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, startRow);
+					preparedStatement.setInt(2, pagePerRow);
+					System.out.println("searchWord 공백이고 오름차순");
+			// 검색창이 null 값이고 sortNo가 DESC이면 내림차순과 페이징
+				}else if(sortNo.equals("DESC")) {
+					String sql="SELECT teacher_no,teacher_name,teacher_age  FROM Teacher ORDER BY teacher_no DESC LIMIT ?, ?";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setInt(1, startRow);
+					preparedStatement.setInt(2, pagePerRow);
+					System.out.println("searchWord 공백이고 내림차순");
+				}
+			// 검색창이 null이 아니고  sortNo가 ASC이면  오름차순과 검색된 내용과 일치하는 내용 표시
+			} else {
+				if(sortNo.equals("ASC")) {
+					String sql="SELECT teacher_no,teacher_name,teacher_age FROM Teacher WHERE teacher_name LIKE ? ORDER BY teacher_no ASC LIMIT ?, ? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+searchWord+"%");
+					preparedStatement.setInt(2, startRow);
+					preparedStatement.setInt(3, pagePerRow);
+					System.out.println("searchWord 공백이 아니고 오름차순");
+					System.out.println("searchWord : " + searchWord);
+			// 검색창이 null이 아니고  sortNo가 DESC이면  내림차순과 검색된 내용과 일치하는 내용 표시		
+				}else if(sortNo.equals("DESC")) {
+					String sql="SELECT teacher_no,teacher_name,teacher_age  FROM Teacher WHERE teacher_name LIKE ? ORDER BY teacher_no DESC LIMIT ?, ? ";
+					preparedStatement = connection.prepareStatement(sql);
+					preparedStatement.setString(1, "%"+searchWord+"%");
+					preparedStatement.setInt(2, startRow);
+					preparedStatement.setInt(3, pagePerRow);
+					System.out.println("searchWord 공백이 아니고 내림차순");
+					System.out.println("searchWord : " + searchWord);
+				}
+		
 			}
 
 			resultSet = preparedStatement.executeQuery();
@@ -205,6 +233,7 @@ public class TeacherDAO {
 
 			preparedStatement.close();
 			connection.close();
+			
 		} catch (Exception e) {
 			e.printStackTrace();
 		} finally {
