@@ -100,8 +100,8 @@
 							<td>회원나이</td>
 							<td>주소입력</td><!-- 다수 -->
 							<td>주소보기</td>
-							<td>회원수정</td>
 							<td>회원삭제</td>
+							<td>회원수정</td>
 							<td>점수입력</td><!-- 한번 -->
 							<td>점수보기</td>
 						</tr>
@@ -130,8 +130,8 @@
 								</form>
 							</td>
 							<td><a href = "<%= request.getContextPath() %>/member/memberAddrList.jsp">주소보기</a></td>
-							<td><a href = "<%= request.getContextPath() %>/member/updateMemberForm.jsp?memberNo=<%=member.getMemberNo() %>">수정</a></td>
 							<td><a href = "<%= request.getContextPath() %>/member/deleteMemberAction.jsp?memberNo=<%=member.getMemberNo() %>">삭제</a></td>
+							<td><a href = "<%= request.getContextPath() %>/member/updateMemberForm.jsp?memberNo=<%=member.getMemberNo() %>">수정</a></td>
 							<!-- updateMemberForm -> updateMemberAction -->
 	<%
 		MemberScoreDAO memberScoreDao = new MemberScoreDAO();

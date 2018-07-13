@@ -1,3 +1,7 @@
+<!-- 28기 현희문 -->
+<!-- 2018-07-10 -->
+<!-- memberListAboveAvg(평균점수와 평균점수 이상의 회원 리스트) 작성 -->
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.MemberScoreDAO"%>
 <%@ page import = "service.MemberAndScore"%>
