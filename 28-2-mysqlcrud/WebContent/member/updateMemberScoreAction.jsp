@@ -1,3 +1,7 @@
+<!-- 28기 현희문 -->
+<!-- 2018-07-12 -->
+<!-- updateMemberScoreAction(회원점수 수정 처리) 작성 -->
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.MemberScoreDAO"%>
 <!DOCTYPE html>

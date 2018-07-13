@@ -1,3 +1,7 @@
+<!-- 28기 현희문 -->
+<!-- 2018-07-12 -->
+<!-- updateMemberScoreForm(회원점수 수정 화면) 작성 -->
+
 <%@ page language="java" contentType="text/html; charset=EUC-KR" pageEncoding="EUC-KR"%>
 <%@ page import = "service.MemberScoreDAO"%>
 <%@ page import = "service.MemberScore"%>
@@ -61,7 +65,7 @@
 					
 			<div id="light">
 				<div>
-					<h2>회원점수 수정</h2>
+					<h2>회원 점수 수정</h2>
 					<form action ="updateMemberScoreAction.jsp" method = "post">
 						<table border = "1">
 							<tr>
